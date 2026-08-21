@@ -31,7 +31,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className={styles.header}>
           <div className={styles.headerInner}>
             <Link href="/" className={styles.brand}>
-              <span className={styles.star} aria-hidden="true" />
+              {/* brand/symbol-*.svg 의 별 — 동그라미가 아니라 트윙클이 얼굴이다. */}
+              <svg className={styles.star} viewBox="0 0 100 100" aria-hidden="true">
+                <defs>
+                  <linearGradient id="brand-star" x1="14" y1="86" x2="86" y2="14" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" style={{ stopColor: "var(--primary)" }} />
+                    <stop offset="1" style={{ stopColor: "var(--primary-lit)" }} />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M50 12 C58.36 36.624 63.376 41.64 88 50 C63.376 58.36 58.36 63.376 50 88 C41.64 63.376 36.624 58.36 12 50 C36.624 41.64 41.64 36.624 50 12 Z"
+                  fill="url(#brand-star)"
+                />
+              </svg>
               <span className={styles.brandName}>{NAME}</span>
             </Link>
             <nav className={styles.nav}>

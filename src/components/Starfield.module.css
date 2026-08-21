@@ -1,0 +1,58 @@
+/* 별하늘.
+   문서 맨 위에 절대 위치로 깔리고, 아래로 갈수록 마스크로 스러진다 —
+   별은 히어로의 공기이지 본문의 배경이 아니다.
+   반짝임의 박자는 --motion-ambient 하나에서 오고, 별마다 배율(--tw-scale)과
+   음수 지연(--tw-delay)으로 어긋나서 한꺼번에 깜빡이지 않는다. */
+
+.sky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 46rem;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+
+.dot {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: var(--tw-base);
+  animation: twinkle calc(var(--motion-ambient) * var(--tw-scale))
+    var(--ease-entering) calc(var(--motion-ambient) * var(--tw-delay) * -1)
+    infinite alternate;
+}
+
+.sparkle {
+  position: absolute;
+  color: var(--accent);
+  opacity: var(--tw-base);
+  /* px — 장식의 번짐이라 글자와 함께 커지지 않는다. */
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--accent) 55%, transparent));
+  animation: twinkle calc(var(--motion-ambient) * var(--tw-scale))
+    var(--ease-entering) calc(var(--motion-ambient) * var(--tw-delay) * -1)
+    infinite alternate;
+}
+
+.sparkle svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes twinkle {
+  from { opacity: calc(var(--tw-base) * 0.2); }
+  to { opacity: var(--tw-base); }
+}
+
+/* 전역 규칙은 시간을 0으로 줄일 뿐이라, 무한 반복은 깜빡임이 된다 — 여기서 멈춘다. */
+@media (prefers-reduced-motion: reduce) {
+  .dot,
+  .sparkle {
+    animation: none;
+  }
+}

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Starfield from "@/components/Starfield";
 import {
   APPS,
   CONTACT,
@@ -22,6 +23,9 @@ export const metadata = {
 export default function Home() {
   return (
     <>
+      {/* 별하늘 — 화면 위쪽에만 깔리는 장식. 본문이 시작되기 전에 스러진다. */}
+      <Starfield />
+
       {/* ── 히어로 ─────────────────────────────────────────── */}
       <section className={styles.hero}>
         <p className={styles.eyebrow}>✦ {HERO.eyebrow}</p>

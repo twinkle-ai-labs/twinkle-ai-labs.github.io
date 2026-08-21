@@ -28,11 +28,10 @@
 .brand:hover { text-decoration: none; }
 
 .star {
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 50%;
-  background: var(--brand-gradient);
-  box-shadow: var(--shadow-brand);
+  width: 1.125rem;
+  height: 1.125rem;
+  /* px — 장식의 번짐이라 글자와 함께 커지지 않는다. */
+  filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--primary) 45%, transparent));
 }
 
 .brandName { font-size: 1rem; }

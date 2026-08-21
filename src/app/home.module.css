@@ -5,9 +5,45 @@
 /* ── 히어로 ─────────────────────────────────────────────────── */
 
 .hero {
+  position: relative;
   max-width: 44rem;
   margin: 0 auto var(--s6);
   text-align: center;
+}
+
+/* 제목 뒤의 달무리 — 별하늘 가운데 비워 둔 자리를 빛이 대신 채운다. */
+.hero::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -8rem;
+  width: 42rem;
+  max-width: 100vw;
+  height: 26rem;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--primary) 10%, transparent),
+    transparent 72%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* 첫 화면은 아래에서 떠오르며 맞이한다 — 줄마다 반 박자씩 늦게. */
+.hero > * {
+  animation: riseIn var(--motion-slow) var(--ease-entering) backwards;
+}
+.hero > :nth-child(2) { animation-delay: calc(var(--motion-fast) / 2); }
+.hero > :nth-child(3) { animation-delay: var(--motion-fast); }
+.hero > :nth-child(4) { animation-delay: calc(var(--motion-fast) * 1.5); }
+.hero > :nth-child(5) { animation-delay: calc(var(--motion-fast) * 2); }
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
 }
 
 .eyebrow {
@@ -30,6 +66,7 @@
   font-weight: 800;
   letter-spacing: -0.035em;
   line-height: 1.18;
+  text-wrap: balance;
 }
 
 /* 제목 바로 밑에서 «무엇을 하는 곳인가»를 말하는 줄 — 본문보다 굵고 진하다. */
@@ -111,6 +148,7 @@
   font-weight: 800;
   letter-spacing: -0.03em;
   margin-bottom: var(--s2h);
+  text-wrap: balance;
 }
 
 .body {
@@ -166,6 +204,15 @@
   background: var(--surface);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
+  transition: transform var(--motion-base) var(--ease-entering),
+    box-shadow var(--motion-base) var(--ease-entering);
+}
+
+/* 살짝만 떠오른다 — 카드는 누르는 물건이 아니라 «눌 수 있음»까지 말하면 거짓이다. */
+.nameCard:hover,
+.appCard:not(.nextCard):hover {
+  transform: translateY(-0.1875rem);
+  box-shadow: var(--shadow-lift);
 }
 
 .word {
