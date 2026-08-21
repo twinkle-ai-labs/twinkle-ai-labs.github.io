@@ -26,6 +26,7 @@ export default function Home() {
       <section className={styles.hero}>
         <p className={styles.eyebrow}>✦ {HERO.eyebrow}</p>
         <h1 className={styles.heroTitle}>{HERO.title}</h1>
+        <p className={styles.heroDefine}>{HERO.define}</p>
         <p className={styles.heroLead}>{HERO.lead}</p>
         <div className={styles.actions}>
           {/* 그라데이션은 «다음 한 걸음»에만 — 한 화면에 하나다. */}

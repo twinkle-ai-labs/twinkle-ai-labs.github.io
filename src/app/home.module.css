@@ -32,8 +32,18 @@
   line-height: 1.18;
 }
 
-.heroLead {
+/* 제목 바로 밑에서 «무엇을 하는 곳인가»를 말하는 줄 — 본문보다 굵고 진하다. */
+.heroDefine {
   margin-top: var(--s2);
+  color: var(--text);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.7;
+}
+
+.heroLead {
+  margin-top: var(--s1);
   color: var(--text-sub);
   font-size: 1rem;
   line-height: 1.8;
@@ -272,6 +282,7 @@
 
 @media (min-width: 40em) {
   .heroTitle { font-size: 3rem; }
+  .heroDefine { font-size: 1.1875rem; }
   .heroLead { font-size: 1.0625rem; }
   .sectionTitle { font-size: 1.75rem; }
   .nameGrid { grid-template-columns: repeat(2, 1fr); }

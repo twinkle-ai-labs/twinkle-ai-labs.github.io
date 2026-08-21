@@ -52,7 +52,9 @@ export const APPS: LabApp[] = [
 export const HERO = {
   eyebrow: "Twinkle Labs",
   title: "난 스스로 빛난다",
-  lead: "한 사람과 AI가 만드는 작은 유틸리티 앱들. 켜자마자 할 일이 끝나고, 쓰는 동안 생각할 것이 없는 도구를 만듭니다.",
+  /** 제목은 다짐이라 «무엇을 하는 곳인지»를 말하지 않는다 — 그 일은 이 줄이 한다. */
+  define: "Twinkle Labs 는 한 사람과 AI 가 만드는 유틸리티 앱 스튜디오입니다.",
+  lead: "켜자마자 할 일이 끝나는 도구를 만듭니다. 지금은 «물타기 계산기» 하나.",
   primary: { label: "만든 앱 보기", href: "#apps" },
   secondary: { label: "이름의 뜻", href: "#names" },
 } as const;
