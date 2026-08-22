@@ -1,32 +1,49 @@
 .wrap {
   max-width: 28rem;
   margin: 0 auto;
-  padding: var(--s6) 0;
+  padding: var(--s8) var(--s2);
   text-align: center;
 }
 
+.mark {
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 auto var(--s3);
+  color: var(--accent);
+  opacity: 0.55;
+}
+
 .code {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: var(--fs-12);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.14em;
   color: var(--accent);
   margin-bottom: var(--s1);
 }
 
-.title { font-size: 1.375rem; font-weight: 800; letter-spacing: -0.02em; }
+.title {
+  font-size: var(--fs-24);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.02em;
+}
 
-.body { margin-top: var(--s1h); color: var(--text-sub); font-size: 0.9375rem; }
+.body {
+  margin-top: var(--s1h);
+  color: var(--text-sub);
+  font-size: var(--fs-16);
+}
 
 /* 다음 한 걸음을 가리키는 면이라 그라데이션이 여기 온다. */
 .cta {
   display: inline-block;
   margin-top: var(--s3);
-  padding: 0.625rem 1.25rem;
-  border-radius: 999px;
+  padding: var(--s1h) var(--s3);
+  border-radius: var(--radius-pill);
   background: var(--brand-gradient);
   color: var(--primary-ink);
-  font-size: 0.875rem;
-  font-weight: 700;
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
   box-shadow: var(--shadow-brand);
 }
 .cta:hover { text-decoration: none; }

@@ -1,16 +1,10 @@
 import type { CSSProperties } from "react";
+import StarMark from "./StarMark";
 import styles from "./Starfield.module.css";
 
-/* 별하늘 — 화면 위쪽에 조용히 반짝이는 장식.
-   서버에서 한 번 그려져 정적으로 구워지므로, 자리는 시드로 고정한다 —
+/* 별하늘 — 문서의 한 자리에 깔리는 하늘.
+   서버에서 한 번 그려져 정적으로 구워지므로 자리는 시드로 고정한다 —
    빌드할 때마다 별자리가 바뀌면 그것은 하늘이 아니라 노이즈다. */
-
-/** brand/symbol-*.svg 의 별 — 같은 모양이 여기서도 반짝인다. */
-const STAR_PATH =
-  "M50 12 C58.36 36.624 63.376 41.64 88 50 C63.376 58.36 58.36 63.376 50 88 " +
-  "C41.64 63.376 36.624 58.36 12 50 C36.624 41.64 41.64 36.624 50 12 Z";
-
-const SEED = 20260822;
 
 /** mulberry32 — 시드 하나로 늘 같은 수열을 내놓는 작은 난수원. */
 function mulberry32(seed: number): () => number {
@@ -34,23 +28,34 @@ type Star = {
   delay: number;
 };
 
-function shine(
+type Keepout = { x: [number, number]; y: [number, number] };
+
+function scatter(
   rnd: () => number,
   count: number,
-  size: { min: number; max: number },
+  size: [number, number],
+  keepout?: Keepout,
 ): Star[] {
   const stars: Star[] = [];
-  while (stars.length < count) {
+  let guard = 0;
+  while (stars.length < count && guard++ < count * 40) {
     const left = rnd() * 100;
     const top = rnd() * 100;
-    const s = size.min + rnd() * (size.max - size.min);
-    /* 제목이 서는 가운데 기둥은 비워 둔다 — 별은 글을 가리지 않는다. */
-    if (left > 30 && left < 70 && top > 8 && top < 52) continue;
+    /* 글이 서는 자리는 비워 둔다 — 별은 읽는 것을 방해하지 않는다. */
+    if (
+      keepout &&
+      left > keepout.x[0] &&
+      left < keepout.x[1] &&
+      top > keepout.y[0] &&
+      top < keepout.y[1]
+    ) {
+      continue;
+    }
     stars.push({
       left: Math.round(left * 100) / 100,
       top: Math.round(top * 100) / 100,
-      size: Math.round(s * 10) / 10,
-      base: Math.round((0.25 + rnd() * 0.5) * 100) / 100,
+      size: Math.round((size[0] + rnd() * (size[1] - size[0])) * 10) / 10,
+      base: Math.round((0.28 + rnd() * 0.52) * 100) / 100,
       scale: Math.round((0.7 + rnd() * 0.9) * 100) / 100,
       delay: Math.round(rnd() * 100) / 100,
     });
@@ -70,22 +75,61 @@ function starStyle(star: Star): CSSProperties {
   } as CSSProperties;
 }
 
-export default function Starfield() {
-  const rnd = mulberry32(SEED);
-  const dots = shine(rnd, 56, { min: 1.5, max: 3 });
-  const sparkles = shine(rnd, 7, { min: 10, max: 18 });
+export default function Starfield({
+  seed = 20260822,
+  height = "62rem",
+  dots = 84,
+  sparkles = 9,
+  shooting = 0,
+  keepout,
+  className,
+}: {
+  seed?: number;
+  /** 하늘의 키. 아래로 갈수록 마스크로 스러진다. */
+  height?: string;
+  dots?: number;
+  sparkles?: number;
+  /** 이따금 지나가는 별똥별. 0 이면 없다. */
+  shooting?: number;
+  keepout?: Keepout;
+  className?: string;
+}) {
+  const rnd = mulberry32(seed);
+  const points = scatter(rnd, dots, [1.5, 3], keepout);
+  const marks = scatter(rnd, sparkles, [10, 19], keepout);
+  const streaks = Array.from({ length: shooting }, (_, i) => ({
+    top: Math.round(rnd() * 42 * 100) / 100,
+    left: Math.round((10 + rnd() * 55) * 100) / 100,
+    delay: Math.round(rnd() * 100) / 100,
+    order: i,
+  }));
 
   return (
-    <div className={styles.sky} aria-hidden="true">
-      {dots.map((star, i) => (
-        <span key={i} className={styles.dot} style={starStyle(star)} />
+    <div
+      className={className ? `${styles.sky} ${className}` : styles.sky}
+      style={{ height }}
+      aria-hidden="true"
+    >
+      {points.map((star, i) => (
+        <span key={`d${i}`} className={styles.dot} style={starStyle(star)} />
       ))}
-      {sparkles.map((star, i) => (
-        <span key={i} className={styles.sparkle} style={starStyle(star)}>
-          <svg viewBox="0 0 100 100">
-            <path d={STAR_PATH} fill="currentColor" />
-          </svg>
+      {marks.map((star, i) => (
+        <span key={`s${i}`} className={styles.sparkle} style={starStyle(star)}>
+          <StarMark />
         </span>
+      ))}
+      {streaks.map((s) => (
+        <span
+          key={`f${s.order}`}
+          className={styles.shooting}
+          style={
+            {
+              top: `${s.top}%`,
+              left: `${s.left}%`,
+              "--tw-delay": s.delay + s.order,
+            } as CSSProperties
+          }
+        />
       ))}
     </div>
   );

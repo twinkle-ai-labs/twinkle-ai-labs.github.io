@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Aurora from "@/components/Aurora";
+import Starfield from "@/components/Starfield";
+import StarMark from "@/components/StarMark";
 import ThemeToggle from "@/components/ThemeToggle";
 import { BLOG_URL, CONTACT_EMAIL, POLARIS_URL } from "@/lib/labs";
 import "./globals.css";
 import styles from "./layout.module.css";
 
-const NAME = "Twinkle Labs";
+const NAME = "Twinkle AI Labs";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://twinklelabs.kr"),
@@ -28,25 +31,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeBoot }} />
       </head>
       <body>
+        {/* 하늘은 어느 화면에나 걸린다 — 404 도 같은 밤 아래 있다. */}
+        <Aurora />
         <header className={styles.header}>
           <div className={styles.headerInner}>
             <Link href="/" className={styles.brand}>
-              {/* brand/symbol-*.svg 의 별 — 동그라미가 아니라 트윙클이 얼굴이다. */}
-              <svg className={styles.star} viewBox="0 0 100 100" aria-hidden="true">
-                <defs>
-                  <linearGradient id="brand-star" x1="14" y1="86" x2="86" y2="14" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" style={{ stopColor: "var(--primary)" }} />
-                    <stop offset="1" style={{ stopColor: "var(--primary-lit)" }} />
-                  </linearGradient>
-                </defs>
-                <path
-                  d="M50 12 C58.36 36.624 63.376 41.64 88 50 C63.376 58.36 58.36 63.376 50 88 C41.64 63.376 36.624 58.36 12 50 C36.624 41.64 41.64 36.624 50 12 Z"
-                  fill="url(#brand-star)"
-                />
-              </svg>
+              <StarMark gradientId="twinkle-brand" className={styles.star} />
               <span className={styles.brandName}>{NAME}</span>
             </Link>
             <nav className={styles.nav}>
+              <a href="/#apps" className={styles.navLink}>
+                앱
+              </a>
+              <a href="/#contact" className={styles.navLink}>
+                문의
+              </a>
               <a href={POLARIS_URL} className={styles.navLink}>
                 약관
               </a>
@@ -56,10 +55,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </header>
         <main className={styles.main}>{children}</main>
         <footer className={styles.footer}>
+          {/* 바닥에도 하늘 한 자락 — 첫 화면과 마지막 화면이 같은 말로 끝난다. */}
+          <Starfield
+            seed={19910104}
+            height="100%"
+            dots={26}
+            sparkles={3}
+            className={styles.footerSky}
+          />
           <div className={styles.footerInner}>
-            <p className={styles.footerLine}>
-              {NAME} — 난 스스로 빛난다. 법인이 아니라 개인이 만들고 운영하는 이름입니다.
-            </p>
+            <div className={styles.footerBrand}>
+              <StarMark className={styles.footerStar} />
+              <p className={styles.footerName}>{NAME}</p>
+              <p className={styles.footerLine}>
+                난 스스로 빛난다. 법인이 아니라 개인이 만들고 운영하는 이름입니다.
+              </p>
+            </div>
             <nav className={styles.footerLinks}>
               <a href={POLARIS_URL} className={styles.footerLink}>
                 약관 보관소

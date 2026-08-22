@@ -2,13 +2,14 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
   backdrop-filter: blur(0.75rem);
-  border-bottom: 1px solid var(--divider);
+  /* px — 헤어라인. 글자를 따라 굵어질 것이 아니다. */
+  border-bottom: 1px solid color-mix(in srgb, var(--divider) 70%, transparent);
 }
 
 .headerInner {
-  max-width: 64rem;
+  max-width: var(--shell);
   margin: 0 auto;
   padding: var(--s1h) var(--s2);
   display: flex;
@@ -22,7 +23,7 @@
   align-items: center;
   gap: var(--s1);
   color: var(--text);
-  font-weight: 700;
+  font-weight: var(--fw-bold);
   letter-spacing: -0.02em;
 }
 .brand:hover { text-decoration: none; }
@@ -32,61 +33,103 @@
   height: 1.125rem;
   /* px — 장식의 번짐이라 글자와 함께 커지지 않는다. */
   filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--primary) 45%, transparent));
+  transition: transform var(--motion-base) var(--ease-entering);
 }
+.brand:hover .star { transform: rotate(90deg) scale(1.08); }
 
-.brandName { font-size: 1rem; }
+.brandName { font-size: var(--fs-16); }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: var(--s1h);
+  gap: var(--s2);
 }
 
 .navLink {
   color: var(--text-sub);
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  transition: color var(--motion-fast) var(--ease-entering);
 }
 .navLink:hover { color: var(--text); text-decoration: none; }
 
-.main {
-  max-width: 64rem;
-  margin: 0 auto;
-  padding: var(--s5) var(--s2) var(--s6);
-}
+/* 구획이 제 여백을 갖는다 — 띠가 화면 전폭을 가로지르려면 통이 여기서 좁아지면 안 된다. */
+.main { display: block; }
 
 .footer {
-  border-top: 1px solid var(--divider);
-  margin-top: var(--s6);
-  background:
-    radial-gradient(30rem 12rem at 50% 130%, color-mix(in srgb, var(--primary) 6%, transparent), transparent 70%);
+  position: relative;
+  /* 하늘이 이 판 안에 갇히도록 */
+  isolation: isolate;
+  overflow: hidden;
+  /* px — 헤어라인. */
+  border-top: 1px solid color-mix(in srgb, var(--divider) 70%, transparent);
+  background: var(--band);
+}
+
+/* 바닥의 하늘은 위에서 스며 나온다 — 마스크 방향이 첫 화면과 반대다. */
+.footerSky {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 65%);
+  mask-image: linear-gradient(to bottom, transparent, #000 65%);
 }
 
 .footerInner {
-  max-width: 64rem;
+  max-width: var(--shell);
   margin: 0 auto;
-  padding: var(--s3) var(--s2);
+  padding: var(--s5) var(--s2);
   display: flex;
   flex-wrap: wrap;
-  gap: var(--s1);
+  gap: var(--s3);
   justify-content: space-between;
-  align-items: center;
-  color: var(--text-faint);
-  font-size: 0.8125rem;
 }
 
-.footerLine { margin: 0; }
+.footerBrand {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--s0) var(--s1);
+  max-width: 30rem;
+}
+
+.footerStar {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--accent);
+}
+
+.footerName {
+  font-size: var(--fs-14);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+/* 별과 이름이 첫 줄을 나눠 쓰고, 문장은 그 아래 두 칸을 통째로 쓴다. */
+.footerLine {
+  grid-column: 1 / -1;
+  color: var(--text-faint);
+  font-size: var(--fs-12);
+  line-height: 1.7;
+}
 
 .footerLinks {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: var(--s1) var(--s2);
+  align-items: flex-start;
+  gap: var(--s1) var(--s3);
+  font-size: var(--fs-12);
 }
 
-.footerLink { color: var(--text-sub); }
+.footerLink {
+  color: var(--text-sub);
+  font-weight: var(--fw-medium);
+}
+
+@media (max-width: 29.99em) {
+  /* 좁은 화면에서는 머리띠가 이름과 테마만 갖는다 — 나머지는 바닥에도 있다. */
+  .nav .navLink:not(:last-of-type) { display: none; }
+}
 
 @media (min-width: 48em) {
-  .headerInner, .main, .footerInner { padding-left: var(--s3); padding-right: var(--s3); }
-  .main { padding-top: var(--s6); }
+  .headerInner, .footerInner { padding-left: var(--s3); padding-right: var(--s3); }
+  .footerInner { padding-block: var(--s6); }
 }
