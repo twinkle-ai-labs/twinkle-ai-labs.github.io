@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Analytics from "@/components/Analytics";
 import Aurora from "@/components/Aurora";
 import Starfield from "@/components/Starfield";
+import RouteViews from "@/components/RouteViews";
 import StarMark from "@/components/StarMark";
 import ThemeToggle from "@/components/ThemeToggle";
 import { BLOG_URL, CONTACT_EMAIL, POLARIS_URL } from "@/lib/labs";
@@ -29,8 +31,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
         />
         <script dangerouslySetInnerHTML={{ __html: themeBoot }} />
+        <Analytics />
       </head>
       <body>
+        <RouteViews />
         {/* 하늘은 어느 화면에나 걸린다 — 404 도 같은 밤 아래 있다. */}
         <Aurora />
         <header className={styles.header}>

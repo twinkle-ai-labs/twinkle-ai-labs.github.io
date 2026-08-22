@@ -33,6 +33,20 @@ export const STATUS: Record<AppStatus, string> = {
   building: "만드는 중",
 };
 
+/*
+ * 스토어 주소에 **어디서 왔는지**를 달아 준다.
+ *
+ * Play 는 `utm_*` 을 주소에 그냥 붙인다고 읽지 않는다 — `referrer` 한 칸 안에
+ * 통째로 넣어야 설치 귀속으로 잡힌다(그래서 안쪽은 한 번 더 인코딩된다).
+ * 이걸 달아 두면 Play 콘솔의 획득 보고서에서 «홈페이지를 거쳐 온 설치»가 갈린다 —
+ * 앱에 아무것도 심지 않고도 웹과 설치 사이에 고리가 하나 생긴다.
+ */
+export function withReferrer(url: string, medium: string): string {
+  if (!url.includes("play.google.com")) return url;
+  const referrer = `utm_source=twinklelabs.kr&utm_medium=${medium}&utm_campaign=home`;
+  return `${url}${url.includes("?") ? "&" : "?"}referrer=${encodeURIComponent(referrer)}`;
+}
+
 export const CONTACT_EMAIL = "twinkle.ai.labs@gmail.com";
 export const BLOG_URL = "https://blog.twinklelabs.kr";
 /** 약관과 정책이 사는 곳 — 이 집이 아니라 제 주소에 산다. */
