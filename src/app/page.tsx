@@ -6,6 +6,7 @@ import {
   APPS_SECTION,
   CONTACT,
   CONTACT_EMAIL,
+  DESIGN,
   FOUNDER,
   HERO,
   HOW,
@@ -228,8 +229,64 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── 디자인 시스템 — Aurora Ledger ──────────────────── */}
+      <section id="design" className={`${styles.section} ${styles.reveal}`}>
+        <div className={styles.shell}>
+          <Head kicker={DESIGN.eyebrow} title={DESIGN.title} />
+          <p className={styles.reading}>{DESIGN.reading}</p>
+          <p className={`${styles.body} ${styles.designLead}`}>{DESIGN.lead}</p>
+
+          <ul className={styles.nameGrid}>
+            {DESIGN.words.map((w) => (
+              <li key={w.word} className={styles.nameCard}>
+                <h3 className={styles.word}>
+                  <StarMark className={styles.wordStar} />
+                  {w.word}
+                </h3>
+                <p className={styles.reading}>{w.reading}</p>
+                <p className={styles.body}>{w.body}</p>
+              </li>
+            ))}
+          </ul>
+
+          {/* 견본은 이 화면의 제 토큰으로 칠한다 — 라이트·다크를 고르면 견본도 갈아입는다. */}
+          <ul className={styles.swatches} aria-label="색 토큰">
+            {DESIGN.swatches.map((sw) => (
+              <li key={sw.token} className={styles.swatch}>
+                <span
+                  className={styles.swatchChip}
+                  style={{ background: `var(--${sw.token})` }}
+                  aria-hidden="true"
+                />
+                <code className={styles.swatchToken}>{sw.token}</code>
+                <span className={styles.swatchLabel}>{sw.label}</span>
+              </li>
+            ))}
+          </ul>
+
+          <ul className={styles.ladders}>
+            {DESIGN.ladders.map((l) => (
+              <li key={l.name} className={styles.ladder}>
+                <span className={styles.ladderName}>{l.name}</span>
+                <span className={styles.ladderValue}>{l.value}</span>
+                <span className={styles.ladderNote}>{l.note}</span>
+              </li>
+            ))}
+          </ul>
+
+          <ul className={`${styles.points} ${styles.rules}`}>
+            {DESIGN.rules.map((rule) => (
+              <li key={rule} className={styles.point}>
+                <StarMark className={styles.pointStar} />
+                <span>{rule}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* ── 값에 대하여 ────────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.reveal}`}>
+      <section className={`${styles.section} ${styles.band} ${styles.reveal}`}>
         <div className={`${styles.shell} ${styles.center}`}>
           <p className={styles.kicker}>{MONEY.eyebrow}</p>
           <h2 className={`${styles.sectionTitle} ${styles.moneyTitle}`}>
