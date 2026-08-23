@@ -91,21 +91,29 @@
 }
 
 .footerInner {
+  position: relative;
+  z-index: 1;
   max-width: var(--shell);
   margin: 0 auto;
-  padding: var(--s5) var(--s2);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s3);
-  justify-content: space-between;
+  padding: var(--s7) var(--s2) var(--s4);
 }
 
-.footerBrand {
+.footerTop {
   display: grid;
-  grid-template-columns: auto 1fr;
+  gap: var(--s4);
+  align-items: start;
+}
+
+.footerBrand { max-width: 34rem; }
+
+.footerName {
+  display: flex;
   align-items: center;
-  gap: var(--s0) var(--s1);
-  max-width: 30rem;
+  gap: var(--s1);
+  color: var(--text);
+  font-size: var(--fs-16);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-snug);
 }
 
 .footerStar {
@@ -114,33 +122,57 @@
   color: var(--accent);
 }
 
-.footerName {
-  font-size: var(--fs-14);
-  font-weight: var(--fw-bold);
-  letter-spacing: var(--tr-slight);
-  color: var(--text);
-}
-
-/* 별과 이름이 첫 줄을 나눠 쓰고, 문장은 그 아래 두 칸을 통째로 쓴다. */
 .footerLine {
-  grid-column: 1 / -1;
-  color: var(--text-faint);
-  font-size: var(--fs-12);
+  max-width: 30rem;
+  margin-top: var(--s1h);
+  color: var(--text-sub);
+  font-size: var(--fs-14);
   line-height: var(--lh-body);
 }
 
-.footerLinks {
+.footerColumn { display: flex; flex-direction: column; gap: var(--s1h); }
+.footerHeading { color: var(--text-faint); font-size: var(--fs-11); font-weight: var(--fw-bold); letter-spacing: var(--tr-wide); text-transform: uppercase; }
+.footerMail { color: var(--text-sub); font-size: var(--fs-12); font-weight: var(--fw-semibold); overflow-wrap: anywhere; }
+.footerMail:hover { color: var(--accent); text-decoration: none; }
+
+.footerBottom {
+  position: relative;
+  margin-top: var(--s6);
+  padding-top: var(--s3);
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
-  gap: var(--s1) var(--s3);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2) var(--s4);
+}
+
+.footerBottom::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  border-top: var(--stroke-hair) solid color-mix(in srgb, var(--divider) var(--alpha-soft), transparent);
+  transform: translateX(-50%);
+}
+
+.footerCopyright { color: var(--text-faint); font-size: var(--fs-11); }
+.footerMotto { color: var(--text-faint); font-size: var(--fs-11); }
+
+.footerLinks {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s1) var(--s2h);
   font-size: var(--fs-12);
 }
 
 .footerLink {
   color: var(--text-sub);
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-semibold);
 }
+.footerLink:hover { color: var(--accent); text-decoration: none; }
 
 @media (max-width: 39.99em) {
   /* 좁은 화면에서는 머리띠가 이름과 테마만 갖는다 — 나머지는 바닥에도 있다. */
@@ -159,5 +191,5 @@
 
 @media (min-width: 48em) {
   .headerInner, .footerInner { padding-left: var(--s3); padding-right: var(--s3); }
-  .footerInner { padding-block: var(--s6); }
+  .footerTop { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: var(--s5); }
 }

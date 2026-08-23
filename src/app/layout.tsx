@@ -7,6 +7,7 @@ import RouteViews from "@/components/RouteViews";
 import StarMark from "@/components/StarMark";
 import ThemeToggle from "@/components/ThemeToggle";
 import HeaderBar from "@/components/HeaderBar";
+import BackToTop from "@/components/BackToTop";
 import Providers from "@/components/Providers";
 import { BLOG_URL, CONTACT_EMAIL, DESIGN_URL, POLARIS_URL } from "@/lib/labs";
 import "./globals.css";
@@ -64,6 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </HeaderBar>
         <main className={styles.main}>{children}</main>
+        <BackToTop />
         <footer className={styles.footer}>
           {/* 바닥에도 하늘 한 자락 — 첫 화면과 마지막 화면이 같은 말로 끝난다. */}
           <Starfield
@@ -74,24 +76,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             className={styles.footerSky}
           />
           <div className={styles.footerInner}>
-            <div className={styles.footerBrand}>
-              <StarMark className={styles.footerStar} />
-              <p className={styles.footerName}>{NAME}</p>
-              <p className={styles.footerLine}>
-                난 스스로 빛난다. 법인이 아니라 개인이 만들고 운영하는 이름입니다.
-              </p>
+            <div className={styles.footerTop}>
+              <div className={styles.footerBrand}>
+                <p className={styles.footerName}>
+                  <StarMark className={styles.footerStar} />
+                  {NAME}
+                </p>
+                <p className={styles.footerLine}>
+                  한 명의 개발자가 AI와 함께 만들고 직접 운영하는 개인 제품 스튜디오입니다.
+                </p>
+              </div>
+              <nav className={styles.footerColumn} aria-label="바닥글 메뉴">
+                <p className={styles.footerHeading}>바로가기</p>
+                <div className={styles.footerLinks}>
+                  <Link href="/" className={styles.footerLink}>홈</Link>
+                  <a href={DESIGN_URL} className={styles.footerLink}>디자인 시스템</a>
+                  <a href={BLOG_URL} className={styles.footerLink}>블로그</a>
+                  <a href={POLARIS_URL} className={styles.footerLink}>약관</a>
+                </div>
+              </nav>
+              <div className={styles.footerColumn}>
+                <p className={styles.footerHeading}>연락</p>
+                <a className={styles.footerMail} href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+              </div>
             </div>
-            <nav className={styles.footerLinks}>
-              <a href={POLARIS_URL} className={styles.footerLink}>
-                약관 보관소
-              </a>
-              <a href={BLOG_URL} className={styles.footerLink}>
-                블로그
-              </a>
-              <a href={`mailto:${CONTACT_EMAIL}`} className={styles.footerLink}>
-                {CONTACT_EMAIL}
-              </a>
-            </nav>
+            <div className={styles.footerBottom}>
+              <p className={styles.footerCopyright}>© 2026 {NAME}</p>
+              <p className={styles.footerMotto}>스스로 빛나다.</p>
+            </div>
           </div>
         </footer>
         </Providers>

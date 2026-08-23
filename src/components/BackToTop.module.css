@@ -1,0 +1,36 @@
+.button {
+  position: fixed;
+  right: 1rem;
+  bottom: var(--s3);
+  z-index: 18;
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  border: var(--stroke-hair) solid color-mix(in srgb, var(--accent) 22%, transparent);
+  border-radius: var(--radius-pill);
+  background: var(--glass);
+  color: var(--accent);
+  box-shadow: 0 .75rem 2rem color-mix(in srgb, var(--primary) 14%, transparent);
+  -webkit-backdrop-filter: blur(.75rem) saturate(125%);
+  backdrop-filter: blur(.75rem) saturate(125%);
+  font-size: var(--fs-20);
+  font-weight: var(--fw-bold);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(.75rem) scale(.9);
+  transition: opacity var(--motion-base) var(--ease), visibility var(--motion-base) var(--ease), transform var(--motion-base) var(--ease), background var(--motion-fast) var(--ease);
+}
+
+.button:hover { background: var(--primary-soft); transform: translateY(-.125rem) scale(1); }
+.button:focus-visible { outline: none; box-shadow: var(--focus-ring), 0 .75rem 2rem color-mix(in srgb, var(--primary) 14%, transparent); }
+.visible { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+
+@media (max-width: 39.99em) {
+  .button { bottom: max(var(--s2), env(safe-area-inset-bottom)); width: 2.75rem; height: 2.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button { transition: none; }
+}

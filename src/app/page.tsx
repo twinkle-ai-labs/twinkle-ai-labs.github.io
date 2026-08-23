@@ -5,8 +5,6 @@ import StarMark from "@/components/StarMark";
 import {
   APPS,
   APPS_SECTION,
-  CONTACT,
-  CONTACT_EMAIL,
   DESIGN_URL,
   FOUNDER,
   HERO,
@@ -305,20 +303,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 문의 ───────────────────────────────────────────── */}
-      <section id="contact" className={`${styles.contact} ${styles.reveal}`}>
-        <div className={`${styles.shell} ${styles.center}`}>
-          <span className={styles.contactMark}>
-            <StarMark gradientId="twinkle-contact" />
-          </span>
-          <p className={styles.kicker}>{CONTACT.eyebrow}</p>
-          <h2 className={styles.sectionTitle}>{CONTACT.title}</h2>
-          <p className={`${styles.body} ${styles.contactBody}`}>{CONTACT.body}</p>
-          <a className={styles.mail} href={`mailto:${CONTACT_EMAIL}`}>
-            {CONTACT_EMAIL}
-          </a>
-        </div>
-      </section>
     </>
   );
 }
