@@ -47,6 +47,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <a href="/#apps" className={styles.navLink}>
                 앱
               </a>
+              <Link href="/design/" className={styles.navLink}>
+                디자인
+              </Link>
               <a href="/#contact" className={styles.navLink}>
                 문의
               </a>

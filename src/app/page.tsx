@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Starfield from "@/components/Starfield";
 import StarMark from "@/components/StarMark";
 import {
@@ -6,7 +7,6 @@ import {
   APPS_SECTION,
   CONTACT,
   CONTACT_EMAIL,
-  DESIGN,
   FOUNDER,
   HERO,
   HOW,
@@ -16,6 +16,7 @@ import {
   STATUS,
   type LabApp,
 } from "@/lib/labs";
+import { DESIGN } from "@/lib/design";
 import styles from "./home.module.css";
 
 export const metadata = {
@@ -236,19 +237,6 @@ export default function Home() {
           <p className={styles.reading}>{DESIGN.reading}</p>
           <p className={`${styles.body} ${styles.designLead}`}>{DESIGN.lead}</p>
 
-          <ul className={styles.nameGrid}>
-            {DESIGN.words.map((w) => (
-              <li key={w.word} className={styles.nameCard}>
-                <h3 className={styles.word}>
-                  <StarMark className={styles.wordStar} />
-                  {w.word}
-                </h3>
-                <p className={styles.reading}>{w.reading}</p>
-                <p className={styles.body}>{w.body}</p>
-              </li>
-            ))}
-          </ul>
-
           {/* 견본은 이 화면의 제 토큰으로 칠한다 — 라이트·다크를 고르면 견본도 갈아입는다. */}
           <ul className={styles.swatches} aria-label="색 토큰">
             {DESIGN.swatches.map((sw) => (
@@ -274,14 +262,12 @@ export default function Home() {
             ))}
           </ul>
 
-          <ul className={`${styles.points} ${styles.rules}`}>
-            {DESIGN.rules.map((rule) => (
-              <li key={rule} className={styles.point}>
-                <StarMark className={styles.pointStar} />
-                <span>{rule}</span>
-              </li>
-            ))}
-          </ul>
+          {/* 전문은 제 장에 산다 — 여기는 얼굴만 보이고 문을 가리킨다. */}
+          <p className={styles.designMore}>
+            <Link className={styles.inlineLink} href={DESIGN.more.href}>
+              {DESIGN.more.label} <span aria-hidden="true">→</span>
+            </Link>
+          </p>
         </div>
       </section>
 

@@ -1,0 +1,567 @@
+/* 디자인 시스템 한 장.
+   이 화면은 제가 설명하는 시스템을 입고 있다 — 값은 전부 :root 의 토큰에서 온다.
+   예외는 색의 두 판뿐이다: 라이트·다크를 한 화면에 나란히 세우려면 hex 가 필요하다(design.ts). */
+
+/* ── 판 — 소개 화면과 같은 문법 ──────────────────────────────── */
+
+.shell {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding-inline: var(--s2);
+}
+
+.section {
+  padding-block: var(--s7);
+  scroll-margin-top: 4.5rem;
+}
+
+.band { background: var(--band); }
+
+.hero {
+  padding-block: var(--s7) var(--s5);
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--s1h);
+}
+.kicker::before {
+  content: "";
+  width: 1.5rem;
+  height: 1px;
+  background: currentColor;
+  opacity: var(--alpha-half);
+}
+
+.title {
+  font-size: var(--fs-40);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.03em;
+}
+
+.reading {
+  margin-top: var(--s1);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  color: var(--text-faint);
+}
+
+.lead {
+  margin-top: var(--s2);
+  max-width: 34rem;
+  font-size: var(--fs-20);
+  line-height: 1.6;
+  color: var(--text-sub);
+}
+
+/* 오로라 한 줄 — 이 장에서 그라데이션은 여기 하나다. */
+.rule {
+  height: 0.375rem;
+  max-width: 12rem;
+  margin-top: var(--s4);
+  border-radius: var(--radius-pill);
+  background: var(--brand-gradient);
+  box-shadow: var(--shadow-brand);
+}
+
+.canon {
+  margin-top: var(--s3);
+  max-width: 40rem;
+  font-size: var(--fs-14);
+  line-height: 1.8;
+  color: var(--text-sub);
+}
+
+.head { margin-bottom: var(--s4); }
+
+.headRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}
+
+.sectionTitle {
+  font-size: var(--fs-28);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.03em;
+}
+
+/* 토큰의 자리 — 제목 옆의 작은 주소 */
+.where {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--fs-12);
+  color: var(--text-sub);
+  background: var(--sunken);
+  padding: var(--s0) var(--s1h);
+  border-radius: var(--radius-sm);
+}
+
+.body {
+  max-width: 40rem;
+  color: var(--text-sub);
+  font-size: var(--fs-16);
+  line-height: 1.85;
+}
+.body + .body { margin-top: var(--s2); }
+.body strong { color: var(--text); font-weight: var(--fw-semibold); }
+
+.aside {
+  margin-top: var(--s3);
+  padding: var(--s2h) var(--s3);
+  border-radius: var(--radius-lg);
+  background: var(--primary-soft);
+  font-size: var(--fs-14);
+  line-height: 1.8;
+  color: var(--text-sub);
+}
+
+.canon code, .aside code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.875em;
+  color: var(--accent);
+}
+
+.token {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--fs-12);
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+}
+
+.num {
+  font-size: var(--fs-12);
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.use {
+  font-size: var(--fs-12);
+  line-height: 1.5;
+  color: var(--text-sub);
+}
+
+.big {
+  font-size: var(--fs-24);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.big small { font-size: var(--fs-12); font-weight: var(--fw-medium); margin-left: 0.125em; }
+
+/* 카드 — 그늘 하나로 선다, 테두리 없이 */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s1h);
+  padding: var(--s3);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-raised);
+}
+
+.cardTitle {
+  font-size: var(--fs-16);
+  font-weight: var(--fw-semibold);
+}
+
+/* ── 이름의 뜻 ───────────────────────────────────────────────── */
+
+.words {
+  list-style: none;
+  margin: var(--s4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s2h);
+  grid-template-columns: 1fr;
+}
+
+.word {
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+  font-size: var(--fs-24);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+
+.wordStar { flex: none; width: 0.875rem; height: 0.875rem; color: var(--accent); }
+
+.wordReading {
+  margin-top: calc(var(--s1) * -1);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  color: var(--text-faint);
+}
+
+/* ── 색 — 두 판 ──────────────────────────────────────────────── */
+
+.panes {
+  display: grid;
+  gap: var(--s2h);
+  grid-template-columns: 1fr;
+  margin-top: var(--s4);
+}
+
+/* 판은 제 테마를 입는다 — 화면의 테마와 무관하게. 그래서 여기만 값을 직접 쓴다. */
+.pane {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  padding: var(--s3);
+  border-radius: var(--radius-lg);
+}
+.paneLight { background: #F8F6FC; color: #21182D; box-shadow: 0 0.25rem 1.25rem -0.5rem rgba(33, 24, 45, 0.18); }
+.paneDark { background: #110D19; color: #FAF7FF; box-shadow: 0 0.25rem 1.25rem -0.5rem rgba(0, 0, 0, 0.55); }
+
+.paneName {
+  font-size: var(--fs-11);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: var(--alpha-soft);
+}
+
+.paneGroup { display: flex; flex-direction: column; gap: var(--s1); }
+
+.paneGroupName {
+  font-size: var(--fs-11);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.06em;
+  opacity: var(--alpha-half);
+}
+
+.chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s1);
+  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+}
+
+.chip {
+  display: flex;
+  align-items: flex-end;
+  min-height: 4.5rem;
+  padding: var(--s1h);
+  border-radius: var(--radius-sm);
+}
+/* 판과 같은 색인 칩은 헤어라인 하나로만 선다 */
+.paneLight .chip { box-shadow: inset 0 0 0 1px rgba(33, 24, 45, 0.08); }
+.paneDark .chip { box-shadow: inset 0 0 0 1px rgba(250, 247, 255, 0.08); }
+
+.chipInk { display: flex; flex-direction: column; gap: 0.125rem; line-height: 1.35; }
+.chipOnLight { color: #21182D; }
+.chipOnDark { color: #FAF7FF; }
+.chipOnBrand { color: #FFFFFF; }
+
+.chipToken {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--fs-11);
+  font-weight: var(--fw-semibold);
+  color: inherit;
+}
+.chipValue { font-size: var(--fs-11); opacity: var(--alpha-soft); font-variant-numeric: tabular-nums; }
+
+.notes {
+  list-style: none;
+  margin: var(--s4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s2);
+  max-width: 44rem;
+}
+
+.note {
+  display: flex;
+  gap: var(--s1h);
+  font-size: var(--fs-14);
+  line-height: 1.75;
+  color: var(--text-sub);
+}
+.note strong { color: var(--text); font-weight: var(--fw-semibold); }
+.noteStar { flex: none; width: 0.75rem; height: 0.75rem; margin-top: 0.4rem; color: var(--accent); }
+
+/* ── 불투명도 ────────────────────────────────────────────────── */
+
+.alpha {
+  list-style: none;
+  margin: var(--s4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s2);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.alphaStep {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s0);
+  padding: var(--s2);
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-raised);
+}
+
+.alphaSwatch {
+  display: block;
+  height: 2rem;
+  margin-bottom: var(--s1);
+  border-radius: var(--radius-sm);
+  background: var(--text);
+}
+
+/* ── 간격 ────────────────────────────────────────────────────── */
+
+.spacing {
+  list-style: none;
+  margin: var(--s4) 0 0;
+  padding: var(--s3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s1h);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-raised);
+}
+
+.spaceRow {
+  display: grid;
+  grid-template-columns: 3.5rem 2rem 1fr;
+  align-items: center;
+  gap: var(--s2);
+}
+
+/* 막대는 px — 그 길이 자체가 값이다 */
+.spaceBar {
+  display: block;
+  height: 0.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+}
+
+/* ── 크기 ────────────────────────────────────────────────────── */
+
+.sizeGrid {
+  display: grid;
+  gap: var(--s2h);
+  grid-template-columns: 1fr;
+}
+
+.icons, .elev, .shapes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.icons { display: flex; align-items: flex-end; gap: var(--s3); }
+.icon { display: flex; flex-direction: column; align-items: center; gap: var(--s0); }
+.iconBox { display: block; border-radius: 25%; background: var(--accent); }
+
+.elev { display: grid; gap: var(--s2); grid-template-columns: repeat(3, 1fr); }
+.elevBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.125rem;
+  aspect-ratio: 1;
+  padding: var(--s1h);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.shapes { display: flex; flex-wrap: wrap; gap: var(--s3); align-items: flex-end; }
+.shape { display: flex; flex-direction: column; gap: var(--s0); max-width: 9rem; }
+.shapeBox {
+  display: block;
+  width: 5rem;
+  height: 3.5rem;
+  background: var(--primary-soft);
+  border: 1.5px solid var(--accent);
+  margin-bottom: var(--s0);
+}
+.shapePill { width: 7rem; height: 2.25rem; }
+
+/* ── 움직임 ──────────────────────────────────────────────────── */
+
+.motionGrid {
+  display: grid;
+  gap: var(--s2h);
+  grid-template-columns: 1fr;
+  margin-top: var(--s4);
+}
+
+.durations {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s2);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.duration {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s0);
+  padding: var(--s2);
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-raised);
+}
+
+.motionCard { gap: var(--s2); cursor: default; }
+
+.curve { display: grid; gap: var(--s0); }
+
+.track {
+  position: relative;
+  display: block;
+  height: 1.25rem;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--sunken);
+}
+.track i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 1.25rem;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  transition: transform var(--motion-slow);
+}
+.trackEntering i { transition-timing-function: var(--ease-entering); }
+.trackLeaving i { transition-timing-function: var(--ease-leaving); }
+.motionCard:hover .track i,
+.motionCard:focus-visible .track i { transform: translateX(calc(100% * 8)); }
+
+/* ── 글자 ────────────────────────────────────────────────────── */
+
+.type {
+  list-style: none;
+  margin: var(--s4) 0 0;
+  padding: 0 var(--s3);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-raised);
+}
+
+.typeRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s0) var(--s3);
+  align-items: baseline;
+  padding: var(--s2) 0;
+  /* px — 헤어라인 */
+  border-top: 1px solid var(--divider);
+}
+.typeRow:first-child { border-top: 0; }
+
+.specimen {
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.typeMeta { display: flex; gap: var(--s1h); align-items: baseline; }
+
+/* ── 히스토리 ────────────────────────────────────────────────── */
+
+.history {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 var(--s2h);
+  /* px — 헤어라인 */
+  border-left: 1px solid var(--divider);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+.event {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s0);
+}
+.event::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--s2h) * -1 - 0.25rem);
+  top: 0.45rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+}
+
+.when {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--fs-12);
+  color: var(--text-faint);
+}
+
+.what { font-size: var(--fs-16); font-weight: var(--fw-semibold); }
+
+.back { margin-top: var(--s6); }
+
+.inlineLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s0);
+  color: var(--accent);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-bold);
+}
+
+/* ── 스크롤을 따라 떠오르기 — 소개 화면과 같은 시계 ──────────── */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: riseIn var(--motion-slow) var(--ease-entering) both;
+      animation-timeline: view();
+      animation-range: entry 6% cover 24%;
+    }
+  }
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(0.75rem); }
+}
+
+/* ── 넓어지면 ────────────────────────────────────────────────── */
+
+@media (min-width: 40em) {
+  .title { font-size: var(--fs-48); }
+  .sectionTitle { font-size: var(--fs-32); }
+  .words { grid-template-columns: repeat(2, 1fr); gap: var(--s3); }
+  .alpha { grid-template-columns: repeat(6, 1fr); }
+  .sizeGrid { grid-template-columns: repeat(2, 1fr); }
+  .cardWide { grid-column: span 2; }
+  .motionGrid { grid-template-columns: 1fr 1fr; }
+  .typeRow { grid-template-columns: 1fr 14rem; }
+  .typeMeta { flex-direction: column; gap: 0.125rem; align-items: flex-end; text-align: right; }
+  .card { padding: var(--s4); }
+}
+
+@media (min-width: 48em) {
+  .shell { padding-inline: var(--s3); }
+  .section { padding-block: var(--s8); }
+  .hero { padding-block: var(--s8) var(--s6); }
+  .panes { grid-template-columns: repeat(2, 1fr); }
+}

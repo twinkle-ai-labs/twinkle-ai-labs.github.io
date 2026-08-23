@@ -489,7 +489,7 @@
 /* 견본 — 상자 안에 상자를 넣지 않는다. 칩이 곧 카드다. */
 .swatches {
   list-style: none;
-  margin: var(--s4) 0 0;
+  margin: 0;
   padding: 0;
   display: grid;
   gap: var(--s2);
@@ -564,7 +564,7 @@
   line-height: 1.6;
 }
 
-.rules { margin-top: var(--s5); }
+.designMore { margin-top: var(--s4); }
 
 /* ── 값에 대하여 ────────────────────────────────────────────── */
 

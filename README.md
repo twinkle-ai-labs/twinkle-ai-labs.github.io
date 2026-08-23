@@ -16,6 +16,8 @@ npm run preview   # 구운 것을 3945 에서 열어 본다
 | 자리 | 무엇 |
 |---|---|
 | `src/lib/labs.ts` | **화면의 말과 자료** — 앱 목록, 이름 풀이, 문구. 앱이 늘면 여기 한 줄 |
+| `src/lib/design.ts` | **디자인 시스템의 말과 자료** — 소개 화면의 구획과 `/design` 이 같은 것을 읽는다 |
+| `src/app/design/` | Aurora Ledger 한 장 — 이름의 뜻 · 토큰 견본 · 법 · 히스토리 |
 | `src/app/page.tsx` | 소개 한 장 (히어로 · 이름의 뜻 · 만드는 사람 · 앱 · 만드는 방식 · 디자인 시스템 · 값 · 문의) |
 | `src/app/globals.css` | Aurora Ledger 토큰 두 계층 — 화면은 의미 토큰만 부른다. 글자·불투명도·고도 사다리도 여기 |
 | `src/components/` | 하늘 — `Aurora`(흐르는 장막) · `Starfield`(별하늘) · `StarMark`(브랜드 별 하나) |
