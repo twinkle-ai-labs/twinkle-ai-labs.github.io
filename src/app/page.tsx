@@ -21,9 +21,9 @@ import styles from "./home.module.css";
 
 export const metadata = {
   // 홈은 제 이름을 통째로 쓴다 — 꼬리표(`· Twinkle AI Labs`)가 붙으면 이름이 두 번이다.
-  title: { absolute: "Twinkle AI Labs — 난 스스로 빛난다" },
+  title: { absolute: "Twinkle AI Labs — 스스로 빛나다" },
   description:
-    "한 사람과 AI가 만드는 작은 유틸리티 앱들. 이름의 뜻과 만드는 방식, 그리고 지금까지 만든 앱.",
+    "기획부터 운영까지 직접 이어 온 개발자가 AI와 함께 생각을 제품으로 만드는 개인 작업실의 이야기.",
 };
 
 /** 구획의 머리 — 작은 말 하나와 제목 하나. 여섯 번 되풀이되므로 한 자리에 둔다. */
@@ -98,6 +98,9 @@ export default function Home() {
                 </h3>
                 <p className={styles.reading}>{name.reading}</p>
                 <p className={styles.body}>{name.body}</p>
+                {"motto" in name && name.motto ? (
+                  <p className={`${styles.body} ${styles.nameMotto}`}>{name.motto}</p>
+                ) : null}
                 {"link" in name && name.link ? (
                   /* 약관은 제 주소에 산다 — 이 집 안의 자리가 아니라 밖으로 나가는 문이다. */
                   <a className={styles.inlineLink} href={name.link.href}>

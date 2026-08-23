@@ -6,6 +6,7 @@ import Starfield from "@/components/Starfield";
 import RouteViews from "@/components/RouteViews";
 import StarMark from "@/components/StarMark";
 import ThemeToggle from "@/components/ThemeToggle";
+import HeaderBar from "@/components/HeaderBar";
 import Providers from "@/components/Providers";
 import { BLOG_URL, CONTACT_EMAIL, DESIGN_URL, POLARIS_URL } from "@/lib/labs";
 import "./globals.css";
@@ -15,9 +16,9 @@ const NAME = "Twinkle AI Labs";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://twinklelabs.kr"),
-  title: { default: `${NAME} — 난 스스로 빛난다`, template: `%s · ${NAME}` },
+  title: { default: `${NAME} — 스스로 빛나다`, template: `%s · ${NAME}` },
   description:
-    "한 사람과 AI가 만드는 작은 유틸리티 앱들. 켜자마자 할 일이 끝나고, 쓰는 동안 생각할 것이 없는 도구를 만듭니다.",
+    "기획부터 운영까지 직접 이어 온 개발자가 AI와 함께 생각을 제품으로 만드는 개인 작업실입니다.",
 };
 
 // 화면이 그려지기 전에 테마를 정한다 — 쿠키를 먼저 읽어 서브도메인 간 동기화하고, 없으면 localStorage를 본다.
@@ -39,18 +40,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <RouteViews />
         {/* 하늘은 어느 화면에나 걸린다 — 404 도 같은 밤 아래 있다. */}
         <Aurora />
-        <header className={styles.header}>
+        <HeaderBar>
           <div className={styles.headerInner}>
             <Link href="/" className={styles.brand}>
               <StarMark gradientId="twinkle-brand" className={styles.star} />
               <span className={styles.brandName}>{NAME}</span>
             </Link>
-            <nav className={styles.nav}>
-              <a href="/" className={`${styles.navLink} ${styles.navLinkActive}`}>
+            <nav className={styles.nav} aria-label="주요 메뉴">
+              <a href="/" className={`${styles.navLink} ${styles.navLinkActive}`} aria-current="page">
                 홈
               </a>
               <a href={DESIGN_URL} className={styles.navLink}>
-                디자인
+                디자인 시스템
               </a>
               <a href={BLOG_URL} className={styles.navLink}>
                 블로그
@@ -61,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <ThemeToggle toLight="밝은 화면으로" toDark="어두운 화면으로" />
             </nav>
           </div>
-        </header>
+        </HeaderBar>
         <main className={styles.main}>{children}</main>
         <footer className={styles.footer}>
           {/* 바닥에도 하늘 한 자락 — 첫 화면과 마지막 화면이 같은 말로 끝난다. */}

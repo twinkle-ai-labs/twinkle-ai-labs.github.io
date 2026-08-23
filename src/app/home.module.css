@@ -213,9 +213,14 @@
   align-items: flex-start;
   height: 100%;
   padding: var(--s3);
-  background: var(--surface);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .14), transparent 44%),
+    color-mix(in srgb, var(--glass) 90%, var(--surface));
+  -webkit-backdrop-filter: blur(1rem) saturate(125%);
+  backdrop-filter: blur(1rem) saturate(125%);
+  border: var(--stroke-hair) solid color-mix(in srgb, var(--accent) 14%, transparent);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-raised);
+  box-shadow: 0 .75rem 2.25rem color-mix(in srgb, var(--primary) 9%, transparent), inset 0 1px rgba(255,255,255,.42);
   transition: transform var(--motion-base) var(--ease),
     box-shadow var(--motion-base) var(--ease);
 }
@@ -252,11 +257,13 @@
 
 .nameCard .inlineLink { margin-top: var(--s2); }
 
+.nameMotto { margin-top: var(--s2); }
+
 /* ── 만드는 사람 ────────────────────────────────────────────── */
 
 .founder {
   display: grid;
-  gap: var(--s5);
+  gap: var(--s4);
   grid-template-columns: 1fr;
 }
 
@@ -299,9 +306,14 @@
   flex-direction: column;
   gap: var(--s2h);
   padding: var(--s3);
-  background: var(--surface);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .14), transparent 44%),
+    color-mix(in srgb, var(--glass) 90%, var(--surface));
+  -webkit-backdrop-filter: blur(1rem) saturate(125%);
+  backdrop-filter: blur(1rem) saturate(125%);
+  border: var(--stroke-hair) solid color-mix(in srgb, var(--accent) 14%, transparent);
   border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-raised);
+  box-shadow: 0 1rem 3rem color-mix(in srgb, var(--primary) 10%, transparent), inset 0 1px rgba(255,255,255,.42);
 }
 
 .featuredHead {
@@ -419,9 +431,14 @@
   flex-direction: column;
   height: 100%;
   padding: var(--s3);
-  background: var(--surface);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .14), transparent 44%),
+    color-mix(in srgb, var(--glass) 90%, var(--surface));
+  -webkit-backdrop-filter: blur(1rem) saturate(125%);
+  backdrop-filter: blur(1rem) saturate(125%);
+  border: var(--stroke-hair) solid color-mix(in srgb, var(--accent) 14%, transparent);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-raised);
+  box-shadow: 0 .75rem 2.25rem color-mix(in srgb, var(--primary) 9%, transparent), inset 0 1px rgba(255,255,255,.42);
   transition: transform var(--motion-base) var(--ease),
     box-shadow var(--motion-base) var(--ease);
 }
@@ -650,13 +667,15 @@
   .heroMark { width: 4rem; height: 4rem; }
   .howGrid { grid-template-columns: repeat(4, 1fr); }
   .swatches { grid-template-columns: repeat(8, 1fr); }
-  /* 숫자는 왼쪽에 머무르고, 이야기가 그 옆을 지나간다. */
-  .founder { grid-template-columns: 20rem 1fr; gap: var(--s6); }
-  .founderAside {
-    position: sticky;
-    top: 5rem;
-    align-self: start;
+  /* 경력은 한 이야기다 — 제목, 숫자, 본문을 좌우로 갈라놓지 않는다. */
+  .founder { grid-template-columns: minmax(0, 1fr); gap: var(--s4); }
+  .founderAside { position: static; }
+  .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s4);
+    padding-block: var(--s3);
+    border-block: var(--stroke-hair) solid color-mix(in srgb, var(--divider) var(--alpha-soft), transparent);
   }
-  .stats { grid-template-columns: 1fr; gap: var(--s3); }
+  .founder .prose { max-width: 52rem; }
   .featured { padding: var(--s5); }
 }
