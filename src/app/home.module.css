@@ -214,13 +214,13 @@
   height: 100%;
   padding: var(--s3);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, .14), transparent 44%),
+    linear-gradient(135deg, var(--glass-highlight), transparent 44%),
     color-mix(in srgb, var(--glass) 90%, var(--surface));
-  -webkit-backdrop-filter: blur(1rem) saturate(125%);
-  backdrop-filter: blur(1rem) saturate(125%);
+  -webkit-backdrop-filter: blur(.625rem) saturate(115%);
+  backdrop-filter: blur(.625rem) saturate(115%);
   border: var(--stroke-hair) solid color-mix(in srgb, var(--accent) 14%, transparent);
   border-radius: var(--radius-lg);
-  box-shadow: 0 .75rem 2.25rem color-mix(in srgb, var(--primary) 9%, transparent), inset 0 1px rgba(255,255,255,.42);
+  box-shadow: 0 .75rem 2.25rem color-mix(in srgb, var(--primary) 7%, transparent), inset 0 1px var(--glass-inset);
   transition: transform var(--motion-base) var(--ease),
     box-shadow var(--motion-base) var(--ease);
 }
@@ -307,13 +307,13 @@
   gap: var(--s2h);
   padding: var(--s3);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, .14), transparent 44%),
+    linear-gradient(135deg, var(--glass-highlight), transparent 44%),
     color-mix(in srgb, var(--glass) 90%, var(--surface));
-  -webkit-backdrop-filter: blur(1rem) saturate(125%);
-  backdrop-filter: blur(1rem) saturate(125%);
+  -webkit-backdrop-filter: blur(.625rem) saturate(115%);
+  backdrop-filter: blur(.625rem) saturate(115%);
   border: var(--stroke-hair) solid color-mix(in srgb, var(--accent) 14%, transparent);
   border-radius: var(--radius-xl);
-  box-shadow: 0 1rem 3rem color-mix(in srgb, var(--primary) 10%, transparent), inset 0 1px rgba(255,255,255,.42);
+  box-shadow: 0 1rem 3rem color-mix(in srgb, var(--primary) 7%, transparent), inset 0 1px var(--glass-inset);
 }
 
 .featuredHead {
@@ -432,13 +432,13 @@
   height: 100%;
   padding: var(--s3);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, .14), transparent 44%),
+    linear-gradient(135deg, var(--glass-highlight), transparent 44%),
     color-mix(in srgb, var(--glass) 90%, var(--surface));
-  -webkit-backdrop-filter: blur(1rem) saturate(125%);
-  backdrop-filter: blur(1rem) saturate(125%);
+  -webkit-backdrop-filter: blur(.625rem) saturate(115%);
+  backdrop-filter: blur(.625rem) saturate(115%);
   border: var(--stroke-hair) solid color-mix(in srgb, var(--accent) 14%, transparent);
   border-radius: var(--radius-lg);
-  box-shadow: 0 .75rem 2.25rem color-mix(in srgb, var(--primary) 9%, transparent), inset 0 1px rgba(255,255,255,.42);
+  box-shadow: 0 .75rem 2.25rem color-mix(in srgb, var(--primary) 7%, transparent), inset 0 1px var(--glass-inset);
   transition: transform var(--motion-base) var(--ease),
     box-shadow var(--motion-base) var(--ease);
 }

@@ -4,15 +4,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 0;
+  border: var(--stroke-hair) solid var(--card-border);
   border-radius: var(--radius-pill);
-  background: var(--sunken);
+  background: var(--glass);
   color: var(--text-sub);
   cursor: pointer;
   transition: background var(--motion-fast) var(--ease),
-    color var(--motion-fast) var(--ease);
+    color var(--motion-fast) var(--ease), transform var(--motion-fast) var(--ease), box-shadow var(--motion-fast) var(--ease);
 }
 
-.toggle:hover { background: var(--primary-soft); color: var(--accent); }
+.toggle:hover { background: var(--primary-soft); color: var(--accent); transform: rotate(8deg); box-shadow: var(--shadow-raised); }
 
 .icon { font-size: var(--fs-16); line-height: 1; }

@@ -118,7 +118,9 @@
   --sky-star: 0.8;
   /* 띠 — 화면 전폭을 가로지르는 바탕. 아래 하늘이 살짝 비쳐야 판이 죽지 않는다. */
   --band: color-mix(in srgb, var(--sunken) var(--alpha-soft), transparent);
-  --glass: light-dark(rgba(255, 255, 255, 0.78), rgba(27, 21, 38, 0.78));
+  --glass: light-dark(rgba(255, 255, 255, 0.78), rgba(27, 21, 38, 0.92));
+  --glass-highlight: light-dark(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.035));
+  --glass-inset: light-dark(rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.08));
   --glass-border: light-dark(rgba(112, 64, 217, 0.12), rgba(183, 154, 255, 0.14));
   --card-border: light-dark(rgba(112, 64, 217, 0.10), rgba(183, 154, 255, 0.10));
   /* 포커스 — 손이 가 있는 곳은 ring 칸 */
