@@ -9,10 +9,12 @@
     "preview": "npm run build && npx --yes serve out -l 3945"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.12.0",
     "next": "^15.5.4",
     "qrcode": "^1.5.4",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-redux": "^9.3.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
