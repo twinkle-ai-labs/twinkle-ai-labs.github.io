@@ -15,10 +15,10 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  background: color-mix(in srgb, var(--bg) var(--alpha-strong), transparent);
   backdrop-filter: blur(0.75rem);
   /* px — 헤어라인. 글자를 따라 굵어질 것이 아니다. */
-  border-bottom: 1px solid color-mix(in srgb, var(--divider) 70%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--divider) var(--alpha-soft), transparent);
   /* 기본값은 «늘 서 있다» — 스크롤에 물린 시계를 모르는 브라우저와
      움직임을 줄여 달라고 한 사람에게는 판이 처음부터 있는 편이 안전하다.
      못 읽는 머리띠보다 늘 있는 머리띠가 낫다. */
@@ -74,7 +74,7 @@
   width: 1.125rem;
   height: 1.125rem;
   /* px — 장식의 번짐이라 글자와 함께 커지지 않는다. */
-  filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--primary) 45%, transparent));
+  filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--primary) var(--alpha-half), transparent));
   transition: transform var(--motion-base) var(--ease-entering);
 }
 .brand:hover .star { transform: rotate(90deg) scale(1.08); }
@@ -104,7 +104,7 @@
   isolation: isolate;
   overflow: hidden;
   /* px — 헤어라인. */
-  border-top: 1px solid color-mix(in srgb, var(--divider) 70%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--divider) var(--alpha-soft), transparent);
   background: var(--band);
 }
 

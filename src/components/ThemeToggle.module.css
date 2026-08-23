@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--sunken);
   color: var(--text-sub);
   cursor: pointer;
@@ -15,4 +15,4 @@
 
 .toggle:hover { background: var(--primary-soft); color: var(--accent); }
 
-.icon { font-size: 0.9375rem; line-height: 1; }
+.icon { font-size: var(--fs-16); line-height: 1; }

@@ -11,7 +11,7 @@
   height: 2.5rem;
   margin: 0 auto var(--s3);
   color: var(--accent);
-  opacity: 0.55;
+  opacity: var(--alpha-half);
 }
 
 .code {
