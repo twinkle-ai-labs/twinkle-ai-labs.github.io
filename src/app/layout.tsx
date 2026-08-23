@@ -6,7 +6,7 @@ import Starfield from "@/components/Starfield";
 import RouteViews from "@/components/RouteViews";
 import StarMark from "@/components/StarMark";
 import ThemeToggle from "@/components/ThemeToggle";
-import { BLOG_URL, CONTACT_EMAIL, POLARIS_URL } from "@/lib/labs";
+import { BLOG_URL, CONTACT_EMAIL, DESIGN_URL, POLARIS_URL } from "@/lib/labs";
 import "./globals.css";
 import styles from "./layout.module.css";
 
@@ -44,14 +44,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <span className={styles.brandName}>{NAME}</span>
             </Link>
             <nav className={styles.nav}>
-              <a href="/#apps" className={styles.navLink}>
-                앱
+              <a href="/" className={`${styles.navLink} ${styles.navLinkActive}`}>
+                홈
               </a>
-              <Link href="/design/" className={styles.navLink}>
+              <a href={DESIGN_URL} className={styles.navLink}>
                 디자인
-              </Link>
-              <a href="/#contact" className={styles.navLink}>
-                문의
+              </a>
+              <a href={BLOG_URL} className={styles.navLink}>
+                블로그
               </a>
               <a href={POLARIS_URL} className={styles.navLink}>
                 약관

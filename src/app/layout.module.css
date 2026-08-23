@@ -18,7 +18,7 @@
   background: color-mix(in srgb, var(--bg) var(--alpha-strong), transparent);
   backdrop-filter: blur(0.75rem);
   /* px — 헤어라인. 글자를 따라 굵어질 것이 아니다. */
-  border-bottom: 1px solid color-mix(in srgb, var(--divider) var(--alpha-soft), transparent);
+  border-bottom: var(--stroke-hair) solid color-mix(in srgb, var(--divider) var(--alpha-soft), transparent);
   /* 기본값은 «늘 서 있다» — 스크롤에 물린 시계를 모르는 브라우저와
      움직임을 줄여 달라고 한 사람에게는 판이 처음부터 있는 편이 안전하다.
      못 읽는 머리띠보다 늘 있는 머리띠가 낫다. */
@@ -66,7 +66,7 @@
   gap: var(--s1);
   color: var(--text);
   font-weight: var(--fw-bold);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tr-snug);
 }
 .brand:hover { text-decoration: none; }
 
@@ -75,7 +75,7 @@
   height: 1.125rem;
   /* px — 장식의 번짐이라 글자와 함께 커지지 않는다. */
   filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--primary) var(--alpha-half), transparent));
-  transition: transform var(--motion-base) var(--ease-entering);
+  transition: transform var(--motion-base) var(--ease);
 }
 .brand:hover .star { transform: rotate(90deg) scale(1.08); }
 
@@ -91,7 +91,7 @@
   color: var(--text-sub);
   font-size: var(--fs-14);
   font-weight: var(--fw-semibold);
-  transition: color var(--motion-fast) var(--ease-entering);
+  transition: color var(--motion-fast) var(--ease);
 }
 .navLink:hover { color: var(--text); text-decoration: none; }
 
@@ -104,7 +104,7 @@
   isolation: isolate;
   overflow: hidden;
   /* px — 헤어라인. */
-  border-top: 1px solid color-mix(in srgb, var(--divider) var(--alpha-soft), transparent);
+  border-top: var(--stroke-hair) solid color-mix(in srgb, var(--divider) var(--alpha-soft), transparent);
   background: var(--band);
 }
 
@@ -141,7 +141,7 @@
 .footerName {
   font-size: var(--fs-14);
   font-weight: var(--fw-bold);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--tr-slight);
   color: var(--text);
 }
 
@@ -150,7 +150,7 @@
   grid-column: 1 / -1;
   color: var(--text-faint);
   font-size: var(--fs-12);
-  line-height: 1.7;
+  line-height: var(--lh-body);
 }
 
 .footerLinks {
@@ -169,6 +169,12 @@
 @media (max-width: 29.99em) {
   /* 좁은 화면에서는 머리띠가 이름과 테마만 갖는다 — 나머지는 바닥에도 있다. */
   .nav .navLink:not(:last-of-type) { display: none; }
+}
+
+/* 현재 사이트의 navLink 강조 — home 사이트이므로 홈 링크가 강조된다 */
+.navLinkActive {
+  color: var(--text);
+  font-weight: var(--fw-bold);
 }
 
 @media (min-width: 48em) {

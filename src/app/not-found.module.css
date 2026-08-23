@@ -17,7 +17,7 @@
 .code {
   font-size: var(--fs-12);
   font-weight: var(--fw-bold);
-  letter-spacing: 0.14em;
+  letter-spacing: var(--tr-wide);
   color: var(--accent);
   margin-bottom: var(--s1);
 }
@@ -25,7 +25,7 @@
 .title {
   font-size: var(--fs-24);
   font-weight: var(--fw-bold);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tr-snug);
 }
 
 .body {

@@ -7,6 +7,7 @@ import {
   APPS_SECTION,
   CONTACT,
   CONTACT_EMAIL,
+  DESIGN_URL,
   FOUNDER,
   HERO,
   HOW,
@@ -16,7 +17,6 @@ import {
   STATUS,
   type LabApp,
 } from "@/lib/labs";
-import { DESIGN } from "@/lib/design";
 import styles from "./home.module.css";
 
 export const metadata = {
@@ -233,13 +233,22 @@ export default function Home() {
       {/* ── 디자인 시스템 — Aurora Ledger ──────────────────── */}
       <section id="design" className={`${styles.section} ${styles.reveal}`}>
         <div className={styles.shell}>
-          <Head kicker={DESIGN.eyebrow} title={DESIGN.title} />
-          <p className={styles.reading}>{DESIGN.reading}</p>
-          <p className={`${styles.body} ${styles.designLead}`}>{DESIGN.lead}</p>
+          <Head kicker="디자인 시스템" title="Aurora Ledger" />
+          <p className={styles.reading}>오로라 · 장부</p>
+          <p className={`${styles.body} ${styles.designLead}`}>모든 앱이 입는 한 벌. 물타기 계산기의 목업에서 태어나 2026년 8월에 모든 제품의 기준이 됐습니다.</p>
 
           {/* 견본은 이 화면의 제 토큰으로 칠한다 — 라이트·다크를 고르면 견본도 갈아입는다. */}
           <ul className={styles.swatches} aria-label="색 토큰">
-            {DESIGN.swatches.map((sw) => (
+            {[
+              { token: "bg", label: "판" },
+              { token: "surface", label: "카드" },
+              { token: "sunken", label: "파인 면" },
+              { token: "divider", label: "구분선" },
+              { token: "text", label: "잉크" },
+              { token: "text-sub", label: "물러난 잉크" },
+              { token: "primary", label: "누를 것" },
+              { token: "accent", label: "글자의 보라" },
+            ].map((sw) => (
               <li key={sw.token} className={styles.swatch}>
                 <span
                   className={styles.swatchChip}
@@ -253,7 +262,12 @@ export default function Home() {
           </ul>
 
           <ul className={styles.ladders}>
-            {DESIGN.ladders.map((l) => (
+            {[
+              { name: "격자", value: "8pt", note: "간격은 8의 배수, 반 칸은 필요한 자리에만" },
+              { name: "둥글기", value: "11 · 14 · 18 · 24", note: "입력칸 · 키 · 카드 · 시트. 알약은 한 줄짜리에만" },
+              { name: "글자", value: "11 → 40", note: "열 칸, 굵기는 넷 — 없는 칸은 부르지 않는다" },
+              { name: "움직임", value: "150 · 250 · 350ms", note: "곡선은 둘 — 들어오는 것과 나가는 것" },
+            ].map((l) => (
               <li key={l.name} className={styles.ladder}>
                 <span className={styles.ladderName}>{l.name}</span>
                 <span className={styles.ladderValue}>{l.value}</span>
@@ -264,9 +278,9 @@ export default function Home() {
 
           {/* 전문은 제 장에 산다 — 여기는 얼굴만 보이고 문을 가리킨다. */}
           <p className={styles.designMore}>
-            <Link className={styles.inlineLink} href={DESIGN.more.href}>
-              {DESIGN.more.label} <span aria-hidden="true">→</span>
-            </Link>
+            <a className={styles.inlineLink} href={DESIGN_URL}>
+              디자인 시스템 전부 보기 <span aria-hidden="true">→</span>
+            </a>
           </p>
         </div>
       </section>

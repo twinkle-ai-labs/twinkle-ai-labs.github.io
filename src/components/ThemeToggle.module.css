@@ -9,8 +9,8 @@
   background: var(--sunken);
   color: var(--text-sub);
   cursor: pointer;
-  transition: background var(--motion-fast) var(--ease-entering),
-    color var(--motion-fast) var(--ease-entering);
+  transition: background var(--motion-fast) var(--ease),
+    color var(--motion-fast) var(--ease);
 }
 
 .toggle:hover { background: var(--primary-soft); color: var(--accent); }

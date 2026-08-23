@@ -21,7 +21,7 @@
   position: absolute;
   opacity: var(--tw-base);
   animation: twinkle calc(var(--motion-ambient) * var(--tw-scale))
-    var(--ease-entering) calc(var(--motion-ambient) * var(--tw-delay) * -1)
+    var(--ease) calc(var(--motion-ambient) * var(--tw-delay) * -1)
     infinite alternate;
 }
 
@@ -54,7 +54,7 @@
   position: absolute;
   width: 9rem;
   /* px — 실 한 올의 두께. 글자를 따라 굵어질 것이 아니다. */
-  height: 1px;
+  height: var(--stroke-hair);
   background: linear-gradient(
     to right,
     transparent,
@@ -62,7 +62,7 @@
   );
   opacity: 0;
   transform: rotate(18deg);
-  animation: shoot calc(var(--motion-drift) * 1.5) var(--ease-leaving)
+  animation: shoot calc(var(--motion-drift) * 1.5) var(--ease-exit)
     calc(var(--motion-drift) * var(--tw-delay) * -0.5) infinite;
 }
 
