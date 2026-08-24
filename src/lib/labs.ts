@@ -5,10 +5,15 @@
  * 그래도 문장은 화면이 아니라 여기 있다 — 언젠가 영어를 더할 때
  * 화면을 뜯을 일이 없도록, 처음부터 말과 화면을 갈라 둔다.
  *
- * 앱이 하나 늘면 `APPS` 에 한 줄을 더한다. 화면은 고치지 않는다.
+ * 앱이 하나 늘면 [APPS] 에 한 줄을 더한다. 화면은 고치지 않는다.
+ * (이름과 주소는 [site] 가 진다 — 그쪽은 이 화면만의 것이 아니다.)
  */
 
-/** 앱이 지금 어디쯤 와 있는가. 배지의 말은 `STATUS` 가 정한다. */
+import { DESIGN_URL, POLARIS_URL } from "./site";
+
+/* ── 앱 ─────────────────────────────────────────────────────── */
+
+/** 앱이 지금 어디쯤 와 있는가. 배지의 말은 [STATUS_LABEL] 이 정한다. */
 export type AppStatus = "live" | "testing" | "building";
 
 export type LabApp = {
@@ -27,7 +32,7 @@ export type LabApp = {
   terms?: string;
 };
 
-export const STATUS: Record<AppStatus, string> = {
+export const STATUS_LABEL: Record<AppStatus, string> = {
   live: "출시됨",
   testing: "비공개 테스트 중",
   building: "만드는 중",
@@ -47,14 +52,7 @@ export function withReferrer(url: string, medium: string): string {
   return `${url}${url.includes("?") ? "&" : "?"}referrer=${encodeURIComponent(referrer)}`;
 }
 
-export const CONTACT_EMAIL = "twinkle.ai.labs@gmail.com";
-export const BLOG_URL = "https://blog.twinklelabs.kr";
-/** Aurora Ledger 디자인 시스템 — 독립 도메인에 산다. */
-export const DESIGN_URL = "https://design.twinklelabs.kr";
-/** 약관과 정책이 사는 곳 — 이 집이 아니라 제 주소에 산다. */
-export const POLARIS_URL = "https://polaris.twinklelabs.kr";
-
-export const APPS: LabApp[] = [
+export const APPS: readonly LabApp[] = [
   {
     slug: "stock-calculator",
     name: "물타기 계산기",
@@ -67,9 +65,13 @@ export const APPS: LabApp[] = [
     ],
     status: "testing",
     icon: "/apps/stock-calculator.png",
-    terms: `${POLARIS_URL}/t/stock-calculator/`,
+    /* 앱 한 장이 이용약관과 개인정보 처리방침을 함께 든다 — 문서 하나가 아니라 그 목록을 가리킨다.
+       (`/t/…` 를 가리키고 있었는데 Polaris 에 그런 길이 없어 404 였다. 서버가 없으니 고쳐 줄 것도 없다.) */
+    terms: `${POLARIS_URL}/ko/stock-calculator/`,
   },
-];
+] as const;
+
+/* ── 화면의 말 ──────────────────────────────────────────────── */
 
 export const HERO = {
   /* 이름은 머리띠가 이미 말한다 — 첫 화면에서는 별 하나가 그 자리를 대신한다. */
@@ -82,26 +84,27 @@ export const HERO = {
 } as const;
 
 /** 이름이 무엇을 뜻하는지 — Twinkle 과 Polaris. */
-export const NAMES = [
-  {
-    word: "Twinkle",
-    reading: "트윙클 · 반짝이다",
-    body:
-      "별이 반짝이는 것은 남의 빛을 되비추기 때문이 아니라, 스스로 타고 있기 때문입니다. 그래서 Twinkle은 이름이자 다짐입니다.",
-    motto:
-      "“스스로 빛나다.” 누가 자리를 만들어 주기를 기다리지 않고, 떠올린 생각을 가치 있는 제품으로 완성해 직접 내놓습니다.",
-  },
-  {
-    word: "Polaris",
-    reading: "폴라리스 · 북극성",
-    body:
-      "북극성은 밤하늘의 변하지 않는 이정표입니다. 모든 앱의 이용약관과 개인정보 처리방침은 Polaris에 한자리에 투명하게 모입니다. 약관이 변경되더라도 앱을 매번 새로 올릴 필요 없이, 언제나 동일하고 신뢰할 수 있는 단일 기준을 제공합니다.",
-    link: { label: "약관 보관소 열기", href: POLARIS_URL },
-  },
-] as const;
-
-/** 구획의 머리와 각주 — 화면에 박아 두지 않는다. */
-export const NAMES_SECTION = { eyebrow: "이름", title: "이름의 뜻" } as const;
+export const NAMES_SECTION = {
+  eyebrow: "이름",
+  title: "이름의 뜻",
+  items: [
+    {
+      word: "Twinkle",
+      reading: "트윙클 · 반짝이다",
+      body:
+        "별이 반짝이는 것은 남의 빛을 되비추기 때문이 아니라, 스스로 타고 있기 때문입니다. 그래서 Twinkle은 이름이자 다짐입니다.",
+      motto:
+        "“스스로 빛나다.” 누가 자리를 만들어 주기를 기다리지 않고, 떠올린 생각을 가치 있는 제품으로 완성해 직접 내놓습니다.",
+    },
+    {
+      word: "Polaris",
+      reading: "폴라리스 · 북극성",
+      body:
+        "북극성은 밤하늘의 변하지 않는 이정표입니다. 모든 앱의 이용약관과 개인정보 처리방침은 Polaris에 한자리에 투명하게 모입니다. 약관이 변경되더라도 앱을 매번 새로 올릴 필요 없이, 언제나 동일하고 신뢰할 수 있는 단일 기준을 제공합니다.",
+      link: { label: "약관 보관소 열기", href: POLARIS_URL },
+    },
+  ],
+} as const;
 
 export const APPS_SECTION = {
   eyebrow: "만든 것",
@@ -145,6 +148,36 @@ export const HOW = {
       title: "본질에 집중한 단순함",
       body: "불필요한 요소를 덜어내어 사용자에게 꼭 필요한 가치만 남깁니다. 기능이 불어난 앱이 아니라 고민이 줄어드는 앱을 만듭니다.",
     },
+  ],
+} as const;
+
+/**
+ * 디자인 시스템의 얼굴만 — 전문은 제 장(design.twinklelabs.kr)에 산다.
+ *
+ * 색견본은 hex 를 적지 않는다. 화면의 제 토큰(`var(--bg)` …)으로 칠하므로
+ * 여기 있는 것은 **토큰의 이름과 그 자리의 뜻**뿐이고, 값은 테마를 따라 갈아입는다.
+ */
+export const DESIGN_SECTION = {
+  eyebrow: "디자인 시스템",
+  title: "Aurora Ledger",
+  reading: "오로라 · 장부",
+  lead: "모든 앱이 입는 한 벌. 물타기 계산기의 목업에서 태어나 2026년 8월에 모든 제품의 기준이 됐습니다.",
+  more: { label: "디자인 시스템 전부 보기", href: DESIGN_URL },
+  swatches: [
+    { token: "bg", label: "판" },
+    { token: "surface", label: "카드" },
+    { token: "sunken", label: "파인 면" },
+    { token: "divider", label: "구분선" },
+    { token: "text", label: "잉크" },
+    { token: "text-sub", label: "물러난 잉크" },
+    { token: "primary", label: "누를 것" },
+    { token: "accent", label: "글자의 보라" },
+  ],
+  ladders: [
+    { name: "격자", value: "8pt", note: "간격은 8의 배수, 반 칸은 필요한 자리에만" },
+    { name: "둥글기", value: "11 · 14 · 18 · 24", note: "입력칸 · 키 · 카드 · 시트. 알약은 한 줄짜리에만" },
+    { name: "글자", value: "11 → 40", note: "열 칸, 굵기는 넷 — 없는 칸은 부르지 않는다" },
+    { name: "움직임", value: "150 · 250 · 350ms", note: "곡선은 둘 — 들어오는 것과 나가는 것" },
   ],
 } as const;
 

@@ -2,7 +2,12 @@ import Link from "next/link";
 import StarMark from "@/components/StarMark";
 import styles from "./not-found.module.css";
 
-export const metadata = { title: "여기엔 아무것도 없습니다" };
+/* 없는 곳은 **목록에 올리지 않는다** — 404 가 검색 결과에 서면
+   찾아온 사람이 처음부터 빈손이다. */
+export const metadata = {
+  title: "여기엔 아무것도 없습니다",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (
