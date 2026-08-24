@@ -12,7 +12,7 @@ import { OG_SIZE } from "./og";
 
 /** 이 집의 한 줄 소개 — 검색 결과에 서는 문장이다. */
 export const DESCRIPTION =
-  "기획부터 운영까지 직접 이어 온 개발자가 AI와 함께 생각을 제품으로 만드는 개인 작업실입니다.";
+  "아이디어를 기획하고, 직접 만들고, 끝까지 운영합니다. 한 명의 개발자와 AI가 함께 완성하는 1인 제품 스튜디오입니다.";
 
 /** 주소를 눈으로 읽는 꼴 — 나눔 카드의 발치에 선다. */
 export const DOMAIN = new URL(HOME_URL).host;
@@ -81,7 +81,7 @@ export function jsonLd(): string {
     /* 법인이 아니다 — 개인이 만들고 운영하는 이름이다. 그래서 Organization 의
        founder 와 이 집의 주인이 같은 사람을 가리킨다. */
     logo: `${HOME_URL}/icon.png`,
-    image: `${HOME_URL}/opengraph-image.png`,
+    image: `${HOME_URL}/og.png`,
     email: CONTACT_EMAIL,
     slogan: HERO.title,
     description: DESCRIPTION,

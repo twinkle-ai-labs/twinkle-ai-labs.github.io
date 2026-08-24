@@ -10,9 +10,9 @@ import type { Metadata } from "next";
 import { shareCard } from "@/lib/seo";
 import { NAME } from "@/lib/site";
 
-const TITLE = `${NAME} — 스스로 빛나다`;
+const TITLE = `${NAME} | AI와 함께 만드는 1인 제품 스튜디오`;
 const DESCRIPTION =
-  "기획부터 운영까지 직접 이어 온 개발자가 AI와 함께 생각을 제품으로 만드는 개인 작업실의 이야기.";
+  "아이디어를 기획하고, 직접 만들고, 끝까지 운영합니다. 한 명의 개발자와 AI가 함께 완성하는 1인 제품 스튜디오입니다.";
 
 export const metadata: Metadata = {
   // 홈은 제 이름을 통째로 쓴다 — 꼬리표(`· Twinkle AI Labs`)가 붙으면 이름이 두 번이다.
