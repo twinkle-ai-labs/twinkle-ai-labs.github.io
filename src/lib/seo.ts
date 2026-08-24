@@ -8,6 +8,7 @@
 import type { Metadata } from "next";
 import { APPS, HERO, STATUS_LABEL } from "./labs";
 import { BLOG_URL, CONTACT_EMAIL, DESIGN_URL, HOME_URL, NAME, POLARIS_URL } from "./site";
+import { OG_SIZE } from "./og";
 
 /** 이 집의 한 줄 소개 — 검색 결과에 서는 문장이다. */
 export const DESCRIPTION =
@@ -23,8 +24,7 @@ export const DOMAIN = new URL(HOME_URL).host;
  */
 export const OG_IMAGE = {
   url: "/og.png",
-  width: 1200,
-  height: 630,
+  ...OG_SIZE,
   alt: `${NAME} — ${HERO.title}`,
   type: "image/png",
 } as const;
