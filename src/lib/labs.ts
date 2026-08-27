@@ -21,8 +21,22 @@ export type LabApp = {
   name: string;
   tagline: string;
   blurb: string;
-  /** 무엇을 해 주는지 — 한 줄씩. 문단 하나보다 눈이 먼저 읽는다. */
+  /**
+   * 무엇을 해 주는지 — 한 줄씩. 문단 하나보다 눈이 먼저 읽는다.
+   *
+   * 지금은 **맨 앞 앱**만 이것을 그린다(나머지는 격자 카드로 서고 소개 문단만 든다).
+   * 그래도 앱마다 적어 두는 것은, 앞자리가 바뀌는 날 글을 새로 쓰지 않기 위해서다.
+   */
   points?: readonly string[];
+
+  /**
+   * 검색엔진에게 말하는 갈래(schema.org) — 사람 눈에는 안 보이고 구조화 데이터에만 실린다.
+   *
+   * 한때 [seo] 가 모든 앱에 `FinanceApplication` 을 박고 있었다. 앱이 계산기 하나일 때는
+   * 맞는 말이었지만, PDF 도구가 들어온 순간 **검색엔진에게 거짓말을 하는 칸**이 됐다.
+   * 앱마다 제 갈래를 든다.
+   */
+  category: string;
   status: AppStatus;
   /** `public/apps/` 의 아이콘. 없으면 이름의 첫 글자가 얼굴이 된다. */
   icon?: string;
@@ -64,10 +78,27 @@ export const APPS: readonly LabApp[] = [
       "계산 이력을 남겨 자주 보는 종목을 다시 확인",
     ],
     status: "testing",
+    category: "FinanceApplication",
     icon: "/apps/stock-calculator.png",
     /* 앱 한 장이 이용약관과 개인정보 처리방침을 함께 든다 — 문서 하나가 아니라 그 목록을 가리킨다.
        (`/t/…` 를 가리키고 있었는데 Polaris 에 그런 길이 없어 404 였다. 서버가 없으니 고쳐 줄 것도 없다.) */
     terms: `${POLARIS_URL}/ko/stock-calculator/`,
+  },
+  {
+    slug: "pocket-pdf",
+    name: "Pocket PDF",
+    tagline: "문서를 다루는 일을 기기 밖으로 내보내지 않는 PDF 도구",
+    blurb:
+      "계약서와 영수증처럼 남에게 보이고 싶지 않은 문서일수록 어딘가에 올려야 다룰 수 있다는 것이 이상했습니다. 병합도, 글자 읽기도, 요약까지도 기기 안에서 끝나도록 만들었습니다.",
+    points: [
+      "PDF 병합·분할, 이미지 변환, 잠긴 PDF 열기",
+      "문서를 찍으면 글자를 읽어 검색되는 PDF로",
+      "기기 안의 모델이 읽고 요약하는 문서 분석",
+    ],
+    status: "building",
+    category: "UtilitiesApplication",
+    icon: "/apps/pocket-pdf.png",
+    terms: `${POLARIS_URL}/ko/pocket-pdf/`,
   },
 ] as const;
 
