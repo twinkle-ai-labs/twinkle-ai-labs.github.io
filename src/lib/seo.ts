@@ -106,7 +106,7 @@ export function jsonLd(): string {
     "@type": "SoftwareApplication",
     name: app.name,
     description: app.blurb,
-    applicationCategory: "FinanceApplication",
+    applicationCategory: app.category,
     operatingSystem: "Android",
     inLanguage: "ko-KR",
     creativeWorkStatus: STATUS_LABEL[app.status],
