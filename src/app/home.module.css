@@ -20,7 +20,16 @@
   scroll-margin-top: 4.5rem;
 }
 
-.band { background: var(--band); }
+/* 띠는 «색이 살짝 다른 면»만으로는 서지 못한다 — 라이트에서 판과의 대비가 1.09:1 이라
+   여섯 구획이 번갈아 선다는 약속이 눈에는 한 덩이로 보였다. 헤어라인 두 줄이 그 경계를
+   말한다: 색을 더 진하게 깔면 «넓게 깔리는 것은 중성색이다»를 어기게 되고,
+   선은 넓이가 없어 그 법에 걸리지 않으면서 구획을 가른다. */
+.band {
+  background: var(--sunken);
+  border-block: var(--stroke-hair) solid color-mix(in srgb, var(--divider) var(--alpha-soft), transparent);
+}
+/* 마지막 띠의 아랫줄은 바닥글의 윗줄과 겹쳐 한 줄이 두 겹으로 보인다. */
+.band:last-child { border-block-end: 0; }
 
 .center { text-align: center; }
 
@@ -123,11 +132,15 @@
   box-shadow: var(--shadow-floating);
 }
 
+/* 파인 면(--sunken)만 깔면 라이트에서 판과의 대비가 1.02:1 — 글자만 떠 있고
+   버튼의 몸이 보이지 않는다. 면을 카드와 같은 --surface 로 올리고 헤어라인을 둘러
+   «누를 수 있는 것»이라고 말한다. 그늘은 주지 않는다 — 떠 있는 것은 CTA 하나다. */
 .ghost {
-  background: var(--sunken);
+  background: var(--surface);
   color: var(--text);
+  box-shadow: inset 0 0 0 var(--stroke-hair) var(--divider);
 }
-.ghost:hover { text-decoration: none; background: var(--divider); }
+.ghost:hover { text-decoration: none; background: var(--sunken); }
 
 /* ── 구획의 머리 ────────────────────────────────────────────── */
 
@@ -164,6 +177,8 @@
   color: var(--text-sub);
   font-size: var(--fs-16);
   line-height: var(--lh-body);
+  /* 마지막 줄에 낱말 하나만 떨어지지 않게 — 브라우저가 줄을 고르게 나눈다. */
+  text-wrap: pretty;
 }
 
 .prose {
@@ -218,9 +233,9 @@
     color-mix(in srgb, var(--glass) 90%, var(--surface));
   -webkit-backdrop-filter: blur(.625rem) saturate(115%);
   backdrop-filter: blur(.625rem) saturate(115%);
-  border: var(--stroke-hair) solid color-mix(in srgb, var(--accent) 14%, transparent);
+  border: var(--stroke-hair) solid var(--card-border);
   border-radius: var(--radius-lg);
-  box-shadow: 0 .75rem 2.25rem color-mix(in srgb, var(--primary) 7%, transparent), inset 0 1px var(--glass-inset);
+  box-shadow: var(--shadow-raised), inset 0 1px var(--glass-inset);
   transition: transform var(--motion-base) var(--ease),
     box-shadow var(--motion-base) var(--ease);
 }
@@ -252,7 +267,7 @@
   margin: var(--s0) 0 var(--s1h);
   font-size: var(--fs-14);
   font-weight: var(--fw-semibold);
-  color: var(--text-faint);
+  color: var(--text-sub);
 }
 
 .nameCard .inlineLink { margin-top: var(--s2); }
@@ -269,17 +284,19 @@
 
 .founderAside .head { margin-bottom: var(--s3); }
 
+/* 좁은 화면에서 셋을 자동으로 채우면 2+1 로 갈려 마지막 하나가 홀로 떨어진다.
+   그럴 바에는 한 줄에 하나씩 — 값과 이름을 같은 밑줄에 나란히 두면 세로도 짧다. */
 .stats {
   display: grid;
-  gap: var(--s2h);
-  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: var(--s1h);
+  grid-template-columns: 1fr;
 }
 
 /* 숫자를 상자에 담지 않는다 — 묶음은 간격이 한다. */
 .stat {
   display: flex;
-  flex-direction: column;
-  gap: var(--s0);
+  align-items: baseline;
+  gap: var(--s1h);
 }
 
 .statValue {
@@ -295,28 +312,57 @@
   font-size: var(--fs-12);
   font-weight: var(--fw-medium);
   line-height: var(--lh-body);
-  color: var(--text-faint);
+  color: var(--text-sub);
 }
 
 /* ── 앱 ─────────────────────────────────────────────────────── */
 
-/* 앱이 하나뿐일 때 작은 카드로 두면 «아직 없음»처럼 읽힌다 — 첫 앱은 제 크기로 선다. */
-.featured {
+/* 앱은 한 줄에 둘씩 — 모든 앱이 같은 크기로 선다.
+   좁은 화면에서는 한 줄에 하나. 격자 칸을 자동으로 세지 않는 것은,
+   앱이 셋이 되는 날에도 «둘씩»이라는 약속이 흔들리지 않게 하려는 것이다. */
+.appGrid {
+  margin-top: var(--s2h);
+  display: grid;
+  gap: var(--s2h);
+  grid-template-columns: 1fr;
+}
+
+.appCard {
   display: flex;
   flex-direction: column;
   gap: var(--s2h);
+  height: 100%;
   padding: var(--s3);
   background:
     linear-gradient(135deg, var(--glass-highlight), transparent 44%),
     color-mix(in srgb, var(--glass) 90%, var(--surface));
   -webkit-backdrop-filter: blur(.625rem) saturate(115%);
   backdrop-filter: blur(.625rem) saturate(115%);
-  border: var(--stroke-hair) solid color-mix(in srgb, var(--accent) 14%, transparent);
+  border: var(--stroke-hair) solid var(--card-border);
   border-radius: var(--radius-xl);
-  box-shadow: 0 1rem 3rem color-mix(in srgb, var(--primary) 7%, transparent), inset 0 1px var(--glass-inset);
+  box-shadow: var(--shadow-raised), inset 0 1px var(--glass-inset);
+  transition: transform var(--motion-base) var(--ease),
+    box-shadow var(--motion-base) var(--ease);
+}
+.appCard:hover {
+  transform: translateY(-0.1875rem);
+  box-shadow: var(--shadow-floating);
 }
 
-.featuredHead {
+/* 배지는 카드의 발에서 문들과 한 줄에 선다 — «지금 무엇을 할 수 있나»의 답이라
+   나가는 문 옆이 제자리다. 머리에 세우던 시절의 음수 여백도 함께 걷혔다. */
+.appStatus {
+  flex: none;
+  margin-inline-end: auto;
+  font-size: var(--fs-11);
+  font-weight: var(--fw-bold);
+  color: var(--text-sub);
+  background: var(--sunken);
+  border-radius: var(--radius-pill);
+  padding: var(--s0) var(--s1h);
+}
+
+.appHead {
   display: flex;
   align-items: center;
   gap: var(--s2h);
@@ -330,13 +376,6 @@
   box-shadow: var(--shadow-raised);
 }
 
-.appIconSm {
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: var(--radius-md);
-  margin-bottom: var(--s2);
-}
-
 .monogram {
   display: flex;
   align-items: center;
@@ -347,7 +386,7 @@
   font-weight: var(--fw-bold);
 }
 
-.featuredIdent {
+.appIdent {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -356,21 +395,25 @@
 }
 
 .appName {
-  font-size: var(--fs-28);
+  font-size: var(--fs-24);
   font-weight: var(--fw-bold);
   letter-spacing: var(--tr-tight);
 }
 
-.appNameSm {
-  font-size: var(--fs-20);
-  font-weight: var(--fw-bold);
-  letter-spacing: var(--tr-snug);
-}
-
 .appTagline {
-  color: var(--text-faint);
+  color: var(--text-sub);
   font-size: var(--fs-14);
   font-weight: var(--fw-medium);
+  line-height: var(--lh-tight);
+  text-wrap: pretty;
+}
+
+/* 소개 문단은 요점보다 한 칸 물러난다 — 눈이 요점을 먼저 집게. */
+.appBlurb {
+  color: var(--text-sub);
+  font-size: var(--fs-14);
+  line-height: var(--lh-body);
+  text-wrap: pretty;
 }
 
 .badge {
@@ -387,11 +430,11 @@
 .points {
   display: grid;
   gap: var(--s1h);
-  padding-top: var(--s1);
 }
 
 .point {
   display: flex;
+  text-wrap: pretty;
   align-items: flex-start;
   gap: var(--s1);
   color: var(--text-sub);
@@ -408,65 +451,44 @@
   color: var(--accent);
 }
 
-.appMeta { margin-top: var(--s2); }
-
+/* 발은 카드 밑바닥에 — 글 길이가 달라도 두 카드의 이 줄이 나란히 선다.
+   배지와 문 사이를 갈라 놓는 것은 간격이지 선이 아니다. */
 .appLinks {
   margin-top: auto;
-  padding-top: var(--s1h);
+  padding-top: var(--s2);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--s1) var(--s3);
-}
-
-.appGrid {
-  margin-top: var(--s2h);
-  display: grid;
-  gap: var(--s2h);
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-}
-
-.appCard {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: var(--s3);
-  background:
-    linear-gradient(135deg, var(--glass-highlight), transparent 44%),
-    color-mix(in srgb, var(--glass) 90%, var(--surface));
-  -webkit-backdrop-filter: blur(.625rem) saturate(115%);
-  backdrop-filter: blur(.625rem) saturate(115%);
-  border: var(--stroke-hair) solid color-mix(in srgb, var(--accent) 14%, transparent);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 .75rem 2.25rem color-mix(in srgb, var(--primary) 7%, transparent), inset 0 1px var(--glass-inset);
-  transition: transform var(--motion-base) var(--ease),
-    box-shadow var(--motion-base) var(--ease);
-}
-.appCard:hover {
-  transform: translateY(-0.1875rem);
-  box-shadow: var(--shadow-floating);
+  gap: var(--s1) var(--s2);
 }
 
 /* 아직 오지 않은 것은 상자를 갖지 않는다 — 한 줄이면 된다. */
+/* 375 에서 글이 두 줄이 되면 별이 두 줄 사이에 매달렸다 — 첫 줄의 글자에 맞춘다. */
 .nextNote {
   margin-top: var(--s3);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: var(--s1);
-  color: var(--text-faint);
+  color: var(--text-sub);
   font-size: var(--fs-14);
+  line-height: var(--lh-body);
+  text-wrap: pretty;
 }
 
 .noteStar {
   flex: none;
   width: 0.6875rem;
   height: 0.6875rem;
+  /* 첫 줄의 글자 한가운데 — .pointStar 와 같은 이유, 같은 자리. */
+  margin-top: 0.4375rem;
   color: var(--accent);
 }
 
 /* ── 만드는 방식 ────────────────────────────────────────────── */
 
+/* 넷을 한 줄에 세우면 칸이 226px 이 되어 한 줄에 한글 열네 자만 든다 —
+   차례를 보여 주려다 글을 못 읽게 만든다. 둘씩 서면 서른 자다. */
 .howGrid {
   display: grid;
   gap: var(--s4);
@@ -538,7 +560,7 @@
 
 .swatchLabel {
   font-size: var(--fs-12);
-  color: var(--text-faint);
+  color: var(--text-sub);
 }
 
 /* 사다리 — 숫자가 먼저 말한다. «만드는 사람»의 통계와 같은 꼴. */
@@ -562,7 +584,7 @@
   font-weight: var(--fw-bold);
   letter-spacing: var(--tr-wide);
   text-transform: uppercase;
-  color: var(--text-faint);
+  color: var(--text-sub);
 }
 
 /* 좁은 화면에서는 한 칸 내려 한 줄에 — «11 · 14 · 18 · 24»가 꺾이면 사다리가 아니라 글이 된다. */
@@ -613,11 +635,13 @@
   .ladderValue { font-size: var(--fs-24); }
   .nameGrid { grid-template-columns: repeat(2, 1fr); gap: var(--s3); }
   .howGrid { grid-template-columns: repeat(2, 1fr); gap: var(--s4) var(--s3); }
-  .points { grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: var(--s2h) var(--s3); }
-  .featured { padding: var(--s4); gap: var(--s3); }
-  .appIcon { width: 5.5rem; height: 5.5rem; }
-  .appName { font-size: var(--fs-32); }
+  .appGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); }
+  .appCard { padding: var(--s4); }
+  .appIcon { width: 5rem; height: 5rem; }
+  .appName { font-size: var(--fs-28); }
   .nameCard { padding: var(--s4); }
+  .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2h); }
+  .stat { flex-direction: column; align-items: flex-start; gap: var(--s0); }
 }
 
 @media (min-width: 48em) {
@@ -629,7 +653,6 @@
 @media (min-width: 64em) {
   .heroTitle { font-size: var(--fs-72); }
   .heroMark { width: 4rem; height: 4rem; }
-  .howGrid { grid-template-columns: repeat(4, 1fr); }
   .swatches { grid-template-columns: repeat(8, 1fr); }
   /* 경력은 한 이야기다 — 제목, 숫자, 본문을 좌우로 갈라놓지 않는다. */
   .founder { grid-template-columns: minmax(0, 1fr); gap: var(--s4); }
@@ -641,5 +664,4 @@
     border-block: var(--stroke-hair) solid color-mix(in srgb, var(--divider) var(--alpha-soft), transparent);
   }
   .founder .prose { max-width: 52rem; }
-  .featured { padding: var(--s5); }
 }

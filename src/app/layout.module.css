@@ -131,7 +131,7 @@
 }
 
 .footerColumn { display: flex; flex-direction: column; gap: var(--s1h); }
-.footerHeading { color: var(--text-faint); font-size: var(--fs-11); font-weight: var(--fw-bold); letter-spacing: var(--tr-wide); text-transform: uppercase; }
+.footerHeading { color: var(--text-sub); font-size: var(--fs-11); font-weight: var(--fw-bold); letter-spacing: var(--tr-wide); text-transform: uppercase; }
 .footerMail { color: var(--text-sub); font-size: var(--fs-12); font-weight: var(--fw-semibold); overflow-wrap: anywhere; }
 .footerMail:hover { color: var(--accent); text-decoration: none; }
 
@@ -156,8 +156,8 @@
   transform: translateX(-50%);
 }
 
-.footerCopyright { color: var(--text-faint); font-size: var(--fs-11); }
-.footerMotto { color: var(--text-faint); font-size: var(--fs-11); }
+.footerCopyright { color: var(--text-sub); font-size: var(--fs-11); }
+.footerMotto { color: var(--text-sub); font-size: var(--fs-11); }
 
 .footerLinks {
   display: flex;
