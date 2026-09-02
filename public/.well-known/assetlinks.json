@@ -8,5 +8,15 @@
         "79:B2:90:EA:2D:E6:B0:01:FD:D9:36:37:B9:55:63:8F:59:85:8F:14:F8:BD:E0:3D:52:4B:83:10:38:F5:31:44"
       ]
     }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "kr.twinklelabs.pocketpdf",
+      "sha256_cert_fingerprints": [
+        "79:B2:90:EA:2D:E6:B0:01:FD:D9:36:37:B9:55:63:8F:59:85:8F:14:F8:BD:E0:3D:52:4B:83:10:38:F5:31:44"
+      ]
+    }
   }
 ]
