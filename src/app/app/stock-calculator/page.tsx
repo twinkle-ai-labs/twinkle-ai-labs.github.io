@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 /**
  * 물타기 계산기로 가는 문 — 읽는 장이 아니라 넘기는 장이다.
  *
- * 공유 그림의 QR 이 이 주소(https://twinklelabs.kr/stock-calculator/app)를 담는다.
+ * 공유 그림의 QR 이 이 주소(https://twinklelabs.kr/app/stock-calculator)를 담는다.
  * 앱이 있는 기기에서는 App Links 가 브라우저보다 먼저 앱을 열므로 이 장은 뜨지 않고,
  * 여기까지 온 사람은 앱이 없는 사람이다 — 스토어로 넘긴다.
  *
@@ -19,10 +19,10 @@ export const metadata: Metadata = {
   title: "물타기 계산기",
   // 넘기는 장은 검색에 서지 않는다 — 정본은 스토어 페이지다
   robots: { index: false, follow: false },
-  alternates: { canonical: "/stock-calculator/app/" },
+  alternates: { canonical: "/app/stock-calculator/" },
 };
 
-export default function StockCalculatorAppPage() {
+export default function AppStockCalculatorPage() {
   return (
     <>
       <script
