@@ -5,29 +5,32 @@ import { APPS, APPS_SECTION, STATUS_LABEL, withReferrer, type LabApp } from "@/l
 import styles from "@/app/home.module.css";
 
 /** 앱의 얼굴 — 아이콘이 없으면 이름의 첫 글자가 대신 선다. */
-function AppFace({ app, className }: { app: LabApp; className: string }) {
+function AppFace({ app }: { app: LabApp }) {
   if (!app.icon) {
     return (
-      <span className={`${className} ${styles.monogram}`} aria-hidden="true">
+      <span className={`${styles.appIcon} ${styles.monogram}`} aria-hidden="true">
         {app.name.trim().charAt(0)}
       </span>
     );
   }
-  return <Image className={className} src={app.icon} alt="" width={88} height={88} />;
+  return <Image className={styles.appIcon} src={app.icon} alt="" width={88} height={88} />;
 }
 
 /**
- * 밖으로 나가는 문 둘 — 스토어와 약관.
+ * 카드의 발 — 지금 이 앱에 무엇을 할 수 있는가.
  *
- * 큰 카드와 작은 카드가 **같은 조각**을 쓴다. 두 벌로 적어 두면 스토어 주소에
- * 표식을 다는 날 한쪽에만 달리고, 그 어긋남은 콘솔의 보고서에서나 드러난다.
+ * 배지는 한때 카드의 머리에 홀로 섰다. 두 앱이 나란히 «비공개 테스트 중»이라고
+ * 적힌 같은 알약을 이고 있으면, 카드가 가장 먼저 말하는 것이 앱이 아니라
+ * **둘 다 같은 상태라는 사실**이 된다 — 아무것도 알려 주지 않으면서 머리를 먹는다.
+ * 상태는 «지금 무엇을 할 수 있나»라는 물음의 답이므로 문 옆이 제자리다.
+ *
  * 아직 공개 전인 앱은 `store` 가 비어 있어 문 자체가 서지 않는다 —
- * «비공개 테스트 중»이라고 말하는 배지 옆에서 링크만 거짓말을 하지 않게.
+ * 배지가 «비공개 테스트 중»이라고 말하는 옆에서 링크만 거짓말을 하지 않게.
  */
-function AppLinks({ app }: { app: LabApp }) {
-  if (!app.store && !app.terms) return null;
+function AppFoot({ app }: { app: LabApp }) {
   return (
     <p className={styles.appLinks}>
+      <span className={styles.appStatus}>{STATUS_LABEL[app.status]}</span>
       {app.store ? (
         <a className={styles.inlineLink} href={withReferrer(app.store, "home")}>
           스토어에서 받기 <span aria-hidden="true">↗</span>
@@ -43,58 +46,52 @@ function AppLinks({ app }: { app: LabApp }) {
 }
 
 /**
- * 만든 것.
+ * 앱 한 장 — **모든 앱이 같은 꼴로 선다.**
  *
- * 앱이 하나뿐일 때 작은 카드로 두면 화면이 «아직 없음»처럼 읽힌다 —
- * 첫 앱은 제 크기로 서고, 나머지가 격자로 뒤를 잇는다.
+ * 한때 맨 앞 앱만 큰 카드로 세우고 나머지를 작은 격자에 두었다. 앱이 하나뿐일 때
+ * «아직 없음»처럼 읽히지 않게 하려던 것인데, 앱이 둘이 되자 **같은 것을 두 벌로
+ * 적어 두는 일**이 됐다 — 아이콘 크기도 이름 크기도 두 벌, 요점(points)은 앞자리만
+ * 그려서 뒤에 선 앱의 글이 적어 둔 채로 화면에 오르지 못했다.
+ * 순서는 목록이 정하는 것이지 크기가 정하는 것이 아니다.
  */
-export default function AppsSection() {
-  const [featured, ...rest] = APPS;
+function AppCard({ app }: { app: LabApp }) {
+  return (
+    <li className={styles.appCard}>
+      <div className={styles.appHead}>
+        <AppFace app={app} />
+        <div className={styles.appIdent}>
+          <h3 className={styles.appName}>{app.name}</h3>
+          <p className={styles.appTagline}>{app.tagline}</p>
+        </div>
+      </div>
+      <p className={styles.appBlurb}>{app.blurb}</p>
+      {app.points ? (
+        <ul className={styles.points}>
+          {app.points.map((point) => (
+            <li key={point} className={styles.point}>
+              <StarMark className={styles.pointStar} />
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+      <AppFoot app={app} />
+    </li>
+  );
+}
 
+/** 만든 것 — 한 줄에 둘씩. */
+export default function AppsSection() {
   return (
     <section id="apps" className={`${styles.section} ${styles.reveal}`}>
       <div className={styles.shell}>
         <SectionHead kicker={APPS_SECTION.eyebrow} title={APPS_SECTION.title} />
 
-        <article className={styles.featured}>
-          <div className={styles.featuredHead}>
-            <AppFace app={featured} className={styles.appIcon} />
-            <div className={styles.featuredIdent}>
-              <span className={styles.badge}>{STATUS_LABEL[featured.status]}</span>
-              <h3 className={styles.appName}>{featured.name}</h3>
-              <p className={styles.appTagline}>{featured.tagline}</p>
-            </div>
-          </div>
-          <p className={styles.body}>{featured.blurb}</p>
-          {featured.points ? (
-            <ul className={styles.points}>
-              {featured.points.map((point) => (
-                <li key={point} className={styles.point}>
-                  <StarMark className={styles.pointStar} />
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-          ) : null}
-          <AppLinks app={featured} />
-        </article>
-
-        {rest.length > 0 ? (
-          <ul className={styles.appGrid}>
-            {rest.map((app) => (
-              <li key={app.slug} className={styles.appCard}>
-                <AppFace app={app} className={styles.appIconSm} />
-                <h3 className={styles.appNameSm}>{app.name}</h3>
-                <p className={styles.appTagline}>{app.tagline}</p>
-                <p className={styles.body}>{app.blurb}</p>
-                <p className={styles.appMeta}>
-                  <span className={styles.badge}>{STATUS_LABEL[app.status]}</span>
-                </p>
-                <AppLinks app={app} />
-              </li>
-            ))}
-          </ul>
-        ) : null}
+        <ul className={styles.appGrid}>
+          {APPS.map((app) => (
+            <AppCard key={app.slug} app={app} />
+          ))}
+        </ul>
 
         {/* 아직 오지 않은 것은 상자를 갖지 않는다 — 한 줄이면 된다. */}
         <p className={styles.nextNote}>

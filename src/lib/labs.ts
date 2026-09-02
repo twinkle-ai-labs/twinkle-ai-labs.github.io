@@ -70,12 +70,13 @@ export const APPS: readonly LabApp[] = [
   {
     slug: "stock-calculator",
     name: "물타기 계산기",
-    tagline: "필요해서 시작했고, 끝까지 만들어 본 첫 번째 앱",
+    tagline: "목표 평단가까지 얼마가 더 필요한지 바로 답하는 계산기",
     blurb:
-      "투자할 때마다 반복하던 계산을 더 편하게 하고 싶어 만들었습니다. 작은 아이디어였지만 기획과 디자인, 개발과 출시 준비까지 직접 지나오며 제 방식으로 제품 하나를 완성했습니다.",
+      "평단가를 낮추려면 얼마를 더 사야 하는지, 살 때마다 계산기를 다시 두드리고 있었습니다. 그 계산을 앱으로 옮겼습니다 — 목표 평단가만 넣으면 필요한 금액과 수량이 바로 나옵니다.",
     points: [
-      "목표 평단가에 필요한 매수 금액과 수량을 즉시 계산",
-      "계산 이력을 남겨 자주 보는 종목을 다시 확인",
+      "목표 평단가에 닿는 매수 금액과 수량을 소수 셋째 자리까지",
+      "종목마다 매수 이력이 남아 다시 열면 이어서 계산",
+      "아홉 개 통화와 열한 개 언어 — 코인은 ‘주’ 대신 제 단위로",
     ],
     status: "testing",
     category: "FinanceApplication",
@@ -87,7 +88,7 @@ export const APPS: readonly LabApp[] = [
   {
     slug: "pocket-pdf",
     name: "Pocket PDF",
-    tagline: "문서를 다루는 일을 기기 밖으로 내보내지 않는 PDF 도구",
+    tagline: "문서도 암호도 기기 밖으로 나가지 않는 PDF 도구",
     blurb:
       "계약서와 영수증처럼 남에게 보이고 싶지 않은 문서일수록 어딘가에 올려야 다룰 수 있다는 것이 이상했습니다. 병합도, 글자 읽기도, 요약까지도 기기 안에서 끝나도록 만들었습니다.",
     points: [
@@ -95,7 +96,7 @@ export const APPS: readonly LabApp[] = [
       "문서를 찍으면 글자를 읽어 검색되는 PDF로",
       "기기 안의 모델이 읽고 요약하는 문서 분석",
     ],
-    status: "building",
+    status: "testing",
     category: "UtilitiesApplication",
     icon: "/apps/pocket-pdf.png",
     terms: `${POLARIS_URL}/ko/pocket-pdf/`,
@@ -139,8 +140,10 @@ export const NAMES_SECTION = {
 
 export const APPS_SECTION = {
   eyebrow: "만든 것",
-  title: "그렇게 만든 첫 번째 앱",
-  note: "하나를 끝까지 만들며 배운 것은 기록하고 다듬어 다음 제품으로 이어갑니다.",
+  /* «첫 번째 앱»이라고 적혀 있었다 — 앱이 둘이 된 날 제목만 그대로 남았다.
+     수를 세는 제목은 앱이 늘 때마다 조용히 거짓이 된다. */
+  title: "그렇게 만든 앱",
+  note: "앱 하나를 끝까지 만들 때마다 배운 것을 기록해 다음 제품으로 넘깁니다.",
 } as const;
 
 export const FOUNDER = {
