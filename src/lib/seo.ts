@@ -6,7 +6,7 @@
  */
 
 import type { Metadata } from "next";
-import { APPS, HERO, STATUS_LABEL } from "./labs";
+import { APPS, HERO, STATUS_LABEL, type LabApp } from "./labs";
 import { BLOG_URL, CONTACT_EMAIL, DESIGN_URL, HOME_URL, NAME, POLARIS_URL } from "./site";
 import { OG_SIZE } from "./og";
 
@@ -53,7 +53,18 @@ export const KEYWORDS = [
  * 정한 카드 그림·이름이 조용히 떨어진다. 실제로 홈의 카드에서 그림이 빠져 있었다.
  * 그래서 장은 이 함수로 한 벌을 통째로 짓는다.
  */
-export function shareCard({ title, description, path }: { title: string; description: string; path: string }): Pick<Metadata, "openGraph" | "twitter"> {
+export function shareCard({
+  title,
+  description,
+  path,
+  image = OG_IMAGE,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  /** 카드 그림 — 비우면 이 집의 것. 앱의 문은 제 그림을 든다. */
+  image?: typeof OG_IMAGE | { url: string; width: number; height: number; alt: string; type: string };
+}): Pick<Metadata, "openGraph" | "twitter"> {
   return {
     openGraph: {
       type: "website",
@@ -62,9 +73,39 @@ export function shareCard({ title, description, path }: { title: string; descrip
       url: path,
       title,
       description,
-      images: [OG_IMAGE],
+      images: [image],
     },
-    twitter: { card: "summary_large_image", title, description, images: [OG_IMAGE.url] },
+    twitter: { card: "summary_large_image", title, description, images: [image.url] },
+  };
+}
+
+/** 앱의 문(`/app/<slug>/`)이 서는 자리 — 장과 카드 그림이 같은 길을 읽는다. */
+export function appDoorPath(slug: string): string {
+  return `/app/${slug}/`;
+}
+
+/**
+ * 앱의 문 한 장의 검색·나눔 정보 — 이름·한 줄·제 카드 그림.
+ *
+ * 문은 사람이 아니라 **공유 그림의 QR·메신저의 링크**가 먼저 연다. 카드가 이 집의
+ * 것(«스스로 빛나다»)을 그대로 들면, 물타기 계산기를 나눈 사람의 대화창에 앱이 아니라
+ * 스튜디오 소개가 뜬다 — 실제로 그랬다. 그래서 문마다 제 카드를 든다.
+ *
+ * ↩ 한때 `noindex` 였다 — 그때의 문은 스토어로 튕기기만 하는 빈 장이라 «정본은 스토어»가
+ * 맞았다. 이제 문이 앱을 소개하는 장이 됐으므로 검색에 선다.
+ */
+export function appDoorMetadata(app: LabApp): Metadata {
+  const path = appDoorPath(app.slug);
+  return {
+    title: app.name,
+    description: app.tagline,
+    alternates: { canonical: path },
+    ...shareCard({
+      title: `${app.name} · ${NAME}`,
+      description: app.tagline,
+      path,
+      image: { url: `${path}og.png`, ...OG_SIZE, alt: `${app.name} — ${app.tagline}`, type: "image/png" },
+    }),
   };
 }
 
