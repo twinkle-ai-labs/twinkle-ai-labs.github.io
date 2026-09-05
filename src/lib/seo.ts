@@ -104,7 +104,7 @@ export function appDoorMetadata(app: LabApp): Metadata {
       title: `${app.name} · ${NAME}`,
       description: app.tagline,
       path,
-      image: { url: `${path}og.png`, ...OG_SIZE, alt: `${app.name} — ${app.tagline}`, type: "image/png" },
+      image: { url: `${path}og.png`, ...OG_SIZE, alt: `${app.name}. ${app.tagline}`, type: "image/png" },
     }),
   };
 }
