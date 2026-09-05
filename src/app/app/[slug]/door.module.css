@@ -1,0 +1,87 @@
+/* 앱의 문 — 한 줄로 서는 소개. 카드가 아니라 장이므로 상자를 두르지 않는다. */
+
+.door {
+  padding-block: var(--s7) var(--s8);
+  text-align: center;
+}
+
+.shell {
+  max-width: var(--shell-narrow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 아이콘은 이 장의 얼굴 — 홈 카드(4.5rem)보다 한 칸 크다. 그늘은 카드와 같은 한 겹. */
+.icon {
+  width: 6rem;
+  height: 6rem;
+  margin-block: var(--s1) var(--s3);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-floating);
+}
+
+.monogram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-40);
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+  background: var(--primary-soft);
+}
+
+/* 가장 큰 글자는 이름이다. */
+.name {
+  font-size: var(--fs-36);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-tight);
+  line-height: var(--lh-tight);
+}
+
+.tagline {
+  margin-top: var(--s1h);
+  color: var(--text-sub);
+  font-size: var(--fs-20);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-tight);
+  text-wrap: balance;
+}
+
+.actions {
+  margin-top: var(--s4);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+}
+
+.blurb {
+  margin-top: var(--s5);
+  color: var(--text-sub);
+  font-size: var(--fs-16);
+  line-height: var(--lh-body);
+  text-wrap: pretty;
+}
+
+/* 요점은 왼쪽 맞춤 — 가운데 맞춘 글머리는 줄마다 시작점이 흔들린다. */
+.points {
+  margin-top: var(--s3);
+  width: 100%;
+  max-width: 34rem;
+  text-align: start;
+}
+
+.foot {
+  margin-top: var(--s5);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s1) var(--s3);
+}
+
+@media (min-width: 40em) {
+  .icon { width: 7rem; height: 7rem; }
+  .name { font-size: var(--fs-48); }
+}

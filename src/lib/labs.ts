@@ -42,6 +42,15 @@ export type LabApp = {
   icon?: string;
   /** 스토어 주소 — 아직 공개 전이면 비운다. */
   store?: string;
+  /**
+   * 앱의 문(`/app/<slug>/`)이 넘기는 곳 — Play 의 패키지 id 와, 그 문에 다는 꼬리표.
+   *
+   * `store` 와 다른 칸이다: 저쪽은 «공개돼서 누구나 받을 수 있는가»라 공개 전에는 비우고,
+   * 이쪽은 공유 그림의 QR·메신저 링크가 이미 사람을 데려오므로 공개 전에도 서야 한다.
+   * 꼬리표(`utm_source`)는 문마다 다르다 — 물타기 계산기의 `share` 는 옛 QR 이 스토어
+   * 주소에 직접 실어 보내던 값 그대로라, 주소의 주인이 바뀌어도 Play 콘솔의 집계가 이어진다.
+   */
+  door: { packageId: string; source: string };
   /** 이 앱의 약관 자리 — Polaris 는 제 주소에 산다. */
   terms?: string;
 };
@@ -66,6 +75,12 @@ export function withReferrer(url: string, medium: string): string {
   return `${url}${url.includes("?") ? "&" : "?"}referrer=${encodeURIComponent(referrer)}`;
 }
 
+/** 문이 넘기는 스토어 주소 — 꼬리표는 `referrer` 한 칸 안에 통째로 든다([withReferrer] 와 같은 이유). */
+export function doorStoreUrl(app: LabApp): string {
+  const referrer = encodeURIComponent(`utm_source=${app.door.source}`);
+  return `https://play.google.com/store/apps/details?id=${app.door.packageId}&referrer=${referrer}`;
+}
+
 export const APPS: readonly LabApp[] = [
   {
     slug: "stock-calculator",
@@ -80,6 +95,7 @@ export const APPS: readonly LabApp[] = [
     ],
     status: "testing",
     category: "FinanceApplication",
+    door: { packageId: "kr.twinklelabs.stockcalculator", source: "share" },
     icon: "/apps/stock-calculator.png",
     /* 앱 한 장이 이용약관과 개인정보 처리방침을 함께 든다 — 문서 하나가 아니라 그 목록을 가리킨다.
        (`/t/…` 를 가리키고 있었는데 Polaris 에 그런 길이 없어 404 였다. 서버가 없으니 고쳐 줄 것도 없다.) */
@@ -98,6 +114,7 @@ export const APPS: readonly LabApp[] = [
     ],
     status: "testing",
     category: "UtilitiesApplication",
+    door: { packageId: "kr.twinklelabs.pocketpdf", source: "web" },
     icon: "/apps/pocket-pdf.png",
     terms: `${POLARIS_URL}/ko/pocket-pdf/`,
   },
