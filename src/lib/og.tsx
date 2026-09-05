@@ -63,6 +63,8 @@ export type OgCard = {
   lead?: string;
   /** 발치에 서는 주소 — 어디서 온 카드인지. */
   domain: string;
+  /** 오른쪽 위의 얼굴 — 앱 아이콘(data URL). 비우면 별의 고리가 그 자리에 선다. */
+  icon?: string;
 };
 
 /**
@@ -71,7 +73,7 @@ export type OgCard = {
  * 오로라는 **면**으로 깐다 — 큰 원 두 개를 흐리게 눌러 두면 satori 에서 값이 비싸고
  * 결과가 기계마다 달라진다. 그래서 그라데이션 두 겹으로 같은 인상을 만든다.
  */
-export function ogCard({ eyebrow, title, lead, domain }: OgCard) {
+export function ogCard({ eyebrow, title, lead, domain, icon }: OgCard) {
   return new ImageResponse(
     (
       <div
@@ -95,9 +97,17 @@ export function ogCard({ eyebrow, title, lead, domain }: OgCard) {
           color: INK.text,
         }}
       >
+        {/* 오른쪽 위 — 앱이면 제 아이콘이, 아니면 별의 고리가 선다. 둘이 같은 자리를 쓴다. */}
         <div style={{ position: "absolute", right: 86, top: 76, width: 250, height: 250, border: "1px solid rgba(183,154,255,0.18)", borderRadius: 999, boxShadow: "0 0 90px rgba(133,80,228,0.18)" }} />
-        <div style={{ position: "absolute", right: 148, top: 138, width: 126, height: 126, border: "1px solid rgba(183,154,255,0.28)", borderRadius: 999 }} />
-        <div style={{ position: "absolute", right: 202, top: 192, width: 18, height: 18, background: INK.accent, borderRadius: 999, boxShadow: "0 0 34px rgba(183,154,255,0.88)" }} />
+        {icon ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={icon} alt="" width={176} height={176} style={{ position: "absolute", right: 123, top: 113, borderRadius: 40, boxShadow: "0 20px 60px rgba(0,0,0,0.45)" }} />
+        ) : (
+          <>
+            <div style={{ position: "absolute", right: 148, top: 138, width: 126, height: 126, border: "1px solid rgba(183,154,255,0.28)", borderRadius: 999 }} />
+            <div style={{ position: "absolute", right: 202, top: 192, width: 18, height: 18, background: INK.accent, borderRadius: 999, boxShadow: "0 0 34px rgba(183,154,255,0.88)" }} />
+          </>
+        )}
         {/* 머리 — 심볼 없이 이름 자체가 브랜드가 된다. */}
         <div style={{ display: "flex", alignItems: "center" }}>
           <span
