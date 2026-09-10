@@ -136,9 +136,9 @@
   --band-fade: light-dark(color-mix(in srgb, var(--divider) 16%, var(--bg)), color-mix(in srgb, var(--surface) 46%, transparent));
   --glass: light-dark(rgba(255, 255, 255, 0.78), rgba(27, 21, 38, 0.92));
   --glass-highlight: light-dark(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.035));
-  --glass-inset: light-dark(rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.08));
-  --glass-border: light-dark(rgba(112, 64, 217, 0.12), rgba(183, 154, 255, 0.14));
-  --card-border: light-dark(rgba(112, 64, 217, 0.10), rgba(183, 154, 255, 0.10));
+  --glass-inset: light-dark(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.08));
+  --glass-border: light-dark(rgba(112, 64, 217, 0.25), rgba(183, 154, 255, 0.14));
+  --card-border: light-dark(rgba(112, 64, 217, 0.25), rgba(183, 154, 255, 0.10));
   --card-ring: inset 0 0 0 1px light-dark(
     color-mix(in srgb, var(--primary) 10%, transparent),
     color-mix(in srgb, var(--divider) 55%, transparent)
