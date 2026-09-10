@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import Image from "next/image";
 import StarMark from "@/components/StarMark";
 import SectionHead from "./SectionHead";
@@ -16,6 +18,7 @@ function AppFace({ app }: { app: LabApp }) {
   return <Image className={styles.appIcon} src={app.icon} alt="" width={88} height={88} />;
 }
 
+
 /**
  * 카드의 발 — 지금 이 앱에 무엇을 할 수 있는가.
  *
@@ -31,6 +34,9 @@ function AppFoot({ app }: { app: LabApp }) {
   return (
     <p className={styles.appLinks}>
       <span className={styles.appStatus}>{STATUS_LABEL[app.status]}</span>
+      <Link className={styles.inlineLink} href={`/app/${app.slug}`}>
+        자세히 보기 <span aria-hidden="true">→</span>
+      </Link>
       {app.store ? (
         <a className={styles.inlineLink} href={withReferrer(app.store, "home")}>
           스토어에서 받기 <span aria-hidden="true">↗</span>

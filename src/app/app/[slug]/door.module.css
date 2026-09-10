@@ -1,87 +1,271 @@
-/* 앱의 문 — 한 줄로 서는 소개. 카드가 아니라 장이므로 상자를 두르지 않는다. */
+/* ───────────────────────────────────────────────────────────────
+   랜딩 페이지 전용 법(Law) — Twinkle Labs 글로벌 토큰 무시
+   앱 쇼케이스를 위해 완벽한 다크 테마(Midnight/Glass) 기반의 
+   고유한 생태계를 구축합니다.
+─────────────────────────────────────────────────────────────── */
 
-.door {
-  padding-block: var(--s7) var(--s8);
-  text-align: center;
+.doorWrapper {
+  /* 글로벌 배경을 덮어버리는 앱 랜딩만의 우주 */
+  --app-bg: #050505;
+  --app-surface: #111111;
+  --app-text: #FFFFFF;
+  --app-text-sub: #A1A1A6;
+  --app-accent: #B79AFF;
+  --app-primary: #8550E4;
+  --app-glow: rgba(133, 80, 228, 0.15);
+  
+  --app-glass-bg: rgba(30, 30, 35, 0.4);
+  --app-glass-border: rgba(255, 255, 255, 0.08);
+
+  background-color: var(--app-bg);
+  color: var(--app-text);
+  min-height: 100vh;
+  margin-top: calc(var(--header-height, 64px) * -1);
+  padding-top: calc(var(--header-height, 64px) + var(--s6));
+  padding-bottom: var(--s10);
+  position: relative;
+  overflow: hidden;
+}
+
+.doorWrapper::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 60vh;
+  background: radial-gradient(ellipse at center, var(--app-glow) 0%, transparent 60%);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .shell {
-  max-width: var(--shell-narrow);
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-inline: var(--s4);
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* 아이콘은 이 장의 얼굴 — 홈 카드(4.5rem)보다 한 칸 크다. 그늘은 카드와 같은 한 겹. */
-.icon {
-  width: 6rem;
-  height: 6rem;
-  margin-block: var(--s1) var(--s3);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-floating);
-}
-
-.monogram {
-  display: inline-flex;
+/* ── Hero Section ── */
+.hero {
+  text-align: center;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: var(--fs-40);
-  font-weight: var(--fw-bold);
-  color: var(--accent);
-  background: var(--primary-soft);
+  margin-bottom: var(--s8);
 }
 
-/* 가장 큰 글자는 이름이다. */
+.icon {
+  width: 112px;
+  height: 112px;
+  border-radius: 28px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--app-glass-border);
+  margin-bottom: var(--s5);
+}
+
 .name {
-  font-size: var(--fs-36);
-  font-weight: var(--fw-bold);
-  letter-spacing: var(--tr-tight);
-  line-height: var(--lh-tight);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: var(--s3);
+  background: linear-gradient(135deg, #FFF, #A1A1A6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .tagline {
-  margin-top: var(--s1h);
-  color: var(--text-sub);
-  font-size: var(--fs-20);
-  font-weight: var(--fw-medium);
-  line-height: var(--lh-tight);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 500;
+  color: var(--app-text-sub);
+  line-height: 1.4;
   text-wrap: balance;
+  margin-bottom: var(--s6);
 }
 
 .actions {
-  margin-top: var(--s4);
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: var(--s2);
+  gap: var(--s3);
+  margin-bottom: var(--s6);
+}
+
+.ctaButton {
+  background: var(--app-text);
+  color: var(--app-bg);
+  padding: 16px 32px;
+  border-radius: 999px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.ctaButton:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
+.statusBadge {
+  background: var(--app-glass-bg);
+  border: 1px solid var(--app-glass-border);
+  color: var(--app-text-sub);
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .blurb {
-  margin-top: var(--s5);
-  color: var(--text-sub);
-  font-size: var(--fs-16);
-  line-height: var(--lh-body);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--app-text-sub);
+  text-align: center;
+  max-width: 680px;
   text-wrap: pretty;
 }
 
-/* 요점은 왼쪽 맞춤 — 가운데 맞춘 글머리는 줄마다 시작점이 흔들린다. */
-.points {
-  margin-top: var(--s3);
-  width: 100%;
-  max-width: 34rem;
-  text-align: start;
+/* ── Screenshots Showcase ── */
+.showcase {
+  width: 100vw;
+  max-width: 100%;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-bottom: var(--s10);
+  overflow: hidden;
+  position: relative;
 }
 
-.foot {
-  margin-top: var(--s5);
+.screenshots {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--s1) var(--s3);
+  align-items: center;
+  gap: var(--s5);
+  padding-inline: max(var(--s4), calc(50vw - 400px));
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--s4); /* shadow space */
 }
 
-@media (min-width: 40em) {
-  .icon { width: 7rem; height: 7rem; }
-  .name { font-size: var(--fs-48); }
+.screenshots::-webkit-scrollbar {
+  display: none;
+}
+
+.screenshotWrapper {
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.6), 0 0 0 1px var(--app-glass-border);
+  background: var(--app-surface);
+  transform: scale(0.98);
+  transition: transform 0.3s;
+}
+
+.screenshotWrapper:hover {
+  transform: scale(1);
+}
+
+.screenshotWrapper.phone {
+  width: 280px;
+}
+
+.screenshotWrapper.wide {
+  width: 600px;
+  border-radius: 24px;
+}
+
+@media (max-width: 48em) {
+  .screenshotWrapper.wide {
+    width: 85vw; /* responsive width for small screens */
+  }
+}
+
+.screenshotImg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Features Grid ── */
+.featuresTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: var(--s6);
+  text-align: center;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s4);
+  width: 100%;
+  max-width: 960px;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto var(--s8);
+}
+
+@media (min-width: 48em) {
+  .featuresGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.featureCard {
+  background: var(--app-glass-bg);
+  border: 1px solid var(--app-glass-border);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 24px;
+  padding: var(--s6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.featureCard:hover {
+  background: rgba(45, 45, 55, 0.5);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.featureIcon {
+  color: var(--app-accent);
+  width: 32px;
+  height: 32px;
+}
+
+.featureText {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--app-text);
+  font-weight: 500;
+  text-wrap: balance;
+}
+
+/* ── Footer ── */
+.foot {
+  margin-top: var(--s8);
+  display: flex;
+  gap: var(--s5);
+  justify-content: center;
+}
+
+.footLink {
+  color: var(--app-text-sub);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.footLink:hover {
+  color: var(--app-text);
 }
