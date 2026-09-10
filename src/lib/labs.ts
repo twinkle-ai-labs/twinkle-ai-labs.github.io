@@ -40,6 +40,8 @@ export type LabApp = {
   status: AppStatus;
   /** `public/apps/` 의 아이콘. 없으면 이름의 첫 글자가 얼굴이 된다. */
   icon?: string;
+  /** 앱 스크린샷 이미지 (폰 및 폴더블 지원) */
+  screenshots?: readonly { src: string; type: "phone" | "wide" }[];
   /** 스토어 주소 — 아직 공개 전이면 비운다. */
   store?: string;
   /**
@@ -85,21 +87,27 @@ export const APPS: readonly LabApp[] = [
   {
     slug: "stock-calculator",
     name: "물타기 계산기",
-    tagline: "국내 주식과 해외 주식, 코인까지. 목표 평단가에 맞추려면 얼마를 더 사야 하는지 바로 알려 주는 계산기",
+    tagline: "얼마를 더 사야 평단가가 맞춰질까? 복잡한 물타기 계산부터 목표 평단가 역산까지 한 번에 해결하세요.",
     blurb:
-      "평단가를 낮추려면 얼마를 더 사야 하는지, 매수할 때마다 계산기를 두드려야 했습니다. 그 계산을 앱에 담았습니다. 목표 평단가만 입력하면 필요한 금액과 수량이 바로 나옵니다.",
+      "평단가를 낮추려면 정확히 몇 주를 더 사야 하는지 매번 엑셀이나 계산기를 두드리며 셈하고 계셨나요? 이제 그 번거로움을 앱 하나로 끝내세요. 보유 주식과 매수할 주식을 입력하는 즉시 새 평단가가 나오고, '원하는 목표 평단가'만 넣으면 거꾸로 필요한 금액과 수량을 정확히 역산해 드립니다. 나만의 매수 시나리오를 세우고 그 결과를 깔끔한 이미지로 공유해 보세요.",
     /* 셋째 줄이 «통화 아홉 · 언어 열하나»였다 — 개수는 우리 자랑이지 쓰는 사람의 강점이 아니다.
        종목마다 통화와 단위를 따로 갖는다는 것이 «국내·해외·코인을 한 앱에서»라는 범위를 말하므로
        둘째로 올리고, 개수 대신 그 사람의 종목 하나로 말한다. */
     points: [
-      "목표 평단가에 맞는 매수 금액과 수량을 소수점 셋째 자리까지 계산",
-      "국내 주식은 원과 주로, 코인은 달러와 코인 단위로. 종목마다 통화와 단위를 따로 설정",
-      "종목별 매수 이력을 저장해 다시 열어도 이어서 계산",
+      "실시간 물타기 평균단가 계산 및 목표 평단가 달성을 위한 역산 기능",
+      "사칙연산과 빠른 입력 키(+1만, +1M)를 그대로 치는 스마트 수식 키패드",
+      "주식·코인 등 종목별 통화와 수량 단위를 맞추고, 기기에 이력을 안전하게 저장",
+      "상세한 시나리오 분석 결과와 QR코드가 포함된 요약 그림 공유 기능",
     ],
     status: "testing",
     category: "FinanceApplication",
     door: { packageId: "kr.twinklelabs.stockcalculator", source: "share" },
     icon: "/apps/stock-calculator.png",
+    screenshots: [
+      { src: "/apps/stock-calculator/screenshots/07-dark.png", type: "phone" },
+      // TODO: 사용자가 추후 폴더블(다크) 스크린샷을 찍어서 교체할 임시 자리표시자
+      { src: "/apps/stock-calculator/screenshots/07-dark.png", type: "wide" }, 
+    ],
     /* 앱 한 장이 이용약관과 개인정보 처리방침을 함께 든다 — 문서 하나가 아니라 그 목록을 가리킨다.
        (`/t/…` 를 가리키고 있었는데 Polaris 에 그런 길이 없어 404 였다. 서버가 없으니 고쳐 줄 것도 없다.) */
     terms: `${POLARIS_URL}/ko/stock-calculator/`,
