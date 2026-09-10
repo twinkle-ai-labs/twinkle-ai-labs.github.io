@@ -99,10 +99,11 @@ export const APPS: readonly LabApp[] = [
       "주식·코인 등 종목별 통화와 수량 단위를 맞추고, 기기에 이력을 안전하게 저장",
       "상세한 시나리오 분석 결과와 QR코드가 포함된 요약 그림 공유 기능",
     ],
-    status: "testing",
+    status: "live",
     category: "FinanceApplication",
     door: { packageId: "kr.twinklelabs.stockcalculator", source: "share" },
     icon: "/apps/stock-calculator.png",
+    store: "https://play.google.com/store/apps/details?id=kr.twinklelabs.stockcalculator",
     screenshots: [
       { src: "/apps/stock-calculator/screenshots/07-dark.png", type: "phone" },
       // TODO: 사용자가 추후 폴더블(다크) 스크린샷을 찍어서 교체할 임시 자리표시자
