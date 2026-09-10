@@ -82,6 +82,9 @@
   font-weight: var(--fw-bold);
   letter-spacing: var(--tr-tight);
   line-height: var(--lh-title);
+  background: light-dark(var(--brand-gradient), var(--text));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* 제목 바로 밑에서 «무엇을 하는 곳인가»를 말하는 줄 — 본문보다 굵고 진하다. */
