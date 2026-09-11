@@ -40,8 +40,8 @@ export type LabApp = {
   status: AppStatus;
   /** `public/apps/` 의 아이콘. 없으면 이름의 첫 글자가 얼굴이 된다. */
   icon?: string;
-  /** 앱 스크린샷 이미지 (폰 및 폴더블 지원) */
-  screenshots?: readonly { src: string; type: "phone" | "wide" }[];
+  /** 앱의 문(`/app/<slug>/`)이 하는 말과 보여 줄 화면. 없으면 문은 이름 · 한 줄 · 소개 문단으로 선다. */
+  page?: DoorPage;
   /** 스토어 주소 — 아직 공개 전이면 비운다. */
   store?: string;
   /**
@@ -56,6 +56,47 @@ export type LabApp = {
   /** 이 앱의 약관 자리 — Polaris 는 제 주소에 산다. */
   terms?: string;
 };
+
+/** 장면 밑에 서는 짧은 사실 하나 — 이름과 값. */
+export type DoorFact = { label: string; value: string };
+
+/** 문이 보여 주는 앱의 화면 한 장 — 테마마다 한 벌. 사람이 고른 테마의 것이 선다. */
+export type DoorScreen = { light: string; dark: string; alt: string };
+
+/**
+ * 앱의 문 — 링크(QR · 메신저 · 검색)로 곧장 떨어진 사람에게 «이 앱이 뭔가, 받을까»를 답하는 장.
+ * 법은 `src/components/door/door.module.css` 의 머리에 있다.
+ */
+export type DoorPage = {
+  /** 첫 화면의 큰 말 — 그 사람이 들고 온 질문. `|` 가 줄을 가른다(자동 줄바꿈에 맡기지 않는다). */
+  headline: string;
+  /** 큰 말 밑의 한 문장 — 질문에 대한 답. */
+  lede: string;
+  /** 받기 단추 밑의 짧은 사실들 — «무료» 처럼 한두 낱말. */
+  facts: readonly string[];
+  /** 첫 화면의 기기 속 화면. */
+  hero: DoorScreen;
+  /** «할 수 있는 일» 구획의 제목 — 다섯 장면을 한 문장으로. */
+  featuresTitle: string;
+  /**
+   * 할 수 있는 일 — 제목 한 줄 · 문장 하나 · 그 일을 하는 화면 하나 · 화면에서 뽑은 숫자 두셋(`facts`).
+   * 첫 화면의 기기와 같은 화면을 다시 넣지 않는다 — 같은 화면을 두 번 보이는 자리는 없다.
+   * `facts` 는 옆 기기 속 화면에 실제로 선 값이다 — 글이 말하는 것을 숫자가 받친다. 없는 값을 짓지 않는다.
+   */
+  features: readonly { title: string; body: string; screen: DoorScreen; facts: readonly DoorFact[] }[];
+  /** 믿어도 되는 이유 — 기록이 어디 머무는가. */
+  trust: readonly { title: string; body: string }[];
+  /** 끝 화면의 큰 말 — 받기 바로 위. `|` 가 줄을 가른다. */
+  closing: string;
+  /** 문의 맨 끝에 서는 한 줄 — 이 앱이 아닌 것. */
+  disclaimer?: string;
+};
+
+/** `public/apps/<slug>/screens/<name>-<light|dark>.webp` — 앱의 날 화면(스토어 조판이 아니다). */
+function screen(slug: string, name: string, alt: string): DoorScreen {
+  const base = `/apps/${slug}/screens/${name}`;
+  return { light: `${base}-light.webp`, dark: `${base}-dark.webp`, alt };
+}
 
 export const STATUS_LABEL: Record<AppStatus, string> = {
   live: "출시됨",
@@ -104,11 +145,73 @@ export const APPS: readonly LabApp[] = [
     door: { packageId: "kr.twinklelabs.stockcalculator", source: "share" },
     icon: "/apps/stock-calculator.png",
     store: "https://play.google.com/store/apps/details?id=kr.twinklelabs.stockcalculator",
-    screenshots: [
-      { src: "/apps/stock-calculator/screenshots/07-dark.png", type: "phone" },
-      // TODO: 사용자가 추후 폴더블(다크) 스크린샷을 찍어서 교체할 임시 자리표시자
-      { src: "/apps/stock-calculator/screenshots/07-dark.png", type: "wide" }, 
-    ],
+    /* 화면은 앱의 스크린샷 하네스(stock-calculator `StoreScreenshotTest`)가 찍은 날 화면이다 —
+       ko-KR 표본(삼성전자 · 72,500원 · 20주)이라 스토어의 한국어 사진과 같은 숫자로 선다. */
+    page: {
+      headline: "얼마를 더 사야|평단가가 맞춰질까?",
+      lede: "보유와 추가 매수를 넣으면 새 평단가가, 원하는 평단가를 넣으면 필요한 수량과 금액이 바로 나옵니다.",
+      facts: ["무료", "로그인 없음", "기록은 이 기기에만"],
+      hero: screen("stock-calculator", "home", "물타기 계산 화면 — 72,500원에 20주, 58,000원에 15주를 더 사면 새 평단가 66,285.71원"),
+      featuresTitle: "계산부터 리포트까지, 한 앱에서.",
+      features: [
+        {
+          title: "목표에서 거꾸로",
+          body: "원하는 평단가를 넣으면 몇 주를 더 사야 하는지, 얼마가 드는지 역산합니다.",
+          screen: screen("stock-calculator", "target", "목표 평단가 화면 — 필요한 추가 수량과 금액"),
+          facts: [
+            { label: "목표 평단가", value: "64,525원" },
+            { label: "더 살 수량", value: "24.44주" },
+            { label: "필요한 금액", value: "1,417,778원" },
+          ],
+        },
+        {
+          title: "칸마다 계산기",
+          body: "500,000 ÷ 69,000 처럼 식을 그대로 칩니다. +1천 · +1만 · +10만 빠른 키로 한 번에 올립니다.",
+          screen: screen("stock-calculator", "keypad", "수식을 치는 키패드와 빠른 키"),
+          facts: [
+            { label: "식 그대로", value: "500,000 ÷ 69,000" },
+            { label: "빠른 키", value: "+1천 · +1만 · +10만 · +100만" },
+          ],
+        },
+        {
+          title: "종목마다 통화와 단위",
+          body: "삼성전자는 원으로, 비트코인은 달러와 BTC로, 금은 그램으로. 국내 주식도 해외 주식도 코인도 한 앱에서 셉니다.",
+          screen: screen("stock-calculator", "stocks", "종목 관리 — 종목마다 다른 통화와 수량 단위 배지"),
+          facts: [
+            { label: "삼성전자", value: "₩ · 주" },
+            { label: "비트코인", value: "$ · BTC" },
+            { label: "금", value: "₩ · g" },
+          ],
+        },
+        {
+          title: "굴려 본 계산이 쌓입니다",
+          body: "저장한 계산은 종목별로 모입니다. 아이콘을 골라 종목에 얼굴을 붙이세요.",
+          screen: screen("stock-calculator", "history", "계산 이력 — 종목별로 묶인 기록"),
+          facts: [
+            { label: "묶는 단위", value: "종목" },
+            { label: "한 기록에", value: "입력 넷과 결과" },
+            { label: "삼성전자", value: "2건" },
+          ],
+        },
+        {
+          title: "한 장으로 나가는 리포트",
+          body: "본전까지의 거리와 주가가 움직일 때의 손익을 리포트로 보고, QR이 든 그림으로 바로 공유합니다.",
+          screen: screen("stock-calculator", "report", "투자 리포트 — 본전 탈출 허들과 주가 변동 시나리오 손익"),
+          facts: [
+            { label: "본전 탈출 허들", value: "▼ 10.71%p" },
+            { label: "주가 변동 시나리오", value: "±10% · ±20%" },
+            { label: "공유", value: "QR 든 그림 한 장" },
+          ],
+        },
+      ],
+      trust: [
+        { title: "이 기기에만 저장", body: "계산 기록과 종목 이름은 기기를 떠나지 않습니다. 백업에도 올라가지 않습니다." },
+        { title: "로그인 없음", body: "계정도 가입도 없습니다. 열면 바로 계산합니다." },
+        { title: "인터넷 없이도", body: "계산은 기기 안에서 합니다. 신호가 없는 곳에서도 됩니다." },
+      ],
+      closing: "다음 매수 전에,|네 칸부터.",
+      disclaimer: "계산 도구입니다. 투자 자문이나 매매 권유가 아니며, 결과에는 실제 체결가·수수료·세금이 반영되지 않습니다.",
+    },
     /* 앱 한 장이 이용약관과 개인정보 처리방침을 함께 든다 — 문서 하나가 아니라 그 목록을 가리킨다.
        (`/t/…` 를 가리키고 있었는데 Polaris 에 그런 길이 없어 404 였다. 서버가 없으니 고쳐 줄 것도 없다.) */
     terms: `${POLARIS_URL}/ko/stock-calculator/`,

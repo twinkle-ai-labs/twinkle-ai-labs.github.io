@@ -82,9 +82,12 @@
   font-weight: var(--fw-bold);
   letter-spacing: var(--tr-tight);
   line-height: var(--lh-title);
-  background: light-dark(var(--brand-gradient), var(--text));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* 제목은 잉크 단색이다 — 그라데이션은 «다음 한 걸음»(만든 것 보기)에만, 한 화면에 하나다.
+     ↩ 2026-09-11 에 `background: light-dark(var(--brand-gradient), var(--text))` 와 글자 오려내기를 입혔었다.
+     `light-dark()` 는 **색만** 받는데 그라데이션은 그림이라 브라우저가 그 줄을 통째로 버렸고, 글자 채움만 투명으로
+     남아 두 테마에서 제목이 사라졌다 — 그대로 twinklelabs.kr 에 나갔다. 눈으로는 «제목이 없다»가 아니라
+     «자리가 좀 비었다」로만 보인다. */
+  color: var(--text);
 }
 
 /* 제목 바로 밑에서 «무엇을 하는 곳인가»를 말하는 줄 — 본문보다 굵고 진하다. */

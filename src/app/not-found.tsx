@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SiteFrame from "@/components/SiteFrame";
 import StarMark from "@/components/StarMark";
 import styles from "./not-found.module.css";
 
@@ -11,6 +12,7 @@ export const metadata = {
 
 export default function NotFound() {
   return (
+    <SiteFrame>
     <div className={styles.wrap}>
       <StarMark className={styles.mark} />
       <p className={styles.code}>404</p>
@@ -20,5 +22,6 @@ export default function NotFound() {
         처음으로
       </Link>
     </div>
+    </SiteFrame>
   );
 }
