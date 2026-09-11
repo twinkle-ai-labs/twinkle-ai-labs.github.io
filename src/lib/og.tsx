@@ -73,8 +73,8 @@ export type AppOgCard = {
   name: string;
   /** 큰 말 — 문의 첫 화면이 하는 질문. 줄은 우리가 가른다(배열 한 칸이 한 줄). */
   headline: readonly string[];
-  /** 짧은 사실 — 체크가 붙은 알약으로 선다. «무료» 처럼 한두 낱말. */
-  facts: readonly string[];
+  /** 강점 셋 — 질문 밑에 헤어라인으로 갈린 세 칸. 값은 크게(대화창에서도 읽히게), 이름은 작게. */
+  highlights: readonly { value: string; label: string }[];
   /** 지금 어디쯤인지 — 사실이 아니라 상태라 체크 대신 점이 붙는다(«비공개 테스트 중»). */
   status?: string;
   /** 발치 — 만든 이의 이름과 주소. */
@@ -95,7 +95,7 @@ export type AppOgCard = {
  * 구석에 몰려 카드가 «글이 많은 어두운 판»으로 읽혔다. 사람이 «제대로 만들어 줘, 로고는 우측 가운데»라고 했다.
  * 대화창의 카드는 **작게 본다** — 글은 줄이고 크기는 올린다.
  */
-export function appOgCard({ name, headline, facts, status, maker, domain, icon }: AppOgCard) {
+export function appOgCard({ name, headline, highlights, status, maker, domain, icon }: AppOgCard) {
   /* 줄 수에 따라 한 칸 — 두 줄이면 68, 세 줄이면 56. 가장 긴 줄이 왼쪽 칸(640px)을 넘지 않는 값이다 */
   const headlineSize = headline.length > 2 ? 56 : 68;
   return new ImageResponse(
@@ -135,47 +135,44 @@ export function appOgCard({ name, headline, facts, status, maker, domain, icon }
                 </span>
               ))}
             </div>
-            {facts.length > 0 || status ? (
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-                {status ? (
+            {highlights.length > 0 ? (
+              /* 강점 셋 — 값은 34(460px 에서 13px), 이름은 24. 사이는 헤어라인 한 줄, 상자는 두르지 않는다 */
+              <div style={{ display: "flex" }}>
+                {highlights.map((item, i) => (
                   <div
+                    key={item.value}
                     style={{
                       display: "flex",
-                      alignItems: "center",
-                      gap: 12,
-                      padding: "10px 22px 10px 18px",
-                      borderRadius: 999,
-                      border: "1px solid rgba(255,255,255,0.14)",
-                      background: "rgba(255,255,255,0.05)",
-                      fontSize: 26,
-                      color: INK.text,
+                      flexDirection: "column",
+                      gap: 6,
+                      paddingLeft: i === 0 ? 0 : 28,
+                      paddingRight: 28,
+                      borderLeft: i === 0 ? "none" : "1px solid rgba(255,255,255,0.16)",
                     }}
                   >
-                    <div style={{ width: 10, height: 10, borderRadius: 999, background: INK.sub }} />
-                    {status}
-                  </div>
-                ) : null}
-                {facts.map((fact) => (
-                  <div
-                    key={fact}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 10,
-                      padding: "10px 22px 10px 16px",
-                      borderRadius: 999,
-                      border: "1px solid rgba(255,255,255,0.14)",
-                      background: "rgba(255,255,255,0.05)",
-                      fontSize: 26,
-                      color: INK.text,
-                    }}
-                  >
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={INK.sub} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12.5l4.5 4.5L19 7.5" />
-                    </svg>
-                    {fact}
+                    <span style={{ fontSize: 34, fontWeight: 700, letterSpacing: -0.5 }}>{item.value}</span>
+                    <span style={{ fontSize: 24, color: INK.sub }}>{item.label}</span>
                   </div>
                 ))}
+              </div>
+            ) : status ? (
+              <div style={{ display: "flex" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 12,
+                    padding: "10px 22px 10px 18px",
+                    borderRadius: 999,
+                    border: "1px solid rgba(255,255,255,0.14)",
+                    background: "rgba(255,255,255,0.05)",
+                    fontSize: 26,
+                    color: INK.text,
+                  }}
+                >
+                  <div style={{ width: 10, height: 10, borderRadius: 999, background: INK.sub }} />
+                  {status}
+                </div>
               </div>
             ) : null}
           </div>

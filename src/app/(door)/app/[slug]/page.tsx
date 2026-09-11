@@ -7,7 +7,7 @@ import GetButton from "@/components/door/GetButton";
 import { CheckGlyph, TRUST_GLYPHS } from "@/components/door/Glyphs";
 import styles from "@/components/door/door.module.css";
 import { APPS } from "@/lib/labs";
-import { appDoorMetadata } from "@/lib/seo";
+import { appDoorMetadata, appJsonLd } from "@/lib/seo";
 
 /**
  * 앱의 문 — `/app/<slug>/`. 법은 `door.module.css` 의 머리에 있다.
@@ -48,6 +48,8 @@ export default async function AppDoorPage({ params }: Params) {
 
   return (
     <div className={styles.door} id="top">
+      {/* 기계가 읽는 표 — 이 앱이 무엇을 하는가. 값은 전부 이 장에 보이는 것에서 온다 */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: appJsonLd(app) }} />
       <DoorHeader app={app} />
 
       <main>
