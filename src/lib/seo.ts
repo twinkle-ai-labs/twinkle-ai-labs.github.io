@@ -6,7 +6,7 @@
  */
 
 import type { Metadata } from "next";
-import { APPS, HERO, STATUS_LABEL, type LabApp } from "./labs";
+import { APPS, HERO, STATUS_LABEL, doorStoreUrl, type LabApp } from "./labs";
 import { BLOG_URL, CONTACT_EMAIL, DESIGN_URL, HOME_URL, NAME, POLARIS_URL } from "./site";
 import { OG_SIZE } from "./og";
 
@@ -96,17 +96,71 @@ export function appDoorPath(slug: string): string {
  */
 export function appDoorMetadata(app: LabApp): Metadata {
   const path = appDoorPath(app.slug);
+  /* 앱이 검색의 말(`page.seo`)을 들면 그것을 — ASO 의 제목 · 설명처럼 사람이 치는 낱말을 앞에 둔다.
+     제목은 이 집의 꼬리(« · Twinkle AI Labs»)를 붙이지 않는다: 검색 결과는 한글 서른 자 남짓에서 자르므로
+     꼬리가 붙으면 «목표 평단가 역산»이 잘려 나간다. 이름은 og:site_name 이 진다. */
+  const seo = app.page?.seo;
+  const title = seo?.title ?? app.name;
+  const description = seo?.description ?? app.tagline;
   return {
-    title: app.name,
-    description: app.tagline,
+    title: seo ? { absolute: title } : title,
+    description,
+    ...(seo ? { keywords: [...new Set([...seo.keywords, app.name, NAME])] } : {}),
     alternates: { canonical: path },
     ...shareCard({
-      title: `${app.name} · ${NAME}`,
-      description: app.tagline,
+      title: seo ? title : `${app.name} · ${NAME}`,
+      description,
       path,
-      image: { url: `${path}og.png`, ...OG_SIZE, alt: `${app.name}. ${app.tagline}`, type: "image/png" },
+      image: { url: `${path}og.png`, ...OG_SIZE, alt: `${app.name}. ${app.page?.headline.replace("|", " ") ?? app.tagline}`, type: "image/png" },
     }),
   };
+}
+
+/** 앱 한 칸의 이름표 — 이 집의 표(`jsonLd`)와 문의 표(`appJsonLd`)가 **같은 것**을 가리키게 한다. */
+export function appId(slug: string): string {
+  return `${HOME_URL}${appDoorPath(slug)}#app`;
+}
+
+/**
+ * 앱의 문 한 장의 기계가 읽는 표 — 앱 한 칸(MobileApplication)과 빵부스러기(BreadcrumbList).
+ *
+ * 이 집의 표에도 앱이 한 칸씩 있다(`jsonLd`). 두 칸이 같은 `@id` 를 들어 검색 엔진이 하나로 합친다 —
+ * 이 집의 표는 «이런 앱이 있다», 문의 표는 «그 앱이 무엇을 하는가»를 더한다.
+ * 값은 전부 문이 **화면에 보이는 것**에서 온다: 보이지 않는 말을 표에만 적으면 그것은 검색을 속이는 표다.
+ * 평점 · 내려받기 수는 적지 않는다 — 우리가 센 적이 없는 숫자다.
+ */
+export function appJsonLd(app: LabApp): string {
+  const page = app.page;
+  const url = `${HOME_URL}${appDoorPath(app.slug)}`;
+  const application = {
+    "@type": "MobileApplication",
+    "@id": appId(app.slug),
+    name: app.name,
+    url,
+    description: page?.seo.description ?? app.blurb,
+    applicationCategory: app.category,
+    operatingSystem: "Android",
+    inLanguage: page?.languages ?? ["ko"],
+    isAccessibleForFree: true,
+    offers: { "@type": "Offer", price: 0, priceCurrency: "KRW" },
+    publisher: { "@id": `${HOME_URL}/#organization` },
+    ...(app.icon ? { image: `${HOME_URL}${app.icon}` } : {}),
+    ...(app.store ? { installUrl: doorStoreUrl(app), downloadUrl: app.store } : {}),
+    ...(page
+      ? {
+          featureList: page.features.map((feature) => `${feature.title} — ${feature.body}`),
+          screenshot: [page.hero, ...page.features.map((feature) => feature.screen)].map((screen) => `${HOME_URL}${screen.light}`),
+        }
+      : {}),
+  };
+  const breadcrumb = {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: NAME, item: `${HOME_URL}/` },
+      { "@type": "ListItem", position: 2, name: app.name, item: url },
+    ],
+  };
+  return JSON.stringify({ "@context": "https://schema.org", "@graph": [application, breadcrumb] });
 }
 
 /** 사람 이름 — 이 집을 만들고 운영하는 한 사람. */
@@ -145,6 +199,8 @@ export function jsonLd(): string {
      받을 수 없는 앱이 뜬다. */
   const apps = APPS.map((app) => ({
     "@type": "SoftwareApplication",
+    /* 문의 표(`appJsonLd`)와 같은 이름표 — 검색 엔진이 두 칸을 한 앱으로 합친다 */
+    "@id": appId(app.slug),
     name: app.name,
     description: app.blurb,
     applicationCategory: app.category,
