@@ -1,0 +1,1068 @@
+/* ───────────────────────────────────────────────────────────────
+   앱의 문 — 문만의 법 (2026-09-11)
+
+   `/app/<slug>/` 는 이름(Twinkle AI Labs)의 장이 아니라 **그 앱의 문**이다.
+   사람은 QR · 메신저 · 검색으로 이 장에 곧장 떨어지고, 그 사람이 묻는 것은
+   «누가 만들었나»가 아니라 **«이 앱이 뭔가, 받을까»** 하나다. 그래서 문은 제 법을 갖는다.
+
+   1. 문은 앱의 것이다 — 이름의 머리띠 · 바닥글 · 하늘을 걸지 않는다. 머리띠에는 앱의
+      얼굴과 받기 하나, 바닥글에는 약관과 문의. 만든 이는 바닥글 한 줄로 선다.
+   2. 주인공은 앱의 날 화면이다 — 스토어 조판(글자가 박힌 그림)을 다시 쓰지 않는다. 그림 속
+      글자는 검색도 낭독도 안 되고, 기기 틀 안에 또 기기 틀이 선다. 문이 제 기기 틀에 담는다.
+   3. 판은 앱의 판이다 — 라이트는 앱과 같은 **순수한 회색**, 다크는 앱과 같은 밤. 기기 속
+      화면의 바탕과 문의 바탕이 같은 색이라, 틀 안팎이 한 화면으로 읽힌다. (이름의 웹은
+      남보라를 머금은 회색이다 — 문은 거기 오지 않는다.)
+   4. 누를 것은 하나 — 받기. 첫 화면과 끝 화면에서는 **스토어의 공식 배지**로 선다. 로고를
+      우리가 다시 그리지 않는다 — 그 모양은 스토어의 상표 규정이 정하고, 사람은 그 모양을
+      보고 «여기서 받는구나»를 읽는다. 머리띠에는 같은 일을 하는 먹색 알약 하나. 그 밖의 길은
+      바닥글의 글자다.
+      ↩ 같은 날 낮에 «공식 배지 그림」을 걷었다. 그림은 둘레의 여백을 품은 채 흐릿하게 커지고, 검은 면이
+      무채색 판에서 혼자 무거웠으며, 다크에서는 흰 테두리가 두 겹으로 섰다. 지키는 것은 **로고**(모양 · 색)다 —
+      면 · 반지름 · 그늘 · 글자는 우리 사다리로 그린다. «여기서 받는구나」는 로고가 말하지 검은 사각형이 말하지 않는다.
+   5. 테마는 사람이 고른 것을 따른다 — 기기 속 화면까지 그 테마의 것으로 바꿔 낀다.
+      ↩ 2026-09-11 자정에 문을 늘 검게(«다크 독립») 했었다. 그러자 이름의 머리띠만 밝게
+      남아 한 화면에 두 테마가 섰다. 문이 제 머리띠를 가지면 그 어긋남은 사라지지만,
+      사람이 고른 테마를 문 하나가 무시할 이유는 없다.
+   6. 문은 앱이 가진 만큼만 그린다 — 화면이 없는 앱에는 기기 틀을 세우지 않고, 스토어가
+      없는 앱에는 받기 대신 지금 어디쯤인지를 말한다.
+   7. 문은 보라를 입지 않는다 — 판 · 글자 · 단추 · 빛은 무채색이고, 색은 **앱의 얼굴(아이콘)과
+      기기 속 화면**만 갖는다. 문 밖이 무채색이어야 화면 속 보라가 앱의 색으로 읽힌다.
+      ↩ 첫 판(같은 날)은 받기에 브랜드 그라데이션을, 체크 · 구획 머리 · 기기 뒤 빛에 보라를
+      입혔다. 문 밖의 보라가 화면 속 보라와 겹쳐 서자 색이 싸게 읽혔다 — 사람이 짚었다.
+      이름의 웹에서 CTA 가 보라인 것과 다른 법이다: 거기는 보여 줄 앱 화면이 없다.
+      이 법은 이름의 부품(테마 단추)에도 걸린다 — 그 부품이 부르는 브랜드 토큰을 문 안에서
+      무채색으로 가리킨다. 부품을 뜯지 않고 문의 색만 바꾸는 길이 그것뿐이다.
+   8. 문이 새로 갖는 칸은 **색의 무대와 기기 틀**뿐이다. 간격 · 반지름 · 글자 · 굵기 ·
+      움직임은 Aurora Ledger 의 사다리를 가리킨다 — rem, 가진 굵기 넷, 첫 화면 칸(48/60/72).
+      법이 달라도 사다리가 같아야 이름의 장에서 문으로 넘어올 때 손이 낯설지 않다.
+
+   ── 프리미엄 한 판 (2026-09-11 저녁) ─────────────────────────────
+   첫 판은 법은 맞았는데 **평평했다** — 기기는 검은 직사각형이고, 화면은 판 위에 그냥 놓였고,
+   다섯 기기가 지그재그로 서서 같은 장면이 다섯 번 반복됐다. 사람이 «구리다»고 했다.
+   프리미엄은 장식을 더하는 일이 아니라 **깊이 · 재질 · 리듬**을 세우는 일이다. 색은 그대로
+   무채색이다(법 7) — 값비싸 보이는 것은 색이 아니라 빛과 그림자의 정확함이다.
+
+   9. 기기는 무대 위에 선다 — 뒤에는 빛(spot), 발치에는 그늘(ground). 빛은 흰색(라이트)과
+      옅은 밤(다크)이라 색이 없고, 그늘은 기기가 «판에 붙어 있다»는 감각을 만든다.
+      기기를 기울이지 않는다 — 기울이면 화면 속 글자가 흐려지고, 떠다니는 폰은 어디서나
+      본 템플릿의 얼굴이다. 정면 · 크게 · 또렷하게.
+   10. 기기는 **한 대**다 — 넓은 화면에서 «할 수 있는 일»은 기기 한 대를 세워 두고 글이
+      지나가면 화면만 갈아 낀다. 다섯 대가 서면 «앱 하나»가 아니라 «폰 다섯 개»가 읽힌다.
+      좁은 화면은 한 줄이라 그 방법이 안 되므로 일마다 제 기기를 갖는다.
+   11. 기기 속 글자는 **실물 크기**에 가깝게 — 화면은 360dp 폭으로 찍혔고, 기기가 20rem(320px)
+      이면 1dp ≈ 0.9px 라 앱의 14dp 글자가 12.6px 로 읽힌다. 첫 판의 15rem 에서는 9px 였다 —
+      읽히지 않는 화면은 «보여 준다»가 아니라 «있다고 말한다»에 그친다.
+   12. 화면 비율은 **찍은 대로**다 — 틀이 화면을 자르지 않는다. 첫 판은 360×800dp 로 찍어
+      계산 화면의 아래 1/5 이 빈 바탕이었다(내용은 640dp 에서 끝난다). 360×720dp 로 다시 찍고
+      틀도 1:2 로 맞춘다 — 키패드는 아래에 붙어 서므로 틀이 아래를 자르면 키가 잘린다.
+   13. 유리 안에는 **상태바와 제스처 바**가 선다 — 하네스가 찍은 화면에는 없어서, 그대로 두면 유리 맨 위에
+      앱 제목이 붙어 «폰»이 아니라 «그림»으로 읽힌다. 틀이 화면 **바깥**에 두 칸을 세운다(덧그리면 제목이 가려진다).
+   14. 글과 기기는 가운데로 모인다 — 판 양 끝에 하나씩 세우면 넓은 화면에서 사이가 통째로 빈다(1920 에서 «휑하다»).
+      장면의 글 밑에는 옆 화면에서 뽑은 숫자 두셋이 헤어라인 사이에 선다 — 글이 말하는 것을 값이 받친다.
+─────────────────────────────────────────────────────────────── */
+
+.door {
+  /* ── 무대 — 앱의 판 ── */
+  --door-bg:        light-dark(#F8F8F8, #110D19);  /* 앱의 바탕과 같다 */
+  --door-band:      light-dark(#F4F4F5, #1B1526);  /* 번갈아 서는 띠 — 앱의 파인 면 */
+  --door-line:      light-dark(#E7E5EA, #352A42);  /* 헤어라인 */
+  --door-ink:       var(--text);                   /* 잉크는 물든 채로 — 앱과 같다 */
+  --door-ink-sub:   var(--text-sub);
+  --door-ink-faint: var(--text-faint);
+  --door-mark:      var(--text-sub);               /* 글리프 · 구획 머리 — 무채색(법 7) */
+
+  /* ── 무대의 빛과 그늘(법 9) — 색이 아니라 밝기다 ──
+     라이트의 빛은 흰색: 판(#F8F8F8)보다 한 칸 밝은 것이 그 판에서 «빛»이다.
+     다크의 빛은 앱의 파인 면보다 한 칸 밝은 밤 — 별빛이 아니라 방의 불빛 정도. */
+  --door-spot:      light-dark(#FFFFFF, #221A31);
+  --door-ground:    light-dark(rgba(17, 13, 25, 0.16), rgba(0, 0, 0, 0.70));
+  /* 유리의 반사 — 화면 위를 비스듬히 지나는 옅은 빛. 다크에서는 더 옅게(«옅게»는 다크 기준) */
+  --door-glass:     light-dark(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+  /* 기기 몸의 모서리에 맺히는 빛 — 검은 몸이 검은 판에 녹지 않게 */
+  --door-edge:      light-dark(rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.16));
+
+  /* ── 받기 — 문에서 유일하게 누를 것 ── */
+  --door-pill:      var(--door-ink);               /* 머리띠의 먹색 알약 */
+  --door-pill-ink:  var(--door-bg);
+
+  /* ── 기기 틀 — 면이 아니라 기기의 모양이라 사다리 밖의 반지름을 갖는다 ──
+     화면의 모서리에 테두리 두께를 더한 것이 몸의 모서리다. 둘을 따로 적으면
+     테두리를 바꾼 날 안쪽과 바깥쪽 곡선이 어긋난다. */
+  --door-bezel:          0.5rem;
+  --door-screen-radius:  1.875rem;
+  --door-device-radius:  calc(var(--door-screen-radius) + var(--door-bezel));
+  --door-device-body:    light-dark(#1A1A1A, #000000);  /* 기기의 몸 — 물들지 않은 검정 */
+  /* 화면의 비율 — 찍은 대로(법 12). 360×720dp */
+  --door-screen-ratio:   1 / 2;
+  /* 기기의 폭(법 11) — 좁은 화면의 첫 기기 · 일마다 서는 기기 · 넓은 화면의 한 대 */
+  --door-device-w:       15rem;
+  --door-device-hero-w:  17rem;
+  --door-device-stage-w: 20rem;
+  /* 유리 안의 상태바와 제스처 바 — 앱은 24dp · 가장자리 제스처 영역. 1dp ≈ 0.9px 에 맞춘 값 */
+  --door-status-h: 1.5rem;
+  --door-nav-h: 1.25rem;
+  /* 넓은 화면에서 한 대가 서는 무대의 키 — 붙박이 자리를 셈하려면 틀의 키를 알아야 한다.
+     유리의 폭(몸 − 테두리 둘)을 비율로 나눈 화면에, 위아래 바와 테두리 둘을 더한다 */
+  --door-stage-h: calc(
+    (var(--door-device-stage-w) - 2 * var(--door-bezel)) / (var(--door-screen-ratio))
+    + var(--door-status-h) + var(--door-nav-h) + 2 * var(--door-bezel)
+  );
+  /* 좁은 화면 갤러리의 기기 키 — 화살표를 기기의 눈높이에 세우려면 이것을 알아야 한다 */
+  --door-slide-device-h: calc(
+    (var(--door-device-w) - 2 * var(--door-bezel)) / (var(--door-screen-ratio))
+    + var(--door-status-h) + var(--door-nav-h) + 2 * var(--door-bezel)
+  );
+
+  /* ── 이름의 부품이 부르는 브랜드 토큰 — 문 안에서는 무채색을 가리킨다(법 7) ── */
+  --accent:       var(--door-ink);
+  --primary-soft: var(--door-band);
+  --card-border:  var(--door-line);
+  --glass:        var(--surface);
+
+  /* ── 틀의 폭 ── */
+  --door-shell: var(--shell);
+  --door-shell-narrow: var(--shell-narrow);
+
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--door-bg);
+  color: var(--door-ink);
+}
+
+/* ── 기기 속 화면 — 사람이 고른 테마의 것만 선다 ── */
+.screenDark { display: none; }
+:global([data-theme="dark"]) .screenLight { display: none; }
+:global([data-theme="dark"]) .screenDark { display: block; }
+/* 스크립트가 없어 표식이 서지 않은 곳은 기기의 설정을 따른다 */
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme])) .screenLight { display: none; }
+  :global(:root:not([data-theme])) .screenDark { display: block; }
+}
+
+/* ═══ 머리띠 ═══════════════════════════════════════════════════ */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  /* px — 헤어라인. 떠오르기 전에는 보이지 않는다. */
+  border-bottom: var(--stroke-hair) solid transparent;
+  transition: background var(--motion-base) var(--ease), border-color var(--motion-base) var(--ease);
+}
+
+.headerScrolled {
+  background: color-mix(in srgb, var(--door-bg) 86%, transparent);
+  -webkit-backdrop-filter: blur(1.25rem) saturate(150%);
+  backdrop-filter: blur(1.25rem) saturate(150%);
+  border-bottom-color: var(--door-line);
+}
+
+.headerInner {
+  max-width: var(--door-shell);
+  height: 3.5rem;
+  margin: 0 auto;
+  padding: 0 var(--s2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  min-width: 0;
+  color: var(--door-ink);
+  font-size: var(--fs-16);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tr-snug);
+}
+.brand:hover { text-decoration: none; }
+
+.brandIcon {
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-sm);
+}
+
+.brandName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.headerEnd {
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+}
+
+/* ═══ 받기 ═══════════════════════════════════════════════════════ */
+
+/* Play 배지 — 우리가 그린다. 면은 카드의 면(`--surface`: 라이트 흰 · 다크 파인 밤)에 헤어라인과 떠 있는 그늘,
+   로고만 제 색. ↩ 낮까지는 Google 의 검은 그림을 실었다 — 흐릿하고 무거웠다. 로고 밖은 우리 사다리다(법 4 의 ↩). */
+.go {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1h);
+  min-height: 3.5rem;
+  padding: var(--s1) var(--s3) var(--s1) var(--s2);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--door-ink);
+  box-shadow: 0 0 0 var(--stroke-hair) var(--door-line), var(--shadow-floating);
+  transition: transform var(--motion-fast) var(--ease), box-shadow var(--motion-fast) var(--ease);
+}
+.go:hover {
+  text-decoration: none;
+  transform: translateY(-0.0625rem);
+  box-shadow: 0 0 0 var(--stroke-hair) var(--door-line), var(--shadow-drawer);
+}
+.go:focus-visible { outline: none; box-shadow: var(--focus-ring), var(--shadow-floating); }
+
+.goLogo {
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+}
+
+.goText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
+}
+
+.goEyebrow {
+  color: var(--door-ink-sub);
+  font-size: var(--fs-11);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tr-wide);
+}
+
+.goName {
+  font-size: var(--fs-20);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tr-snug);
+}
+
+/* 머리띠의 받기 — 먹색 알약. 배지를 줄이면 로고가 읽히지 않는 크기가 된다 */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0 var(--s2);
+  border-radius: var(--radius-pill);
+  background: var(--door-pill);
+  color: var(--door-pill-ink);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  transition: opacity var(--motion-fast) var(--ease);
+}
+.pill:hover { text-decoration: none; opacity: var(--alpha-strong); }
+.pill:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+/* 스토어가 없는 앱 — 받기 대신 지금 어디쯤인지 */
+.status {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-primary);
+  padding: 0 var(--s3);
+  border-radius: var(--radius-pill);
+  border: var(--stroke-hair) solid var(--door-line);
+  background: var(--surface);
+  color: var(--door-ink-sub);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+}
+
+/* ═══ 첫 화면 ═══════════════════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  max-width: var(--door-shell);
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--s5) var(--s2) var(--s7);
+  display: grid;
+  gap: var(--s6);
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 34rem;
+}
+
+/* 첫 화면은 아래에서 떠오르며 맞이한다 — 줄마다 반 박자씩 늦게(이름의 장과 같은 걸음). */
+.heroText > *,
+.heroStage {
+  animation: riseIn var(--motion-slow) var(--ease) backwards;
+}
+.heroText > :nth-child(2) { animation-delay: calc(var(--motion-fast) / 2); }
+.heroText > :nth-child(3) { animation-delay: var(--motion-fast); }
+.heroStage { animation-delay: calc(var(--motion-fast) * 1.5); }
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(0.75rem); }
+}
+
+/* 눈에는 없고 낭독기와 검색에만 있는 글 — h1 이 앱 이름을 잃지 않게 */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.headline {
+  font-size: var(--fs-36);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-title);
+  letter-spacing: var(--tr-tight);
+}
+
+/* `|` 가 가른 줄 — 줄바꿈을 기기 폭에 맡기지 않는다 */
+.line { display: block; }
+
+.lede {
+  margin-top: var(--s2h);
+  color: var(--door-ink-sub);
+  font-size: var(--fs-16);
+  line-height: var(--lh-body);
+}
+
+.heroActions {
+  margin-top: var(--s4);
+  display: flex;
+  flex-direction: column;
+  align-items: inherit;
+  gap: var(--s2);
+}
+
+/* 세 가지 사실 — 작은 알약 셋. ↩ 회색 글자로만 두었더니 «그냥 텍스트가 떠 있다»고 했다.
+   알약은 한 줄이 통째로 둥근 것이라 사다리의 999px 이 맞고, 면과 헤어라인이 글자를 판에 붙인다. */
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: inherit;
+  gap: var(--s1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.fact {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  min-height: 2rem;
+  padding: 0 var(--s1h) 0 var(--s0h);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  box-shadow: 0 0 0 var(--stroke-hair) var(--door-line);
+  color: var(--door-ink);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+}
+
+/* 체크의 우물 — 알약 안의 작은 원. 잉크로만 */
+.factGlyph {
+  flex: none;
+  box-sizing: content-box;
+  width: var(--icon-xs);
+  height: var(--icon-xs);
+  padding: 0.1875rem;
+  border-radius: var(--radius-pill);
+  background: var(--door-band);
+  color: var(--door-ink);
+}
+
+/* ═══ 무대(법 9) — 기기 뒤의 빛과 발치의 그늘 ═════════════════════
+   빛은 기기보다 넓게 퍼지고, 그늘은 기기보다 좁게 모인다. 둘 다 색이 없다. */
+
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  /* 빛이 퍼질 자리 — 기기 둘레로 한 칸씩. 좁은 화면에서는 옆을 한 칸으로 줄인다 —
+     기기 17rem 에 옆 2.5rem 씩을 더하면 320px 판이 넘쳤다(2026-09-11, 320 · 360 에서 실측) */
+  padding: var(--s4) var(--s2) var(--s5);
+  max-width: 100%;
+}
+
+.stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 45%, var(--door-spot), transparent 70%);
+  pointer-events: none;
+}
+
+.stage::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: var(--s3);
+  z-index: 0;
+  width: 60%;
+  height: var(--s3);
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, var(--door-ground), transparent 70%);
+  /* px — 번짐은 글자와 함께 커지지 않는다 */
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.stage > * { position: relative; z-index: 1; }
+
+/* ═══ 기기 틀 ═══════════════════════════════════════════════════ */
+
+.device {
+  position: relative;
+  width: var(--door-device-w);
+  /* 판보다 넓어지지 않는다 — 좁은 화면에서는 기기가 판을 따라 줄어든다 */
+  max-width: 100%;
+  margin: 0;
+  padding: var(--door-bezel);
+  border-radius: var(--door-device-radius);
+  background: var(--door-device-body);
+  box-shadow:
+    /* 몸의 모서리에 맺힌 빛 — px, 헤어라인 */
+    inset 0 1px 0 var(--door-edge),
+    /* 다크에서 몸이 판에 녹지 않게 테두리 한 줄 */
+    0 0 0 var(--stroke-hair) var(--door-line),
+    /* 떠 있는 그늘 — 사다리의 맨 위 칸 */
+    var(--shadow-drawer);
+}
+
+.deviceHero { width: var(--door-device-hero-w); }
+.deviceStage { width: var(--door-device-stage-w); }
+
+/* 옆의 단추 — 왼쪽에 소리 둘, 오른쪽에 전원 하나. 몸과 같은 색이라 윤곽으로만 읽힌다.
+   px — 기기의 부품은 글자와 함께 커지지 않는다 */
+.device::before,
+.device::after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--door-device-body);
+  box-shadow: 0 0 0 var(--stroke-hair) var(--door-line);
+}
+.device::before {
+  left: -3px;
+  top: 22%;
+  height: 2.75rem;
+  /* 두 번째 소리 단추는 첫 번째의 그림자로 선다 */
+  box-shadow: 0 0 0 var(--stroke-hair) var(--door-line), 0 3.5rem 0 0 var(--door-device-body), 0 3.5rem 0 var(--stroke-hair) var(--door-line);
+}
+.device::after {
+  right: -3px;
+  top: 26%;
+  height: 3.75rem;
+}
+
+/* 화면의 유리 — 틀은 화면을 자르지 않고(법 12) 비율만 맞춘다 */
+.screenWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--door-screen-radius);
+  overflow: hidden;
+  background: var(--door-bg);
+  /* 유리의 가장자리 — 몸과 화면 사이의 한 줄. px */
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.55);
+  isolation: isolate;
+}
+
+/* 유리의 반사 — 화면 위를 비스듬히 지나는 빛 하나 */
+.screenWrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(112deg, var(--door-glass) 0%, transparent 42%);
+  pointer-events: none;
+}
+
+/* 앱의 화면이 서는 자리 — 찍은 비율 그대로. 겹쳐 담는 화면(`.layer`)은 이 안에서 절대 위치다 */
+.screenArea {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--door-screen-ratio);
+}
+
+/* 화면은 자리에 절대 위치로 선다 — 흐름에 두면 그림의 제 키(1440px)가 자리를 늘려 비율이 무너진다.
+   `display` 는 여기 적지 않는다 — 위의 «테마의 것만 선다» 규칙(`.screenDark { display: none }`)을 같은 무게로 덮어
+   두 장이 겹쳐 서고 뒤의 다크가 위로 올라온다(실제로 그랬다). */
+.screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* 상태바 — 시각은 왼쪽, 신호 · 와이파이 · 배터리는 오른쪽. 앱과 같은 판 위에 잉크로만 */
+.statusBar {
+  flex: none;
+  height: var(--door-status-h);
+  padding: 0 var(--s2h) 0 var(--s2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--door-ink);
+  font-size: var(--fs-11);
+  font-weight: var(--fw-semibold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tr-slight);
+}
+
+.statusIcons {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s0h);
+}
+
+.statusGlyph {
+  width: var(--icon-xs);
+  height: var(--icon-xs);
+}
+
+/* 제스처 바 — 가운데 알약 하나. 잉크를 옅게 */
+.navBar {
+  flex: none;
+  height: var(--door-nav-h);
+  display: grid;
+  place-items: center;
+}
+
+.navPill {
+  width: 30%;
+  /* px — 기기의 부품 */
+  height: 3px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--door-ink) var(--alpha-soft), transparent);
+}
+
+/* ═══ 할 수 있는 일 ═════════════════════════════════════════════ */
+
+.features {
+  max-width: var(--door-shell);
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--s6) var(--s2) var(--s7);
+}
+
+/* 구획 머리 — 작은 꼬리표 위에 제목 한 줄. 꼬리표 하나만 서면 구획이 시작된 줄 모른다 */
+.sectionHead {
+  display: grid;
+  gap: var(--s1);
+  text-align: center;
+  justify-items: center;
+}
+
+.eyebrow {
+  color: var(--door-mark);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tr-slight);
+  text-align: center;
+}
+
+.sectionTitle {
+  max-width: 26rem;
+  font-size: var(--fs-28);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-title);
+  letter-spacing: var(--tr-tight);
+}
+
+.showcase {
+  margin-top: var(--s6);
+  display: grid;
+  gap: var(--s3);
+}
+
+/* 좁은 화면의 장면 — 옆으로 넘기는 갤러리. 통은 판 끝까지 나가고(옆 여백을 되물린다) 장면은 가운데에 멈춘다.
+   넓은 화면에서는 아래 `min-width: 56em` 블록이 이것을 세로 흐름으로 되돌린다. */
+.steps {
+  --door-slide-w: min(21rem, 80vw);
+  display: flex;
+  /* 장면 사이 — 한 칸 반. 다닥다닥 붙으면 옆 장면의 숫자 표가 이 장면의 것으로 읽힌다 */
+  gap: var(--s4);
+  list-style: none;
+  margin: 0 calc(-1 * var(--s2));
+  /* 첫 장면과 끝 장면도 가운데 서게 — 양 끝에 «통의 반 − 장면의 반» 만큼 */
+  padding: var(--s1) max(var(--s2), calc((100% + 2 * var(--s2) - var(--door-slide-w)) / 2)) var(--s2);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  /* 스크롤바는 점이 대신 말한다 */
+  scrollbar-width: none;
+}
+.steps::-webkit-scrollbar { display: none; }
+
+.step {
+  flex: 0 0 var(--door-slide-w);
+  scroll-snap-align: center;
+  display: grid;
+  /* 기기 · 글. 통 안의 장면은 키가 같고(flex 가 늘린다) 글 칸이 남는 키를 먹는다 */
+  grid-template-rows: auto 1fr;
+  gap: var(--s4);
+  justify-items: center;
+  text-align: center;
+  /* 지금 장면만 또렷하다 — 옆에 살짝 보이는 장면은 물러나 있다 */
+  opacity: var(--alpha-half);
+  transition: opacity var(--motion-base) var(--ease);
+}
+.stepActive { opacity: 1; }
+
+/* 갤러리에서는 기기가 먼저, 글이 그 밑에 */
+.stepDevice { order: -1; }
+
+.stepText {
+  width: 100%;
+  max-width: 26rem;
+  display: grid;
+  /* 번호 · 제목 · 문장 · 숫자 표 — 문장이 남는 키를 먹어 표는 장면마다 **같은 높이**에 선다.
+     글 길이가 다른 다섯 장면을 옆으로 넘길 때 표가 오르내리면 눈이 매번 다시 찾는다(2026-09-11). */
+  grid-template-rows: auto auto 1fr auto;
+  gap: var(--s2);
+}
+.stepFacts { align-self: end; margin-top: var(--s3); }
+
+/* 통 — 화살표가 떠 있을 자리. 좁은 화면에서만 뜻이 있다(넓은 화면은 아래 블록이 걷는다) */
+.track {
+  position: relative;
+  /* 격자 칸 안의 상자는 최소 폭이 «내용»이다 — 그 내용이 옆으로 긴 통이라 판이 1280px 로 늘었다(2026-09-11 실측).
+     0 으로 못 박아야 통이 제 자리 안에서 스크롤된다 */
+  min-width: 0;
+}
+
+/* 앞뒤 화살표 — **기기의 세로 가운데**, 양 옆에 떠 있다. 통의 가운데(글까지 센 키)에 두면 기기 아랫단에 걸린다.
+   믿어도 되는 이유의 우물과 같은 크기 · 같은 면 */
+.arrow {
+  position: absolute;
+  top: calc(var(--s1) + var(--door-slide-device-h) / 2);
+  z-index: 2;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--door-ink);
+  box-shadow: 0 0 0 var(--stroke-hair) var(--door-line), var(--shadow-raised);
+  cursor: pointer;
+  transition: opacity var(--motion-fast) var(--ease), transform var(--motion-fast) var(--ease);
+}
+.arrowPrev { left: 0; }
+.arrowNext { right: 0; }
+.arrow:disabled { opacity: var(--alpha-ring); cursor: default; box-shadow: 0 0 0 var(--stroke-hair) var(--door-line); }
+.arrow:not(:disabled):hover { transform: translateY(calc(-50% - 0.0625rem)); }
+.arrow:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.arrowGlyph { width: var(--icon-sm); height: var(--icon-sm); }
+
+/* 갤러리의 점 — 지금 장면은 잉크, 나머지는 선 색. 조작하는 작은 것이라 사다리 아래 4px 칸의 크기다 */
+.dots {
+  margin-top: var(--s1);
+  display: flex;
+  justify-content: center;
+  gap: var(--s1);
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--door-line);
+  cursor: pointer;
+  transition: background var(--motion-base) var(--ease), transform var(--motion-base) var(--ease);
+}
+.dotActive { background: var(--door-ink); transform: scale(1.25); }
+
+/* 화면에서 뽑은 숫자 — 이름은 왼쪽, 값은 오른쪽. 줄 사이는 헤어라인, 상자는 두르지 않는다 */
+.stepFacts {
+  margin: var(--s2) 0 0;
+  width: 100%;
+  text-align: left;
+}
+
+.stepFact {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--s2);
+  padding-block: var(--s1h);
+  border-top: var(--stroke-hair) solid var(--door-line);
+}
+.stepFact:last-child { border-bottom: var(--stroke-hair) solid var(--door-line); }
+
+.stepFactLabel {
+  color: var(--door-ink-sub);
+  font-size: var(--fs-14);
+}
+
+.stepFactValue {
+  margin: 0;
+  color: var(--door-ink);
+  font-size: var(--fs-16);
+  font-weight: var(--fw-semibold);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* 차례 — 다섯 장면이 한 벌이라는 것을 숫자 하나가 말한다 */
+.stepIndex {
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tr-wide);
+  color: var(--door-ink-faint);
+}
+
+.featureTitle {
+  font-size: var(--fs-24);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-title);
+  letter-spacing: var(--tr-snug);
+}
+
+.featureBody {
+  color: var(--door-ink-sub);
+  font-size: var(--fs-16);
+  line-height: var(--lh-body);
+}
+
+/* 넓은 화면의 한 대(법 10) — 좁은 화면에서는 서지 않는다 */
+.stageColumn { display: none; }
+
+/* 갈아 끼우는 화면 — 한 장만 보이고, 바뀔 때는 겹쳐서 스민다 */
+.layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--motion-slow) var(--ease);
+}
+.layerActive { opacity: 1; }
+
+/* 화면이 없는 앱 — 한 줄씩의 목록으로 */
+.pointList {
+  margin: var(--s4) auto 0;
+  max-width: 34rem;
+  display: grid;
+  gap: var(--s1h);
+  list-style: none;
+  padding: 0;
+}
+
+.point {
+  display: flex;
+  gap: var(--s1h);
+  align-items: flex-start;
+  padding: var(--s2);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-raised);
+  font-size: var(--fs-16);
+  line-height: var(--lh-tight);
+}
+
+.pointGlyph {
+  flex: none;
+  width: var(--icon-md);
+  height: var(--icon-md);
+  color: var(--door-mark);
+}
+
+/* ═══ 믿어도 되는 이유 ═══════════════════════════════════════════ */
+
+.trust {
+  background: var(--door-band);
+  /* px — 헤어라인 */
+  border-block: var(--stroke-hair) solid var(--door-line);
+}
+
+.trustInner {
+  max-width: var(--door-shell);
+  margin: 0 auto;
+  padding: var(--s6) var(--s2);
+  display: grid;
+  gap: var(--s4);
+  list-style: none;
+}
+
+.trustItem {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s0) var(--s2);
+  align-items: start;
+}
+
+/* 글리프의 자리 — 판 색의 둥근 우물 하나. 띠 위에서 글리프가 «놓여 있다»가 아니라 «앉아 있다»로 읽힌다 */
+.trustWell {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-pill);
+  background: var(--door-bg);
+  box-shadow: inset 0 0 0 var(--stroke-hair) var(--door-line);
+}
+
+.trustGlyph {
+  width: var(--icon-md);
+  height: var(--icon-md);
+  color: var(--door-mark);
+}
+
+.trustTitle {
+  align-self: end;
+  font-size: var(--fs-16);
+  font-weight: var(--fw-semibold);
+}
+
+.trustBody {
+  color: var(--door-ink-sub);
+  font-size: var(--fs-14);
+  line-height: var(--lh-body);
+}
+
+/* ═══ 끝 화면 ═══════════════════════════════════════════════════
+   마지막 한 마디 · 받기 · 처음의 세 가지 사실 · 면책. 얼굴은 없다 — 머리띠와 바닥글이 든다.
+   ↩ 첫 판은 아이콘을 무대 위에 홀로 세우고 그 밑에 나머지를 매달았다 — 아이콘이 이 문에서 세 번째로 서면서
+   정작 마지막 말은 작게 읽혔다. 무대의 빛은 남긴다 — 이번엔 글 뒤에. */
+
+.closing {
+  position: relative;
+  isolation: isolate;
+  padding: var(--s7) var(--s2);
+}
+
+/* 끝의 빛 — 기기 뒤에 섰던 그 빛이 마지막 말 뒤에 넓게 선다 */
+.closing::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse 40% 60% at 50% 45%, var(--door-spot), transparent 70%);
+  pointer-events: none;
+}
+
+.closingInner {
+  max-width: var(--door-shell-narrow, 44rem);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--s3);
+}
+
+.closingTitle {
+  font-size: var(--fs-36);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-title);
+  letter-spacing: var(--tr-tight);
+}
+
+.closingFacts { justify-content: center; }
+
+.disclaimer {
+  max-width: 36rem;
+  margin-top: var(--s1);
+  color: var(--door-ink-faint);
+  font-size: var(--fs-12);
+  line-height: var(--lh-body);
+}
+
+/* ═══ 바닥글 ═══════════════════════════════════════════════════ */
+
+.footer {
+  margin-top: auto;
+  /* px — 헤어라인 */
+  border-top: var(--stroke-hair) solid var(--door-line);
+}
+
+.footerInner {
+  max-width: var(--door-shell);
+  margin: 0 auto;
+  padding: var(--s4) var(--s2) var(--s5);
+  display: grid;
+  gap: var(--s3);
+}
+
+.footerApp {
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+}
+
+.footerIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1) var(--s2h);
+  list-style: none;
+  padding: 0;
+  font-size: var(--fs-14);
+}
+
+.footerLink {
+  color: var(--door-ink-sub);
+  font-weight: var(--fw-medium);
+}
+.footerLink:hover { color: var(--door-ink); text-decoration: none; }
+
+.footerMaker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s1) var(--s3);
+  color: var(--door-ink-faint);
+  font-size: var(--fs-12);
+}
+
+.footerMakerLink { color: var(--door-ink-sub); font-weight: var(--fw-semibold); }
+.footerMakerLink:hover { color: var(--door-ink); text-decoration: none; }
+
+/* ═══ 스크롤에 물린 등장 ════════════════════════════════════════
+   JS 없이 스크롤 시계(view())로 떠오른다 — 이름의 장과 같은 문법.
+   이 문법을 모르는 브라우저에서는 규칙이 들어오지 않아 처음부터 그냥 보인다. */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* 떠오르는 것은 키가 작아야 한다 — 700px 짜리 장면에 걸었더니 글이 화면에 들어온 뒤에도 한참 흐릿했다
+       (cover 24% 는 «장면 키 + 창 키»의 24% 를 지나야 온다). 장면은 글 덩이(`.stepText`)에만 건다 */
+    .reveal {
+      animation: riseIn var(--motion-slow) var(--ease) both;
+      animation-timeline: view();
+      animation-range: entry 6% cover 24%;
+    }
+    /* 갤러리(옆으로 넘기는 통) 안에서는 세로 시계가 뜻이 없다 — 걷는다 */
+    @media (max-width: 55.99em) {
+      .step .reveal { animation: none; }
+    }
+  }
+}
+
+/* ═══ 넓어지면 ═══════════════════════════════════════════════════
+   브레이크포인트는 em — 사람이 글자를 키우면 그만큼 일찍 좁은 판으로 넘어간다. */
+
+@media (min-width: 40em) {
+  .headline { font-size: var(--fs-48); }
+  .lede { font-size: var(--fs-20); }
+  .sectionTitle { font-size: var(--fs-36); }
+  .featureTitle { font-size: var(--fs-28); }
+  .trustInner { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s5); }
+  /* 세 약속 사이의 헤어라인 — 칸을 두르지 않고 사이만 긋는다 */
+  .trustItem + .trustItem {
+    padding-left: var(--s5);
+    border-left: var(--stroke-hair) solid var(--door-line);
+  }
+  .closingTitle { font-size: var(--fs-48); }
+  .footerInner { grid-template-columns: 1fr auto; align-items: center; }
+  .footerMaker { grid-column: 1 / -1; }
+}
+
+@media (min-width: 56em) {
+  .headerInner, .hero, .features, .trustInner, .closing, .footerInner { padding-inline: var(--s3); }
+  .closingTitle { font-size: var(--fs-60); }
+
+  /* 첫 화면은 두 칸 — 말은 왼쪽, 기기는 오른쪽 */
+  .hero {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--s6);
+    padding-block: var(--s6) var(--s8);
+    text-align: left;
+    justify-items: start;
+  }
+  .heroText { align-items: flex-start; }
+  .headline { font-size: var(--fs-60); }
+  .heroStage { justify-self: end; padding-inline: var(--s5); }
+  .closing { padding-block: var(--s8); }
+  .deviceHero { width: var(--door-device-stage-w); }
+
+  /* 할 수 있는 일 — 글은 왼쪽을 지나가고, 기기 한 대가 오른쪽에 붙박여 화면만 갈아 낀다(법 10) */
+  /* 글과 기기를 가운데로 모은다 — 판 양 끝에 하나씩 세우면 사이가 통째로 빈다(2026-09-11, 1920 에서 «휑하다») */
+  .showcase {
+    grid-template-columns: minmax(0, 30rem) auto;
+    justify-content: center;
+    gap: var(--s8);
+    align-items: start;
+  }
+  .steps {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+  .arrow, .dots { display: none; }
+  .track { position: static; }
+  .step {
+    flex: none;
+    /* 한 장면이 한 화면의 7/10 — 글이 기기의 눈높이를 지나가는 동안 화면이 바뀐다 */
+    min-height: 70dvh;
+    align-content: center;
+    justify-items: start;
+    text-align: left;
+    /* 지나간 장면과 올 장면은 물러나 있다 — 지금 읽는 것만 또렷하다 */
+    opacity: var(--alpha-half);
+    transition: opacity var(--motion-base) var(--ease);
+  }
+  .stepActive { opacity: 1; }
+  .stepText { max-width: 30rem; }
+  /* 일마다 서던 기기는 걷는다 — 한 대가 대신 선다 */
+  .stepDevice { display: none; }
+  /* 글이 혼자 왼쪽 반을 지므로 한 칸씩 올린다 — 제목은 첫 화면의 아랫칸, 본문은 lede 와 같은 칸 */
+  .featureTitle { font-size: var(--fs-36); }
+  .featureBody { font-size: var(--fs-20); }
+
+  .stageColumn {
+    display: block;
+    position: sticky;
+    /* 화면 한가운데 — 머리띠(3.5rem)만큼 아래로 치우쳐 선다 */
+    top: calc((100dvh - var(--door-stage-h)) / 2 + 1.75rem);
+    align-self: start;
+  }
+  .stageColumn .stage { padding-block: 0; }
+  .stageColumn .stage::after { bottom: calc(-1 * var(--s2)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .go, .pill, .header, .layer, .step { transition: none; }
+  .go:hover { transform: none; }
+  .heroText > *, .heroStage { animation: none; }
+}

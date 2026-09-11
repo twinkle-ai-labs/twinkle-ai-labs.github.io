@@ -1,16 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import Analytics from "@/components/Analytics";
-import Aurora from "@/components/Aurora";
-import BackToTop from "@/components/BackToTop";
 import Providers from "@/components/Providers";
 import RouteViews from "@/components/RouteViews";
-import SiteFooter from "@/components/SiteFooter";
-import SiteHeader from "@/components/SiteHeader";
 import { DESCRIPTION, FOUNDER_NAME, KEYWORDS, jsonLd, shareCard } from "@/lib/seo";
 import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 import { HOME_URL, NAME } from "@/lib/site";
 import "./globals.css";
-import styles from "./layout.module.css";
 
 /** Pretendard — 굵기는 «가진 넷»만 부른다. 없는 굵기는 브라우저가 흉내 내거나 이웃 칸으로 스냅한다. */
 const PRETENDARD_CSS =
@@ -49,9 +44,9 @@ export const viewport: Viewport = {
 /**
  * 문서의 뼈대 — 어느 화면에나 같은 것만 든다.
  *
- * 머리띠와 바닥글은 제 조각([SiteHeader] · [SiteFooter])이 그린다. 레이아웃이
- * 그 안까지 들고 있으면 «메뉴 한 줄»을 고치러 문서의 뿌리를 열게 되고,
- * 그 파일은 곧 아무도 통째로 읽지 않는 길이가 된다.
+ * 머리띠와 바닥글은 **장의 묶음**이 두른다 — 이름의 장은 `(site)` 가 [SiteFrame] 을,
+ * 앱의 문은 `(door)` 가 제 머리띠와 바닥글을. 뿌리가 그것까지 들고 있으면 문도 이름의
+ * 머리띠 밑에 서게 된다(2026-09-11 에 그랬다).
  */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -68,12 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Providers>
           <RouteViews />
-          {/* 하늘은 어느 화면에나 걸린다 — 404 도 같은 밤 아래 있다. */}
-          <Aurora />
-          <SiteHeader />
-          <main className={styles.main}>{children}</main>
-          <BackToTop />
-          <SiteFooter />
+          {children}
         </Providers>
       </body>
     </html>
