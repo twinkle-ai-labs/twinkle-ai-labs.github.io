@@ -67,6 +67,154 @@ export type OgCard = {
   icon?: string;
 };
 
+/** 앱 카드가 받는 것 — 문(`/app/<slug>/`)이 하는 말과 같은 자리(`lib/labs`)에서 온다. */
+export type AppOgCard = {
+  /** 앱의 이름 — 왼쪽 위의 머리. */
+  name: string;
+  /** 큰 말 — 문의 첫 화면이 하는 질문. 줄은 우리가 가른다(배열 한 칸이 한 줄). */
+  headline: readonly string[];
+  /** 짧은 사실 — 체크가 붙은 알약으로 선다. «무료» 처럼 한두 낱말. */
+  facts: readonly string[];
+  /** 지금 어디쯤인지 — 사실이 아니라 상태라 체크 대신 점이 붙는다(«비공개 테스트 중»). */
+  status?: string;
+  /** 발치 — 만든 이의 이름과 주소. */
+  maker: string;
+  domain: string;
+  /** 오른쪽 가운데의 얼굴 — 앱 아이콘(data URL). */
+  icon?: string;
+};
+
+/**
+ * 앱의 카드 — 대화창에 링크를 붙인 사람이 받는 **첫 장면**이다.
+ *
+ * 문의 법을 그대로 따른다: 판은 밤의 무채색이고 색은 **앱의 얼굴만** 갖는다(법 7). 얼굴은 오른쪽 가운데,
+ * 문의 기기처럼 무대(뒤의 빛 · 발치의 그늘) 위에 선다(법 9). 왼쪽은 이름 · 질문 · 사실 셋.
+ *
+ * ↩ 첫 판(2026-09-06)은 이 집의 카드와 한 판이었다 — 아이콘이 오른쪽 위 고리 안에 176px 로 앉고, 그 아래로
+ * 앱의 한 줄 소개(40자 남짓)가 두 줄로 흘렀다. 카카오톡에서 460px 로 줄면 소개는 12px 가 되고, 아이콘은
+ * 구석에 몰려 카드가 «글이 많은 어두운 판»으로 읽혔다. 사람이 «제대로 만들어 줘, 로고는 우측 가운데»라고 했다.
+ * 대화창의 카드는 **작게 본다** — 글은 줄이고 크기는 올린다.
+ */
+export function appOgCard({ name, headline, facts, status, maker, domain, icon }: AppOgCard) {
+  /* 줄 수에 따라 한 칸 — 두 줄이면 68, 세 줄이면 56. 가장 긴 줄이 왼쪽 칸(640px)을 넘지 않는 값이다 */
+  const headlineSize = headline.length > 2 ? 56 : 68;
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          position: "relative",
+          overflow: "hidden",
+          background: INK.bg,
+          /* 무대의 빛 — 얼굴 뒤에만. 색이 아니라 밝기다(문의 `--door-spot` 과 같은 밤) */
+          backgroundImage: `radial-gradient(420px 420px at 83% 50%, #2A2140, rgba(17,13,25,0))`,
+          fontFamily: "Pretendard",
+          color: INK.text,
+        }}
+      >
+        {/* 왼쪽 — 이름 · 질문 · 사실, 발치에 만든 이 */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            width: 760,
+            padding: "68px 0 64px 80px",
+          }}
+        >
+          {/* 대화창은 이 판을 460px 쯤으로 줄여 보인다 — 1200 판의 24px 는 거기서 9px 다. 작은 글자의 바닥은 26 */}
+          <span style={{ fontSize: 32, fontWeight: 700, color: INK.text }}>{name}</span>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 36 }}>
+            <div style={{ display: "flex", flexDirection: "column", wordBreak: "keep-all" }}>
+              {headline.map((line) => (
+                <span key={line} style={{ fontSize: headlineSize, fontWeight: 700, lineHeight: 1.22, letterSpacing: -1.5 }}>
+                  {line}
+                </span>
+              ))}
+            </div>
+            {facts.length > 0 || status ? (
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+                {status ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 12,
+                      padding: "10px 22px 10px 18px",
+                      borderRadius: 999,
+                      border: "1px solid rgba(255,255,255,0.14)",
+                      background: "rgba(255,255,255,0.05)",
+                      fontSize: 26,
+                      color: INK.text,
+                    }}
+                  >
+                    <div style={{ width: 10, height: 10, borderRadius: 999, background: INK.sub }} />
+                    {status}
+                  </div>
+                ) : null}
+                {facts.map((fact) => (
+                  <div
+                    key={fact}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 10,
+                      padding: "10px 22px 10px 16px",
+                      borderRadius: 999,
+                      border: "1px solid rgba(255,255,255,0.14)",
+                      background: "rgba(255,255,255,0.05)",
+                      fontSize: 26,
+                      color: INK.text,
+                    }}
+                  >
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={INK.sub} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12.5l4.5 4.5L19 7.5" />
+                    </svg>
+                    {fact}
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </div>
+
+          <span style={{ fontSize: 24, color: INK.sub }}>
+            {maker} · {domain}
+          </span>
+        </div>
+
+        {/* 오른쪽 가운데 — 무대 위의 얼굴. 발치의 그늘이 먼저, 얼굴이 그 위에 */}
+        {icon ? (
+          <div style={{ position: "absolute", right: 120, top: 0, bottom: 0, width: 240, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div
+              style={{
+                position: "absolute",
+                left: 20,
+                top: 450,
+                width: 200,
+                height: 36,
+                borderRadius: 999,
+                background: "radial-gradient(100px 18px at 50% 50%, rgba(0,0,0,0.65), rgba(0,0,0,0))",
+              }}
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={icon}
+              alt=""
+              width={240}
+              height={240}
+              style={{ borderRadius: 54, boxShadow: "0 30px 70px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08)" }}
+            />
+          </div>
+        ) : null}
+      </div>
+    ),
+    { ...OG_SIZE, fonts: fonts() },
+  );
+}
+
 /**
  * 카드 한 장.
  *
