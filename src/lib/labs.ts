@@ -10,6 +10,7 @@
  */
 
 import { DESIGN_URL, POLARIS_URL } from "./site";
+import type { TrustGlyph } from "@/components/door/Glyphs";
 
 /* ── 앱 ─────────────────────────────────────────────────────── */
 
@@ -60,8 +61,11 @@ export type LabApp = {
 /** 장면 밑에 서는 짧은 사실 하나 — 이름과 값. */
 export type DoorFact = { label: string; value: string };
 
-/** 문이 보여 주는 앱의 화면 한 장 — 테마마다 한 벌. 사람이 고른 테마의 것이 선다. */
-export type DoorScreen = { light: string; dark: string; alt: string };
+/**
+ * 문이 보여 주는 앱의 화면 한 장 — 테마마다 한 벌. 사람이 고른 테마의 것이 선다.
+ * `width` · `height` 는 **찍은 화소**다 — 기기 틀이 이 비율로 선다(그림을 틀에 맞춰 자르지 않는다 · 법 12).
+ */
+export type DoorScreen = { light: string; dark: string; alt: string; width: number; height: number };
 
 /**
  * 앱의 문 — 링크(QR · 메신저 · 검색)로 곧장 떨어진 사람에게 «이 앱이 뭔가, 받을까»를 답하는 장.
@@ -85,7 +89,7 @@ export type DoorPage = {
    */
   features: readonly { title: string; body: string; screen: DoorScreen; facts: readonly DoorFact[] }[];
   /** 믿어도 되는 이유 — 기록이 어디 머무는가. */
-  trust: readonly { title: string; body: string }[];
+  trust: readonly { title: string; body: string; glyph: TrustGlyph }[];
   /**
    * 이 앱의 강점 셋 — 나눔 카드가 질문 밑에 세운다. 값은 크게(대화창에서 460px 로 줄어도 읽히게), 이름은 작게.
    * 값은 앱에서 **센 것**만 적는다 — 언어는 `locales_config.xml`, 통화는 `Currency` 가 정본이다.
@@ -104,10 +108,22 @@ export type DoorPage = {
   disclaimer?: string;
 };
 
+/*
+ * 앱마다 화면을 찍은 화소 — 찍는 길이 달라 비율도 다르다. 한 앱의 화면은 모두 같은 크기다.
+ *
+ * 물타기 계산기는 Robolectric 이 360×720dp 의 **화면만** 세워 찍고(1:2), Pocket PDF 는 에뮬레이터(1080×2400)에서 찍은 뒤
+ * 시스템 상태바와 제스처 바(63px 씩)를 걷는다 — 그 둘은 기기 틀이 그리므로 그림에 남기면 탑바가 두 겹이 된다.
+ * ↩ 2026-09-18 의 첫 판은 Pocket PDF 의 9:20 그림을 1:2 틀에 그대로 넣어, 틀이 그림을 잘랐고 제목이 빈 상태바 밑에 반쯤 묻혔다.
+ */
+const SCREEN_SIZE: Record<string, { width: number; height: number }> = {
+  "stock-calculator": { width: 720, height: 1440 },
+  "pocket-pdf": { width: 720, height: 1516 },
+};
+
 /** `public/apps/<slug>/screens/<name>-<light|dark>.webp` — 앱의 날 화면(스토어 조판이 아니다). */
 function screen(slug: string, name: string, alt: string): DoorScreen {
   const base = `/apps/${slug}/screens/${name}`;
-  return { light: `${base}-light.webp`, dark: `${base}-dark.webp`, alt };
+  return { light: `${base}-light.webp`, dark: `${base}-dark.webp`, alt, ...SCREEN_SIZE[slug] };
 }
 
 export const STATUS_LABEL: Record<AppStatus, string> = {
@@ -224,9 +240,9 @@ export const APPS: readonly LabApp[] = [
         },
       ],
       trust: [
-        { title: "이 기기에만 저장", body: "계산 기록과 종목 이름은 기기를 떠나지 않습니다. 백업에도 올라가지 않습니다." },
-        { title: "로그인 없음", body: "계정도 가입도 없습니다. 열면 바로 계산합니다." },
-        { title: "인터넷 없이도", body: "계산은 기기 안에서 합니다. 신호가 없는 곳에서도 됩니다." },
+        { glyph: "device", title: "이 기기에만 저장", body: "계산 기록과 종목 이름은 기기를 떠나지 않습니다. 백업에도 올라가지 않습니다." },
+        { glyph: "person", title: "로그인 없음", body: "계정도 가입도 없습니다. 열면 바로 계산합니다." },
+        { glyph: "offline", title: "인터넷 없이도", body: "계산은 기기 안에서 합니다. 신호가 없는 곳에서도 됩니다." },
       ],
       /* 이 앱의 강점 — 한 줄 소개가 아니라 **다른 계산기에 없는 것**. 2026-09-11 에 사람이 «중요한 설명이 필요하다
          — 다국어, 다중 종목 · 여러 화폐 · 커스텀 단위(BTC)»라고 했다. ↩ 09-06 에는 카드의 요점에서 «통화 아홉 · 언어
@@ -267,18 +283,109 @@ export const APPS: readonly LabApp[] = [
   {
     slug: "pocket-pdf",
     name: "Pocket PDF",
-    tagline: "한 번의 결제로 끝나고, 문서는 기기 밖으로 내보내지 않는 PDF 도구",
+    tagline: "매달 나가는 구독료와 문서 유출 걱정 없이, 기기 안에서 모든 작업이 끝나는 6-in-1 PDF 도구",
     blurb:
-      "쓸 만한 PDF 편집 앱은 너무 비쌌습니다. 서명 하나 넣으려 해도 매달 구독료를 내야 했고, 문서는 남의 서버에 올려야 했습니다. 그래서 여섯 가지 도구를 모두 무료로 열고, 광고 제거는 구독 없이 한 번의 결제로 끝나게 했습니다. 병합도 문자 인식도 서명도 모두 기기 안에서 처리합니다.",
+      "간단한 서명 하나 넣으려 해도 매달 값비싼 구독료를 요구받거나, 중요한 개인 문서를 알 수 없는 서버에 업로드해야 했던 적 있으신가요? Pocket PDF는 그런 불안과 부담을 모두 걷어냈습니다. 한글 검색이 되는 스마트 스캔부터 문서 병합, 쪽 분할, 전자 서명까지 꼭 필요한 6가지 도구를 조건 없이 무료로 엽니다. 모든 문서 처리는 100% 기기 안에서만 이루어져 안전하며, 복잡한 정기 구독 없이 단 한 번의 결제로 영원히 광고 없는 쾌적함을 누리실 수 있습니다.",
     points: [
-      "스캔, 병합, 분할, 이미지 변환, 서명, 페이지 편집까지 여섯 가지 도구 모두 무료",
-      "광고 제거는 구독도 등급도 없이 한 번의 결제로 완료",
-      "문서를 촬영하면 한글까지 검색되는 PDF로 변환, 모든 처리는 기기 안에서",
+      "스캔, 병합, 분할, 이미지 변환, 전자 서명, 페이지 편집까지 여섯 가지 도구를 무료로",
+      "복잡한 구독이나 등급 없이, 한 번의 결제로 영원히 광고 제거",
+      "문서를 촬영하면 한글까지 검색 가능한 PDF로 변환(OCR)",
+      "문서와 암호는 서버로 전송되지 않으며 모든 처리는 100% 온디바이스에서",
     ],
     status: "testing",
     category: "UtilitiesApplication",
     door: { packageId: "kr.twinklelabs.pocketpdf", source: "web" },
+    store: "https://play.google.com/store/apps/details?id=kr.twinklelabs.pocketpdf",
     icon: "/apps/pocket-pdf.png",
+    page: {
+      headline: "기기 안에서 끝나는|PDF 도구",
+      lede: "여섯 가지 도구를 모두 무료로. 문서와 암호는 기기 밖으로 나가지 않습니다.",
+      facts: ["무료", "11개 언어", "로그인 없음"],
+      hero: screen("pocket-pdf", "home", "Pocket PDF 홈 화면 — 여섯 가지 기능이 한눈에 보이는 격자"),
+      featuresTitle: "스캔부터 서명까지, 한 앱에서.",
+      features: [
+        {
+          title: "한글까지 검색되는 스캔",
+          body: "문서를 촬영하면 윤곽과 원근을 잡아 반듯하게 펴고, 한글과 영어를 읽어 검색하고 복사할 수 있는 PDF로 굽습니다.",
+          screen: screen("pocket-pdf", "scan", "이미지 → PDF 화면 — 계약서 사진 한 장을 골라 A4 세로로 굽기 전"),
+          facts: [
+            { label: "텍스트 인식", value: "한국어 · 영어" },
+            { label: "결과물", value: "검색 가능한 PDF" },
+          ],
+        },
+        {
+          title: "끌어서 끼워 넣는 병합",
+          body: "여러 PDF를 고른 뒤 끌어 옮겨 순서를 맞춥니다. 밀어내면 목록에서 바로 빠집니다.",
+          screen: screen("pocket-pdf", "merge", "PDF 병합 화면 — 업무협약서 · 임대차계약서 · 분기보고서 세 문서를 순서대로 담은 목록"),
+          facts: [
+            { label: "문서 추가", value: "여러 파일 한 번에" },
+            { label: "순서 변경", value: "길게 눌러 끌기" },
+          ],
+        },
+        {
+          title: "도장과 전자 서명",
+          body: "손으로 그린 서명을 남기거나, 명조와 고딕으로 인감을 빚어 문서 위에 얹습니다. 만든 서명과 도장은 기기에 보관됩니다.",
+          screen: screen("pocket-pdf", "sign", "전자 서명 화면 — 명조체 사각 인감 «김민수» 를 빚고, 저장된 도장과 손글씨 서명이 아래에 선 모습"),
+          facts: [
+            { label: "서명 보관", value: "기기 안에 무제한" },
+            { label: "인감 모양", value: "원형 · 사각" },
+            { label: "도장 서체", value: "명조 · 고딕" },
+          ],
+        },
+        {
+          title: "쪽 단위 편집과 분할",
+          body: "문서의 불필요한 쪽을 지우거나 돌리고, 원하는 쪽만 골라내어 가벼운 PDF로 나누어 담습니다.",
+          screen: screen("pocket-pdf", "edit", "페이지 편집기 — 다섯 쪽 문서를 격자로 펼쳐 쪽마다 돌리기 · 지우기"),
+          facts: [
+            { label: "쪽 추출", value: "범위 지정 · 짝/홀수" },
+            { label: "페이지 뷰", value: "한눈에 보는 격자" },
+          ],
+        },
+        {
+          title: "결과물은 바로 서랍으로",
+          body: "작업이 끝난 문서는 즉시 기기의 Documents 폴더에 안전하게 앉습니다. 완성된 파일들을 날짜별로 모아 봅니다.",
+          screen: screen("pocket-pdf", "history", "문서함 — 오늘 만든 서명본 · 분할본 · 이미지 PDF 세 개"),
+          facts: [
+            { label: "분류 기준", value: "날짜" },
+            { label: "기록 위치", value: "Documents 폴더" },
+            { label: "공유", value: "목록에서 바로" },
+          ],
+        },
+      ],
+      trust: [
+        { glyph: "device", title: "문서 전송 없음", body: "모든 연산과 문자 인식이 기기 안에서 끝납니다. 문서는 절대 서버로 나가지 않습니다." },
+        { glyph: "lock", title: "암호 보호", body: "비밀번호가 걸린 문서를 열 때 입력한 암호 역시 기기 밖으로 빠져나가지 않습니다." },
+        { glyph: "noRepeat", title: "구독 없음", body: "매달 결제할 필요 없이 단 한 번의 결제로 모든 광고가 영원히 사라집니다." },
+      ],
+      highlights: [
+        { value: "온디바이스", label: "문서 전송 없음" },
+        { value: "구독 없음", label: "한 번 결제로 완료" },
+        { value: "11개 언어", label: "무료 도구 여섯" },
+      ],
+      languages: ["ko", "en", "ja", "zh-CN", "zh-TW", "es", "de", "pt-BR", "it", "fr", "id"],
+      seo: {
+        title: "Pocket PDF — 기기 안에서 끝나는 무료 PDF 스캐너 · 서명 · 병합",
+        description:
+          "여섯 가지 PDF 도구를 무료로 씁니다. 문서를 촬영해 한글 검색이 되는 PDF로 굽고, 병합, 분할, 전자 서명까지 기기 안에서 모두 처리합니다. 문서는 서버로 나가지 않으며, 구독 없이 한 번의 결제로 광고를 지웁니다.",
+        keywords: [
+          "Pocket PDF",
+          "포켓 PDF",
+          "PDF 스캐너",
+          "PDF 병합",
+          "PDF 분할",
+          "PDF 전자 서명",
+          "PDF 인감 도장",
+          "이미지 PDF 변환",
+          "한글 OCR",
+          "검색되는 PDF",
+          "온디바이스 PDF",
+          "구독 없는 PDF",
+          "무료 PDF 편집",
+        ],
+      },
+      closing: "기기 밖으로 나가지 않는|안전한 도구.",
+      disclaimer: "문서 내용과 입력된 비밀번호는 서버로 전송되지 않으며 모든 처리는 기기 내부에서 이루어집니다.",
+    },
     terms: `${POLARIS_URL}/ko/pocket-pdf/`,
   },
 ] as const;
