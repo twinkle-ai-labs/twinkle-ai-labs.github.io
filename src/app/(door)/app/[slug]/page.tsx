@@ -46,8 +46,11 @@ export default async function AppDoorPage({ params }: Params) {
   if (!app) notFound();
   const page = app.page;
 
+  /* 기기 틀의 비율은 이 앱이 찍은 화면의 것이다(법 12) — 틀의 폭 · 키 · 붙박이 자리가 모두 이 값에서 셈된다 */
+  const screenRatio = page && ({ "--door-screen-ratio": `${page.hero.width} / ${page.hero.height}` } as React.CSSProperties);
+
   return (
-    <div className={styles.door} id="top">
+    <div className={styles.door} id="top" style={screenRatio}>
       {/* 기계가 읽는 표 — 이 앱이 무엇을 하는가. 값은 전부 이 장에 보이는 것에서 온다 */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: appJsonLd(app) }} />
       <DoorHeader app={app} />
@@ -113,8 +116,8 @@ export default async function AppDoorPage({ params }: Params) {
         {page && page.trust.length > 0 && (
           <section className={styles.trust} aria-label="기록은 어디에 머무나">
             <ul className={styles.trustInner}>
-              {page.trust.map((item, i) => {
-                const Glyph = TRUST_GLYPHS[i % TRUST_GLYPHS.length];
+              {page.trust.map((item) => {
+                const Glyph = TRUST_GLYPHS[item.glyph];
                 return (
                   <li key={item.title} className={`${styles.trustItem} ${styles.reveal}`}>
                     <span className={styles.trustWell}>

@@ -53,5 +53,37 @@ export function OfflineGlyph({ className }: Props) {
   );
 }
 
-/** 믿어도 되는 이유의 순서대로 — 데이터는 글만 들고, 모양은 자리가 정한다 */
-export const TRUST_GLYPHS = [DeviceGlyph, PersonGlyph, OfflineGlyph] as const;
+/** 자물쇠 — 암호가 기기 밖으로 나가지 않는다 */
+export function LockGlyph({ className }: Props) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5" />
+      <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3M12 15v2" />
+    </svg>
+  );
+}
+
+/** 돌아오는 화살표에 빗금 — 매달 도는 결제(구독)가 없다 */
+export function NoRepeatGlyph({ className }: Props) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M20 12a8 8 0 0 1-13.7 5.6M4 12a8 8 0 0 1 13.7-5.6" />
+      <path d="M18 3v3.6h-3.6M6 21v-3.6h3.6M3 3l18 18" />
+    </svg>
+  );
+}
+
+/**
+ * 믿어도 되는 이유의 글리프 — **글이 이름으로 고른다**.
+ * ↩ 자리(첫째 · 둘째 · 셋째)가 모양을 정했다. 물타기 계산기의 세 약속(기기 · 로그인 · 인터넷)에 맞춘 순서라,
+ * Pocket PDF 가 제 약속 셋을 적자 «암호 보호»에 사람이, «구독 없음»에 끊긴 와이파이가 섰다 — 글과 그림이 다른 말을 했다.
+ */
+export const TRUST_GLYPHS = {
+  device: DeviceGlyph,
+  person: PersonGlyph,
+  offline: OfflineGlyph,
+  lock: LockGlyph,
+  noRepeat: NoRepeatGlyph,
+} as const;
+
+export type TrustGlyph = keyof typeof TRUST_GLYPHS;
