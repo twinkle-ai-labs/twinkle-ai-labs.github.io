@@ -32,10 +32,15 @@ export async function generateMetadata({ params }: Params) {
   return app ? appDoorMetadata(app) : {};
 }
 
-/** `|` 가 가른 줄 — 줄바꿈은 우리가 정한다 */
+/**
+ * `|` 가 가른 줄 — 줄바꿈은 우리가 정한다.
+ * 줄 사이에 띄어쓰기 하나를 둔다 — 화면은 줄(`display: block`)이 가르지만 글자만 읽는 쪽(검색 · 낭독기 · 복사)에는
+ * 줄이 없다. ↩ 없을 때는 제목이 «기기 안에서 끝나는PDF 도구» 로 붙어 읽혔다.
+ */
 function Lines({ text }: { text: string }) {
-  return text.split("|").map((line) => (
+  return text.split("|").map((line, i) => (
     <span key={line} className={styles.line}>
+      {i > 0 && " "}
       {line}
     </span>
   ));

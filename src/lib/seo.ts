@@ -42,6 +42,7 @@ export const KEYWORDS = [
   "1인 개발 스튜디오",
   "안드로이드 앱 개발",
   "물타기 계산기",
+  "Pocket PDF",
   "Aurora Ledger",
   "디자인 시스템",
 ] as const;
