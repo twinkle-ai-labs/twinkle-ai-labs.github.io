@@ -32,10 +32,15 @@ export async function generateMetadata({ params }: Params) {
   return app ? appDoorMetadata(app) : {};
 }
 
-/** `|` 가 가른 줄 — 줄바꿈은 우리가 정한다 */
+/**
+ * `|` 가 가른 줄 — 줄바꿈은 우리가 정한다.
+ * 줄 사이에 띄어쓰기 하나를 둔다 — 화면은 줄(`display: block`)이 가르지만 글자만 읽는 쪽(검색 · 낭독기 · 복사)에는
+ * 줄이 없다. ↩ 없을 때는 제목이 «기기 안에서 끝나는PDF 도구» 로 붙어 읽혔다.
+ */
 function Lines({ text }: { text: string }) {
-  return text.split("|").map((line) => (
+  return text.split("|").map((line, i) => (
     <span key={line} className={styles.line}>
+      {i > 0 && " "}
       {line}
     </span>
   ));
@@ -46,8 +51,11 @@ export default async function AppDoorPage({ params }: Params) {
   if (!app) notFound();
   const page = app.page;
 
+  /* 기기 틀의 비율은 이 앱이 찍은 화면의 것이다(법 12) — 틀의 폭 · 키 · 붙박이 자리가 모두 이 값에서 셈된다 */
+  const screenRatio = page && ({ "--door-screen-ratio": `${page.hero.width} / ${page.hero.height}` } as React.CSSProperties);
+
   return (
-    <div className={styles.door} id="top">
+    <div className={styles.door} id="top" style={screenRatio}>
       {/* 기계가 읽는 표 — 이 앱이 무엇을 하는가. 값은 전부 이 장에 보이는 것에서 온다 */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: appJsonLd(app) }} />
       <DoorHeader app={app} />
@@ -113,8 +121,8 @@ export default async function AppDoorPage({ params }: Params) {
         {page && page.trust.length > 0 && (
           <section className={styles.trust} aria-label="기록은 어디에 머무나">
             <ul className={styles.trustInner}>
-              {page.trust.map((item, i) => {
-                const Glyph = TRUST_GLYPHS[i % TRUST_GLYPHS.length];
+              {page.trust.map((item) => {
+                const Glyph = TRUST_GLYPHS[item.glyph];
                 return (
                   <li key={item.title} className={`${styles.trustItem} ${styles.reveal}`}>
                     <span className={styles.trustWell}>
