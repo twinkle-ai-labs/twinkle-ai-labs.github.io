@@ -309,7 +309,7 @@ export const APPS: readonly LabApp[] = [
         {
           title: "한글까지 검색되는 스캔",
           body: "문서를 촬영하면 윤곽과 원근을 잡아 반듯하게 펴고, 한글과 영어를 읽어 검색하고 복사할 수 있는 PDF로 굽습니다.",
-          screen: screen("pocket-pdf", "scan", "이미지 → PDF 화면 — 계약서 사진 한 장을 골라 A4 세로로 굽기 전"),
+          screen: screen("pocket-pdf", "scan", "문서 스캔 결과 — 스캔한 업무협약서와 인식된 단락 여섯, 전체 복사 · PDF로 내보내기"),
           facts: [
             { label: "텍스트 인식", value: "한국어 · 영어" },
             { label: "결과물", value: "검색 가능한 PDF" },
