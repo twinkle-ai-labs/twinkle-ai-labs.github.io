@@ -14,12 +14,13 @@ type ScrollState = {
   offset: number;
   /** 창의 높이(px). 「한 화면쯤 내려갔다」를 세려면 이것이 함께 있어야 한다. */
   viewportHeight: number;
+  documentHeight: number;
 };
 
 /** 맨 위로 버튼이 나서는 자리 — 한 화면의 70%쯤 내려갔을 때. */
 const BACK_TO_TOP_AT = 0.7;
 
-const initialState: ScrollState = { offset: 0, viewportHeight: 0 };
+const initialState: ScrollState = { offset: 0, viewportHeight: 0, documentHeight: 0 };
 
 const scrollSlice = createSlice({
   name: "scroll",
@@ -28,6 +29,7 @@ const scrollSlice = createSlice({
     scrollChanged(state, action: PayloadAction<ScrollState>) {
       state.offset = action.payload.offset;
       state.viewportHeight = action.payload.viewportHeight;
+      state.documentHeight = action.payload.documentHeight;
     },
   },
 });
@@ -37,6 +39,12 @@ export default scrollSlice.reducer;
 
 /** 머리띠가 판에서 떠올라야 하는가 — 한 픽셀만 내려가도 그렇다. */
 export const selectIsPageScrolled = (state: RootState): boolean => state.scroll.offset > 0;
+
+export const selectScrollProgress = (state: RootState): number => {
+  const { offset, viewportHeight, documentHeight } = state.scroll;
+  const distance = documentHeight - viewportHeight;
+  return distance > 0 ? Math.min(1, Math.max(0, offset / distance)) : 0;
+};
 
 /** 맨 위로 버튼이 보여야 하는가. */
 export const selectIsBackToTopVisible = (state: RootState): boolean =>

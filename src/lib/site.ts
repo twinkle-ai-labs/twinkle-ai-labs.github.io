@@ -11,6 +11,10 @@ export const NAME = "Twinkle AI Labs";
 export const MOTTO = "스스로 빛나다.";
 
 export const CONTACT_EMAIL = "twinkle.ai.labs@gmail.com";
+export const SOCIAL_LINKS = [
+  { label: "Instagram", href: "https://www.instagram.com/twinkle.ai.labs/" },
+  { label: "X (Twitter)", href: "https://x.com/twinkle_ai_labs" },
+] as const;
 export const HOME_URL = "https://twinklelabs.kr";
 /** Aurora Ledger 디자인 시스템 — 독립 도메인에 산다. */
 export const DESIGN_URL = "https://design.twinklelabs.kr";

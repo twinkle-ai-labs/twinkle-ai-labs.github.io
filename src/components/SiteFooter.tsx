@@ -7,6 +7,7 @@ import {
   MOTTO,
   NAME,
   NAV_LINKS,
+  SOCIAL_LINKS,
 } from "@/lib/site";
 import styles from "@/app/layout.module.css";
 
@@ -48,6 +49,20 @@ export default function SiteFooter() {
             <a className={styles.footerMail} href={`mailto:${CONTACT_EMAIL}`}>
               {CONTACT_EMAIL}
             </a>
+            <nav className={styles.footerLinks} aria-label="소셜 미디어">
+              {SOCIAL_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={styles.footerLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${link.label} (새 탭에서 열림)`}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
           </div>
         </div>
         <div className={styles.footerBottom}>

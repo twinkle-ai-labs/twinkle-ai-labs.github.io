@@ -20,6 +20,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
+    {
+      url: `${HOME_URL}/app/`,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
     ...APPS.map((app) => ({
       url: `${HOME_URL}${appDoorPath(app.slug)}`,
       changeFrequency: "monthly" as const,
