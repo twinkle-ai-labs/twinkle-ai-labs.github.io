@@ -5,6 +5,7 @@ import StarMark from "@/components/StarMark";
 import SectionHead from "./SectionHead";
 import { APPS, APPS_SECTION, STATUS_LABEL, withReferrer, type LabApp } from "@/lib/labs";
 import styles from "@/app/home.module.css";
+import catalog from "./AppsCatalog.module.css";
 
 /** 앱의 얼굴 — 아이콘이 없으면 이름의 첫 글자가 대신 선다. */
 function AppFace({ app }: { app: LabApp }) {
@@ -19,26 +20,15 @@ function AppFace({ app }: { app: LabApp }) {
 }
 
 
-/**
- * 카드의 발 — 지금 이 앱에 무엇을 할 수 있는가.
- *
- * 배지는 한때 카드의 머리에 홀로 섰다. 두 앱이 나란히 «비공개 테스트 중»이라고
- * 적힌 같은 알약을 이고 있으면, 카드가 가장 먼저 말하는 것이 앱이 아니라
- * **둘 다 같은 상태라는 사실**이 된다 — 아무것도 알려 주지 않으면서 머리를 먹는다.
- * 상태는 «지금 무엇을 할 수 있나»라는 물음의 답이므로 문 옆이 제자리다.
- *
- * 아직 공개 전인 앱은 `store` 가 비어 있어 문 자체가 서지 않는다 —
- * 배지가 «비공개 테스트 중»이라고 말하는 옆에서 링크만 거짓말을 하지 않게.
- */
+/** 앱 목록의 주요 동작과 보조 링크. */
 function AppFoot({ app }: { app: LabApp }) {
   return (
-    <p className={styles.appLinks}>
-      <span className={styles.appStatus}>{STATUS_LABEL[app.status]}</span>
-      <Link className={styles.inlineLink} href={`/app/${app.slug}`}>
+    <div className={catalog.actions}>
+      <Link className={catalog.primaryLink} href={`/app/${app.slug}`}>
         자세히 보기 <span aria-hidden="true">→</span>
       </Link>
       {app.store ? (
-        <a className={styles.inlineLink} href={withReferrer(app.store, "home")}>
+        <a className={styles.inlineLink} href={withReferrer(app.store, "apps")}>
           스토어에서 받기 <span aria-hidden="true">↗</span>
         </a>
       ) : null}
@@ -47,7 +37,7 @@ function AppFoot({ app }: { app: LabApp }) {
           약관 보기
         </a>
       ) : null}
-    </p>
+    </div>
   );
 }
 
@@ -62,15 +52,18 @@ function AppFoot({ app }: { app: LabApp }) {
  */
 function AppCard({ app }: { app: LabApp }) {
   return (
-    <li className={styles.appCard}>
-      <div className={styles.appHead}>
+    <li className={`${styles.appCard} ${catalog.card}`}>
+      <div className={catalog.topline}>
         <AppFace app={app} />
+        <span className={catalog.status}>{STATUS_LABEL[app.status]}</span>
+      </div>
+      <div className={styles.appHead}>
         <div className={styles.appIdent}>
           <h3 className={styles.appName}>{app.name}</h3>
           <p className={styles.appTagline}>{app.tagline}</p>
         </div>
       </div>
-      <p className={styles.appBlurb}>{app.blurb}</p>
+
       {app.points ? (
         <ul className={styles.points}>
           {app.points.map((point) => (
@@ -81,29 +74,59 @@ function AppCard({ app }: { app: LabApp }) {
           ))}
         </ul>
       ) : null}
+      <details className={catalog.description}>
+        <summary>앱 이야기</summary>
+        <p className={styles.appBlurb}>{app.blurb}</p>
+      </details>
       <AppFoot app={app} />
     </li>
   );
 }
 
-/** 만든 것 — 한 줄에 둘씩. */
-export default function AppsSection() {
+/** 홈에서는 요약, 앱 목록 페이지에서는 전체 카드를 보여준다. */
+export default function AppsSection({ expanded = false }: { expanded?: boolean }) {
   return (
     <section id="apps" className={`${styles.section} ${styles.reveal}`}>
       <div className={styles.shell}>
-        <SectionHead kicker={APPS_SECTION.eyebrow} title={APPS_SECTION.title} />
+        {expanded ? (
+          <header className={catalog.heading}>
+            <p className={styles.kicker}>{APPS_SECTION.eyebrow}</p>
+            <h1 className={catalog.title}>작은 불편을 덜어주는 앱</h1>
+            <p className={catalog.intro}>직접 만들고, 매일 다듬습니다. 나에게 필요한 도구를 만나보세요.</p>
+          </header>
+        ) : (
+          <SectionHead kicker={APPS_SECTION.eyebrow} title={APPS_SECTION.title} />
+        )}
 
-        <ul className={styles.appGrid}>
-          {APPS.map((app) => (
-            <AppCard key={app.slug} app={app} />
-          ))}
-        </ul>
+        {expanded ? (
+          <ul className={styles.appGrid}>
+            {APPS.map((app) => (
+              <AppCard key={app.slug} app={app} />
+            ))}
+          </ul>
+        ) : (
+          <>
+            <ul className={styles.appGrid}>
+              {APPS.map((app) => (
+                <li key={app.slug} className={styles.appCard}>
+                  <Link className={styles.appPreview} href={`/app/${app.slug}/`}>
+                    <AppFace app={app} />
+                    <div className={styles.appIdent}>
+                      <h3 className={styles.appName}>{app.name}</h3>
+                      <p className={styles.appTagline}>{app.tagline}</p>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className={styles.appsSummary}>
+              <Link className={styles.inlineLink} href="/app/" aria-label="앱 소개 더보기">
+                더보기 <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </>
+        )}
 
-        {/* 아직 오지 않은 것은 상자를 갖지 않는다 — 한 줄이면 된다. */}
-        <p className={styles.nextNote}>
-          <StarMark className={styles.noteStar} />
-          {APPS_SECTION.note}
-        </p>
       </div>
     </section>
   );

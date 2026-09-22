@@ -230,6 +230,39 @@
   grid-template-columns: 1fr;
 }
 
+.nameCard,
+.appCard {
+  position: relative;
+}
+
+.nameCard::before,
+.appCard::before {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--stroke-hair));
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg,
+    #b79af5 0%,
+    #edc5e5 28%,
+    #dcd7fa 48%,
+    #a9d8ed 72%,
+    #c4b0f4 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+:global(:root[data-theme="dark"]) .nameCard::before,
+:global(:root[data-theme="dark"]) .appCard::before { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme="light"])) .nameCard::before,
+  :global(:root:not([data-theme="light"])) .appCard::before { display: none; }
+}
+
 .nameCard {
   display: flex;
   flex-direction: column;
@@ -291,31 +324,43 @@
 }
 
 .founderAside .head { margin-bottom: var(--s3); }
+.founder .prose { width: 100%; max-width: none; }
 
-/* 좁은 화면에서 셋을 자동으로 채우면 2+1 로 갈려 마지막 하나가 홀로 떨어진다.
-   그럴 바에는 한 줄에 하나씩 — 값과 이름을 같은 밑줄에 나란히 두면 세로도 짧다. */
 .stats {
   display: grid;
-  gap: var(--s1h);
   grid-template-columns: 1fr;
+  padding: var(--s1) var(--s3);
+  border: var(--stroke-hair) solid var(--divider);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--surface) 65%, transparent);
 }
 
-/* 숫자를 상자에 담지 않는다 — 묶음은 간격이 한다. */
 .stat {
   display: flex;
-  align-items: baseline;
-  gap: var(--s1h);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2);
+  padding: var(--s2) 0;
 }
+.stat + .stat { border-top: var(--stroke-hair) solid var(--divider); }
 
 .statValue {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--s0);
+  white-space: nowrap;
   font-size: var(--fs-32);
   font-weight: var(--fw-bold);
   letter-spacing: var(--tr-tight);
-  line-height: var(--lh-title);
+  line-height: 1.2;
   color: var(--accent);
   font-variant-numeric: tabular-nums;
 }
-
+.statUnit {
+  font-size: var(--fs-16);
+  font-weight: var(--fw-medium);
+  letter-spacing: normal;
+}
 .statLabel {
   font-size: var(--fs-12);
   font-weight: var(--fw-medium);
@@ -328,6 +373,20 @@
 /* 앱은 한 줄에 둘씩 — 모든 앱이 같은 크기로 선다.
    좁은 화면에서는 한 줄에 하나. 격자 칸을 자동으로 세지 않는 것은,
    앱이 셋이 되는 날에도 «둘씩»이라는 약속이 흔들리지 않게 하려는 것이다. */
+.appsSummary {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--s3);
+}
+
+.appPreview {
+  display: flex;
+  align-items: center;
+  gap: var(--s2h);
+  color: inherit;
+}
+.appPreview:hover { text-decoration: none; }
+
 .appGrid {
   margin-top: var(--s2h);
   display: grid;
@@ -468,29 +527,6 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--s1) var(--s2);
-}
-
-/* 아직 오지 않은 것은 상자를 갖지 않는다 — 한 줄이면 된다. */
-/* 375 에서 글이 두 줄이 되면 별이 두 줄 사이에 매달렸다 — 첫 줄의 글자에 맞춘다. */
-.nextNote {
-  margin-top: var(--s3);
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: var(--s1);
-  color: var(--text-sub);
-  font-size: var(--fs-14);
-  line-height: var(--lh-body);
-  text-wrap: pretty;
-}
-
-.noteStar {
-  flex: none;
-  width: 0.6875rem;
-  height: 0.6875rem;
-  /* 첫 줄의 글자 한가운데 — .pointStar 와 같은 이유, 같은 자리. */
-  margin-top: 0.4375rem;
-  color: var(--accent);
 }
 
 /* ── 만드는 방식 ────────────────────────────────────────────── */
@@ -648,8 +684,9 @@
   .appIcon { width: 5rem; height: 5rem; }
   .appName { font-size: var(--fs-28); }
   .nameCard { padding: var(--s4); }
-  .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2h); }
-  .stat { flex-direction: column; align-items: flex-start; gap: var(--s0); }
+  .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); padding: var(--s3) 0; }
+  .stat { flex-direction: column; align-items: center; justify-content: flex-start; gap: var(--s1); padding: var(--s1) var(--s2); text-align: center; }
+  .stat + .stat { border-top: 0; border-left: var(--stroke-hair) solid var(--divider); }
 }
 
 @media (min-width: 48em) {
@@ -665,11 +702,4 @@
   /* 경력은 한 이야기다 — 제목, 숫자, 본문을 좌우로 갈라놓지 않는다. */
   .founder { grid-template-columns: minmax(0, 1fr); gap: var(--s4); }
   .founderAside { position: static; }
-  .stats {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--s4);
-    padding-block: var(--s3);
-    border-block: var(--stroke-hair) solid color-mix(in srgb, var(--divider) var(--alpha-soft), transparent);
-  }
-  .founder .prose { max-width: 52rem; }
 }

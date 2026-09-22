@@ -16,6 +16,17 @@
   transition: background var(--motion-base) var(--ease), border-color var(--motion-base) var(--ease), box-shadow var(--motion-base) var(--ease), backdrop-filter var(--motion-base) var(--ease);
 }
 
+.scrollProgress {
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 3px;
+  background: linear-gradient(90deg, #8756e8 0%, #b78af4 45%, #e2acd8 72%, #98d4ed 100%);
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+  box-shadow: 0 1px 8px color-mix(in srgb, var(--primary) 25%, transparent);
+  transform-origin: left;
+  pointer-events: none;
+}
+
 .headerScrolled {
   background: color-mix(in srgb, var(--glass) 94%, transparent);
   -webkit-backdrop-filter: blur(1.5rem) saturate(155%);
