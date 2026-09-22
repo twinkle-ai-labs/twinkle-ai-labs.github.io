@@ -12,7 +12,9 @@ export default function FounderSection() {
           <ul className={styles.stats}>
             {FOUNDER.stats.map((stat) => (
               <li key={stat.label} className={styles.stat}>
-                <span className={styles.statValue}>{stat.value}</span>
+                <span className={styles.statValue}>
+                  {stat.value}<span className={styles.statUnit}>{stat.unit}</span>
+                </span>
                 <span className={styles.statLabel}>{stat.label}</span>
               </li>
             ))}
