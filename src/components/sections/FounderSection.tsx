@@ -5,7 +5,7 @@ import styles from "@/app/home.module.css";
 /** 만드는 사람 — 숫자가 먼저 말하고, 이야기가 뒤를 받는다. */
 export default function FounderSection() {
   return (
-    <section className={`${styles.section} ${styles.band} ${styles.reveal}`}>
+    <section id="founder" className={`${styles.section} ${styles.band} ${styles.reveal}`}>
       <div className={`${styles.shell} ${styles.founder}`}>
         <div className={styles.founderAside}>
           <SectionHead kicker={FOUNDER.eyebrow} title={FOUNDER.title} />
