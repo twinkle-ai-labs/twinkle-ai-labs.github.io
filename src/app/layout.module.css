@@ -36,6 +36,7 @@
 }
 
 .headerInner {
+  position: relative;
   height: 100%;
   box-sizing: border-box;
   max-width: var(--shell);
@@ -54,6 +55,7 @@
   color: var(--text);
   font-weight: var(--fw-bold);
   letter-spacing: var(--tr-snug);
+  flex-shrink: 0;
 }
 .brand:hover { text-decoration: none; }
 
@@ -68,6 +70,15 @@
 
 .brandName { font-size: var(--fs-16); }
 
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.themeControl { display: flex; order: 1; }
+.menuToggle { display: none; }
+
 .nav {
   display: flex;
   align-items: center;
@@ -78,6 +89,7 @@
   color: var(--text-sub);
   font-size: var(--fs-14);
   font-weight: var(--fw-semibold);
+  white-space: nowrap;
   transition: color var(--motion-fast) var(--ease);
 }
 .navLink:hover { color: var(--text); text-decoration: none; }
@@ -186,15 +198,56 @@
 .footerLink:hover { color: var(--accent); text-decoration: none; }
 
 @media (max-width: 39.99em) {
-  /* 좁은 화면에서는 머리띠가 이름과 테마만 갖는다 — 나머지는 바닥에도 있다. */
-  .navLink { display: none; }
   .headerInner { width: 90vw; max-width: 90vw; min-width: 0; padding: 0; margin-inline: auto; }
   .brandName { font-size: var(--fs-14); }
   .brand { min-width: 0; }
-  .nav { flex: none; gap: 0; }
+  .headerActions { flex: none; gap: var(--s1); }
+  .themeControl { order: 0; }
+  .themeControl > button { width: var(--s5); height: var(--s5); }
+  .menuToggle {
+    width: var(--s5);
+    height: var(--s5);
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: var(--stroke-hair) solid var(--card-border);
+    border-radius: var(--radius-pill);
+    background: var(--glass);
+    color: var(--text-sub);
+    cursor: pointer;
+    transition: background var(--motion-fast) var(--ease), color var(--motion-fast) var(--ease);
+  }
+  .menuToggle:hover, .menuToggle[aria-expanded="true"] { background: var(--primary-soft); color: var(--accent); }
+  .menuIcon { width: var(--icon-md); height: var(--icon-md); }
+  .nav {
+    position: absolute;
+    top: calc(100% + var(--s1));
+    inset-inline: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--s0);
+    max-height: calc(100dvh - var(--s7) - var(--s2));
+    overflow-y: auto;
+    padding: var(--s1);
+    border: var(--stroke-hair) solid var(--card-border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-floating);
+  }
+  .nav[data-open="true"] { display: flex; }
+  .navLink {
+    display: flex;
+    align-items: center;
+    min-height: var(--s5);
+    padding: var(--s1) var(--s2);
+    border-radius: var(--radius-sm);
+  }
+  .navLink:hover, .navLinkActive { background: var(--primary-soft); }
 }
 
-/* 현재 사이트의 navLink 강조 — home 사이트이므로 홈 링크가 강조된다 */
+/* 현재 경로에 해당하는 메뉴만 강조한다. */
 .navLinkActive {
   color: var(--accent);
   font-weight: var(--fw-bold);

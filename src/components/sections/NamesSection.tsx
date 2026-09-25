@@ -1,12 +1,13 @@
 import StarMark from "@/components/StarMark";
 import SectionHead from "./SectionHead";
+import MoneySection from "./MoneySection";
 import { NAMES_SECTION } from "@/lib/labs";
 import styles from "@/app/home.module.css";
 
 /** 이름의 뜻 — Twinkle 과 Polaris. 둘 다 별의 이름이라 별이 낱말 앞에 선다. */
 export default function NamesSection() {
   return (
-    <section id="names" className={`${styles.section} ${styles.reveal}`}>
+    <section id="names" className={`${styles.section} ${styles.band} ${styles.reveal}`}>
       <div className={styles.shell}>
         <SectionHead kicker={NAMES_SECTION.eyebrow} title={NAMES_SECTION.title} />
         <ul className={styles.nameGrid}>
@@ -30,6 +31,7 @@ export default function NamesSection() {
             </li>
           ))}
         </ul>
+        <MoneySection />
       </div>
     </section>
   );
