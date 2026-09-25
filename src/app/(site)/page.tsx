@@ -1,9 +1,7 @@
 import AppsSection from "@/components/sections/AppsSection";
-import DesignSection from "@/components/sections/DesignSection";
 import FounderSection from "@/components/sections/FounderSection";
 import HeroSection from "@/components/sections/HeroSection";
 import HowSection from "@/components/sections/HowSection";
-import MoneySection from "@/components/sections/MoneySection";
 import NamesSection from "@/components/sections/NamesSection";
 
 import type { Metadata } from "next";
@@ -12,7 +10,7 @@ import { NAME } from "@/lib/site";
 
 const TITLE = `${NAME} | AI와 함께 만드는 1인 제품 스튜디오`;
 const DESCRIPTION =
-  "아이디어를 기획하고, 직접 만들고, 끝까지 운영합니다. 한 명의 개발자와 AI가 함께 완성하는 1인 제품 스튜디오입니다.";
+  "투자 계산부터 PDF 작업까지, 일상의 작은 불편을 덜어주는 앱을 만듭니다. 한 명의 개발자와 AI가 함께 만드는 Twinkle AI Labs입니다.";
 
 export const metadata: Metadata = {
   // 홈은 제 이름을 통째로 쓴다 — 꼬리표(`· Twinkle AI Labs`)가 붙으면 이름이 두 번이다.
@@ -32,12 +30,10 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <NamesSection />
-      <FounderSection />
       <AppsSection />
+      <FounderSection />
       <HowSection />
-      <DesignSection />
-      <MoneySection />
+      <NamesSection />
     </>
   );
 }

@@ -1,0 +1,107 @@
+.section {
+  padding-top: var(--s3);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  position: relative;
+  min-width: 0;
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-raised);
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: var(--text);
+  border-radius: inherit;
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.link:focus-visible {
+  border-radius: var(--radius-xl);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s2);
+  padding: var(--s3);
+  flex: 1;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.heading img,
+.heading > span {
+  width: var(--s6);
+  height: var(--s6);
+  border-radius: var(--radius-sm);
+}
+
+.description {
+  color: var(--text-sub);
+  font-size: var(--fs-16);
+  line-height: var(--lh-body);
+  text-wrap: pretty;
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  margin-top: auto;
+  color: var(--accent);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-bold);
+}
+
+.link:hover .more {
+  text-decoration: underline;
+  text-underline-offset: var(--s0);
+}
+
+.stage {
+  --preview-screen-height: calc(var(--s8) * 4);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: var(--s3) var(--s3) var(--s4);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  background: linear-gradient(180deg, var(--surface), var(--sunken));
+}
+
+/* 원본의 비율을 그대로 유지한다. 두 앱은 화면의 높이만 맞춘다. */
+.screen {
+  position: relative;
+  width: calc(var(--preview-screen-height) * var(--preview-screen-ratio));
+  max-width: 100%;
+  aspect-ratio: var(--preview-screen-ratio);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-floating);
+}
+
+@media (min-width: 40em) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .content { padding: var(--s4); }
+  .stage { --preview-screen-height: calc(var(--s8) * 4 + var(--s2)); }
+}

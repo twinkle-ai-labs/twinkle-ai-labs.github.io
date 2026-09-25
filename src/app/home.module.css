@@ -379,14 +379,6 @@
   margin-top: var(--s3);
 }
 
-.appPreview {
-  display: flex;
-  align-items: center;
-  gap: var(--s2h);
-  color: inherit;
-}
-.appPreview:hover { text-decoration: none; }
-
 .appGrid {
   margin-top: var(--s2h);
   display: grid;
@@ -562,99 +554,6 @@
   letter-spacing: var(--tr-snug);
 }
 
-/* ── 디자인 시스템 ──────────────────────────────────────────── */
-
-.designLead {
-  max-width: 40rem;
-  margin-bottom: var(--s4);
-}
-
-/* 견본 — 상자 안에 상자를 넣지 않는다. 칩이 곧 카드다. */
-.swatches {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: var(--s2);
-  /* 여덟 칸이다 — 자동으로 채우면 7+1 로 갈려 하나가 홀로 떨어진다. */
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.swatch {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s0);
-}
-
-.swatchChip {
-  display: block;
-  aspect-ratio: 3 / 2;
-  border-radius: var(--radius-md);
-  /* 판색 칩은 판과 같은 색이라 선 하나로만 선다 — 헤어라인, px. */
-  box-shadow: inset 0 0 0 var(--stroke-hair) color-mix(in srgb, var(--text) var(--alpha-wash), transparent);
-}
-
-.swatchToken {
-  margin-top: var(--s0);
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  font-size: var(--fs-12);
-  font-weight: var(--fw-semibold);
-  color: var(--text);
-}
-
-.swatchLabel {
-  font-size: var(--fs-12);
-  color: var(--text-sub);
-}
-
-/* 사다리 — 숫자가 먼저 말한다. «만드는 사람»의 통계와 같은 꼴. */
-.ladders {
-  list-style: none;
-  margin: var(--s5) 0 0;
-  padding: 0;
-  display: grid;
-  gap: var(--s3);
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-}
-
-.ladder {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s0);
-}
-
-.ladderName {
-  font-size: var(--fs-12);
-  font-weight: var(--fw-bold);
-  letter-spacing: var(--tr-wide);
-  text-transform: uppercase;
-  color: var(--text-sub);
-}
-
-/* 좁은 화면에서는 한 칸 내려 한 줄에 — «11 · 14 · 18 · 24»가 꺾이면 사다리가 아니라 글이 된다. */
-.ladderValue {
-  font-size: var(--fs-20);
-  font-weight: var(--fw-bold);
-  letter-spacing: var(--tr-snug);
-  line-height: var(--lh-title);
-  color: var(--accent);
-  font-variant-numeric: tabular-nums;
-}
-
-.ladderNote {
-  font-size: var(--fs-14);
-  color: var(--text-sub);
-  line-height: var(--lh-body);
-}
-
-.designMore { margin-top: var(--s4); }
-
-/* ── 값에 대하여 ────────────────────────────────────────────── */
-
-.moneyTitle { margin-bottom: var(--s2h); }
-
-.center .kicker { margin-inline: auto; }
-
 /* ── 스크롤을 따라 떠오르기 ─────────────────────────────────────
    JS 없이 스크롤에 물리는 시계(view())로 움직인다.
    이 문법을 모르는 브라우저에서는 규칙 자체가 들어오지 않으므로
@@ -676,7 +575,6 @@
   .heroTitle { font-size: var(--fs-60); }
   .heroDefine { font-size: var(--fs-20); }
   .sectionTitle { font-size: var(--fs-32); }
-  .ladderValue { font-size: var(--fs-24); }
   .nameGrid { grid-template-columns: repeat(2, 1fr); gap: var(--s3); }
   .howGrid { grid-template-columns: repeat(2, 1fr); gap: var(--s4) var(--s3); }
   .appGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); }
@@ -698,7 +596,6 @@
 @media (min-width: 64em) {
   .heroTitle { font-size: var(--fs-72); }
   .heroMark { width: 4rem; height: 4rem; }
-  .swatches { grid-template-columns: repeat(8, 1fr); }
   /* 경력은 한 이야기다 — 제목, 숫자, 본문을 좌우로 갈라놓지 않는다. */
   .founder { grid-template-columns: minmax(0, 1fr); gap: var(--s4); }
   .founderAside { position: static; }
