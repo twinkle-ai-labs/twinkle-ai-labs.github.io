@@ -22,18 +22,16 @@ export const BLOG_URL = "https://blog.twinklelabs.kr";
 /** 약관과 정책이 사는 곳 — 이 집이 아니라 제 주소에 산다. */
 export const POLARIS_URL = "https://polaris.twinklelabs.kr";
 
-/** 메뉴 한 칸. `key` 로 「지금 서 있는 곳」을 가린다 — 주소를 견주면 슬래시 하나에 어긋난다. */
+/** 메뉴 한 칸. 현재 위치는 HeaderNavigation이 실제 경로와 견준다. */
 export type NavLink = { key: string; label: string; href: string };
 
 export const NAV_LINKS: readonly NavLink[] = [
   { key: "home", label: "홈", href: "/" },
+  { key: "apps", label: "앱", href: "/app/" },
   { key: "design", label: "디자인 시스템", href: DESIGN_URL },
   { key: "blog", label: "블로그", href: BLOG_URL },
   { key: "terms", label: "약관", href: POLARIS_URL },
 ] as const;
-
-/** 이 집이 서 있는 칸. 머리띠와 바닥글이 여기에 표시를 단다. */
-export const CURRENT_NAV_KEY = "home";
 
 export const THEME_TOGGLE_LABELS = {
   toLight: "밝은 화면으로",
