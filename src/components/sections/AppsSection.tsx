@@ -1,11 +1,13 @@
 import Link from "next/link";
-
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import StarMark from "@/components/StarMark";
+import ScreenImage from "@/components/door/ScreenImage";
 import SectionHead from "./SectionHead";
 import { APPS, APPS_SECTION, STATUS_LABEL, withReferrer, type LabApp } from "@/lib/labs";
 import styles from "@/app/home.module.css";
 import catalog from "./AppsCatalog.module.css";
+import preview from "./AppPreview.module.css";
 
 /** 앱의 얼굴 — 아이콘이 없으면 이름의 첫 글자가 대신 선다. */
 function AppFace({ app }: { app: LabApp }) {
@@ -83,10 +85,43 @@ function AppCard({ app }: { app: LabApp }) {
   );
 }
 
+/** 홈에서는 설명과 실제 화면을 함께 보여 주고 앱의 상세 소개로 이어진다. */
+function AppPreview({ app }: { app: LabApp }) {
+  const screen = app.page?.hero;
+  const titleId = `app-${app.slug}-title`;
+
+  return (
+    <li className={preview.card}>
+      <Link className={preview.link} href={`/app/${app.slug}/`} aria-labelledby={titleId}>
+        <div className={preview.content}>
+          <div className={preview.heading}>
+            <AppFace app={app} />
+            <h3 id={titleId} className={styles.appName}>{app.name}</h3>
+          </div>
+          <p className={preview.description}>{app.page?.lede ?? app.tagline}</p>
+          <span className={preview.more}>
+            앱 살펴보기 <span aria-hidden="true">→</span>
+          </span>
+        </div>
+        {screen ? (
+          <div className={preview.stage}>
+            <div
+              className={preview.screen}
+              style={{ "--preview-screen-ratio": screen.width / screen.height } as CSSProperties}
+            >
+              <ScreenImage screen={screen} />
+            </div>
+          </div>
+        ) : null}
+      </Link>
+    </li>
+  );
+}
+
 /** 홈에서는 요약, 앱 목록 페이지에서는 전체 카드를 보여준다. */
 export default function AppsSection({ expanded = false }: { expanded?: boolean }) {
   return (
-    <section id="apps" className={`${styles.section} ${styles.reveal}`}>
+    <section id="apps" className={`${styles.section} ${expanded ? styles.reveal : preview.section}`}>
       <div className={styles.shell}>
         {expanded ? (
           <header className={catalog.heading}>
@@ -106,22 +141,14 @@ export default function AppsSection({ expanded = false }: { expanded?: boolean }
           </ul>
         ) : (
           <>
-            <ul className={styles.appGrid}>
+            <ul className={preview.grid}>
               {APPS.map((app) => (
-                <li key={app.slug} className={styles.appCard}>
-                  <Link className={styles.appPreview} href={`/app/${app.slug}/`}>
-                    <AppFace app={app} />
-                    <div className={styles.appIdent}>
-                      <h3 className={styles.appName}>{app.name}</h3>
-                      <p className={styles.appTagline}>{app.tagline}</p>
-                    </div>
-                  </Link>
-                </li>
+                <AppPreview key={app.slug} app={app} />
               ))}
             </ul>
             <div className={styles.appsSummary}>
-              <Link className={styles.inlineLink} href="/app/" aria-label="앱 소개 더보기">
-                더보기 <span aria-hidden="true">→</span>
+              <Link className={styles.inlineLink} href="/app/">
+                앱 전체 보기 <span aria-hidden="true">→</span>
               </Link>
             </div>
           </>
