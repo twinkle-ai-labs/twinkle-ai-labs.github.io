@@ -292,7 +292,7 @@ export const APPS: readonly LabApp[] = [
       "문서를 촬영하면 한글까지 검색 가능한 PDF로 변환(OCR)",
       "문서와 암호는 서버로 전송되지 않으며 모든 처리는 100% 온디바이스에서",
     ],
-    status: "testing",
+    status: "live",
     category: "UtilitiesApplication",
     door: { packageId: "kr.twinklelabs.pocketpdf", source: "web" },
     store: "https://play.google.com/store/apps/details?id=kr.twinklelabs.pocketpdf",
