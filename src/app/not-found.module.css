@@ -46,4 +46,6 @@
   font-weight: var(--fw-semibold);
   box-shadow: var(--shadow-brand);
 }
-.cta:hover { text-decoration: none; }
+.cta:hover {
+  text-decoration: none;
+}

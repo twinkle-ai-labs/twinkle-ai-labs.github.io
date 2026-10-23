@@ -39,7 +39,7 @@ export default function DeviceFrame({
     <figure className={`${styles.device} ${SIZE_CLASS[size]}`}>
       <div className={styles.screenWrap}>
         <div className={styles.statusBar} aria-hidden="true">
-          <span className={styles.statusTime}>{STATUS_TIME}</span>
+          <span>{STATUS_TIME}</span>
           <span className={styles.statusIcons}>
             {/* 신호 — 네 칸 */}
             <svg {...glyph} className={styles.statusGlyph}>

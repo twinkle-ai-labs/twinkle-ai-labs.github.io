@@ -37,8 +37,18 @@ function fontFile(name: string): Buffer {
 /** 굵기는 **가진 것만** 부른다 — 없는 굵기는 satori 가 이웃 칸으로 스냅한다. */
 function fonts() {
   return [
-    { name: "Pretendard", data: fontFile("Pretendard-Regular.otf"), weight: 400 as const, style: "normal" as const },
-    { name: "Pretendard", data: fontFile("Pretendard-Bold.otf"), weight: 700 as const, style: "normal" as const },
+    {
+      name: "Pretendard",
+      data: fontFile("Pretendard-Regular.otf"),
+      weight: 400 as const,
+      style: "normal" as const,
+    },
+    {
+      name: "Pretendard",
+      data: fontFile("Pretendard-Bold.otf"),
+      weight: 700 as const,
+      style: "normal" as const,
+    },
   ];
 }
 
@@ -130,7 +140,15 @@ export function appOgCard({ name, headline, highlights, status, maker, domain, i
           <div style={{ display: "flex", flexDirection: "column", gap: 36 }}>
             <div style={{ display: "flex", flexDirection: "column", wordBreak: "keep-all" }}>
               {headline.map((line) => (
-                <span key={line} style={{ fontSize: headlineSize, fontWeight: 700, lineHeight: 1.22, letterSpacing: -1.5 }}>
+                <span
+                  key={line}
+                  style={{
+                    fontSize: headlineSize,
+                    fontWeight: 700,
+                    lineHeight: 1.22,
+                    letterSpacing: -1.5,
+                  }}
+                >
                   {line}
                 </span>
               ))}
@@ -150,7 +168,9 @@ export function appOgCard({ name, headline, highlights, status, maker, domain, i
                       borderLeft: i === 0 ? "none" : "1px solid rgba(255,255,255,0.16)",
                     }}
                   >
-                    <span style={{ fontSize: 34, fontWeight: 700, letterSpacing: -0.5 }}>{item.value}</span>
+                    <span style={{ fontSize: 34, fontWeight: 700, letterSpacing: -0.5 }}>
+                      {item.value}
+                    </span>
                     <span style={{ fontSize: 24, color: INK.sub }}>{item.label}</span>
                   </div>
                 ))}
@@ -184,7 +204,18 @@ export function appOgCard({ name, headline, highlights, status, maker, domain, i
 
         {/* 오른쪽 가운데 — 무대 위의 얼굴. 발치의 그늘이 먼저, 얼굴이 그 위에 */}
         {icon ? (
-          <div style={{ position: "absolute", right: 120, top: 0, bottom: 0, width: 240, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div
+            style={{
+              position: "absolute",
+              right: 120,
+              top: 0,
+              bottom: 0,
+              width: 240,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <div
               style={{
                 position: "absolute",
@@ -193,7 +224,8 @@ export function appOgCard({ name, headline, highlights, status, maker, domain, i
                 width: 200,
                 height: 36,
                 borderRadius: 999,
-                background: "radial-gradient(100px 18px at 50% 50%, rgba(0,0,0,0.65), rgba(0,0,0,0))",
+                background:
+                  "radial-gradient(100px 18px at 50% 50%, rgba(0,0,0,0.65), rgba(0,0,0,0))",
               }}
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -202,7 +234,10 @@ export function appOgCard({ name, headline, highlights, status, maker, domain, i
               alt=""
               width={240}
               height={240}
-              style={{ borderRadius: 54, boxShadow: "0 30px 70px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08)" }}
+              style={{
+                borderRadius: 54,
+                boxShadow: "0 30px 70px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08)",
+              }}
             />
           </div>
         ) : null}
@@ -243,14 +278,58 @@ export function ogCard({ eyebrow, title, lead, domain, icon }: OgCard) {
         }}
       >
         {/* 오른쪽 위 — 앱이면 제 아이콘이, 아니면 별의 고리가 선다. 둘이 같은 자리를 쓴다. */}
-        <div style={{ position: "absolute", right: 86, top: 76, width: 250, height: 250, border: "1px solid rgba(183,154,255,0.18)", borderRadius: 999, boxShadow: "0 0 90px rgba(133,80,228,0.18)" }} />
+        <div
+          style={{
+            position: "absolute",
+            right: 86,
+            top: 76,
+            width: 250,
+            height: 250,
+            border: "1px solid rgba(183,154,255,0.18)",
+            borderRadius: 999,
+            boxShadow: "0 0 90px rgba(133,80,228,0.18)",
+          }}
+        />
         {icon ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={icon} alt="" width={176} height={176} style={{ position: "absolute", right: 123, top: 113, borderRadius: 40, boxShadow: "0 20px 60px rgba(0,0,0,0.45)" }} />
+          <img
+            src={icon}
+            alt=""
+            width={176}
+            height={176}
+            style={{
+              position: "absolute",
+              right: 123,
+              top: 113,
+              borderRadius: 40,
+              boxShadow: "0 20px 60px rgba(0,0,0,0.45)",
+            }}
+          />
         ) : (
           <>
-            <div style={{ position: "absolute", right: 148, top: 138, width: 126, height: 126, border: "1px solid rgba(183,154,255,0.28)", borderRadius: 999 }} />
-            <div style={{ position: "absolute", right: 202, top: 192, width: 18, height: 18, background: INK.accent, borderRadius: 999, boxShadow: "0 0 34px rgba(183,154,255,0.88)" }} />
+            <div
+              style={{
+                position: "absolute",
+                right: 148,
+                top: 138,
+                width: 126,
+                height: 126,
+                border: "1px solid rgba(183,154,255,0.28)",
+                borderRadius: 999,
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                right: 202,
+                top: 192,
+                width: 18,
+                height: 18,
+                background: INK.accent,
+                borderRadius: 999,
+                boxShadow: "0 0 34px rgba(183,154,255,0.88)",
+              }}
+            />
           </>
         )}
         {/* 머리 — 심볼 없이 이름 자체가 브랜드가 된다. */}
@@ -293,7 +372,15 @@ export function ogCard({ eyebrow, title, lead, domain, icon }: OgCard) {
             {title}
           </span>
           {lead ? (
-            <span style={{ fontSize: 32, fontWeight: 400, lineHeight: 1.45, color: INK.sub, lineClamp: 2 }}>
+            <span
+              style={{
+                fontSize: 32,
+                fontWeight: 400,
+                lineHeight: 1.45,
+                color: INK.sub,
+                lineClamp: 2,
+              }}
+            >
               {lead}
             </span>
           ) : null}

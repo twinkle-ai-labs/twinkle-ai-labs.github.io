@@ -9,7 +9,7 @@
  * (이름과 주소는 [site] 가 진다 — 그쪽은 이 화면만의 것이 아니다.)
  */
 
-import { DESIGN_URL, POLARIS_URL } from "./site";
+import { POLARIS_URL } from "./site";
 import type { TrustGlyph } from "@/components/door/Glyphs";
 
 /* ── 앱 ─────────────────────────────────────────────────────── */
@@ -65,7 +65,13 @@ export type DoorFact = { label: string; value: string };
  * 문이 보여 주는 앱의 화면 한 장 — 테마마다 한 벌. 사람이 고른 테마의 것이 선다.
  * `width` · `height` 는 **찍은 화소**다 — 기기 틀이 이 비율로 선다(그림을 틀에 맞춰 자르지 않는다 · 법 12).
  */
-export type DoorScreen = { light: string; dark: string; alt: string; width: number; height: number };
+export type DoorScreen = {
+  light: string;
+  dark: string;
+  alt: string;
+  width: number;
+  height: number;
+};
 
 /**
  * 앱의 문 — 링크(QR · 메신저 · 검색)로 곧장 떨어진 사람에게 «이 앱이 뭔가, 받을까»를 답하는 장.
@@ -78,6 +84,8 @@ export type DoorPage = {
   lede: string;
   /** 받기 단추 밑의 짧은 사실들 — «무료» 처럼 한두 낱말. */
   facts: readonly string[];
+  /** 설치 전에 확인할 무료 이용·선택 구매 안내. */
+  downloadNote?: string;
   /** 첫 화면의 기기 속 화면. */
   hero: DoorScreen;
   /** «할 수 있는 일» 구획의 제목 — 다섯 장면을 한 문장으로. */
@@ -87,7 +95,12 @@ export type DoorPage = {
    * 첫 화면의 기기와 같은 화면을 다시 넣지 않는다 — 같은 화면을 두 번 보이는 자리는 없다.
    * `facts` 는 옆 기기 속 화면에 실제로 선 값이다 — 글이 말하는 것을 숫자가 받친다. 없는 값을 짓지 않는다.
    */
-  features: readonly { title: string; body: string; screen: DoorScreen; facts: readonly DoorFact[] }[];
+  features: readonly {
+    title: string;
+    body: string;
+    screen: DoorScreen;
+    facts: readonly DoorFact[];
+  }[];
   /** 믿어도 되는 이유 — 기록이 어디 머무는가. */
   trust: readonly { title: string; body: string; glyph: TrustGlyph }[];
   /**
@@ -156,7 +169,8 @@ export const APPS: readonly LabApp[] = [
   {
     slug: "stock-calculator",
     name: "물타기 계산기",
-    tagline: "얼마를 더 사야 평단가가 맞춰질까? 복잡한 물타기 계산부터 목표 평단가 역산까지 한 번에 해결하세요.",
+    tagline:
+      "얼마를 더 사야 평단가가 맞춰질까? 복잡한 물타기 계산부터 목표 평단가 역산까지 한 번에 해결하세요.",
     blurb:
       "평단가를 낮추려면 정확히 몇 주를 더 사야 하는지 매번 엑셀이나 계산기를 두드리며 셈하고 계셨나요? 이제 그 번거로움을 앱 하나로 끝내세요. 보유 주식과 매수할 주식을 입력하는 즉시 새 평단가가 나오고, '원하는 목표 평단가'만 넣으면 거꾸로 필요한 금액과 수량을 정확히 역산해 드립니다. 나만의 매수 시나리오를 세우고 그 결과를 깔끔한 이미지로 공유해 보세요.",
     /* 셋째 줄이 «통화 아홉 · 언어 열하나»였다 — 개수는 우리 자랑이지 쓰는 사람의 강점이 아니다.
@@ -179,18 +193,26 @@ export const APPS: readonly LabApp[] = [
     /* 화면은 앱의 스크린샷 하네스(stock-calculator `StoreScreenshotTest`)가 찍은 날 화면이다 —
        ko-KR 표본(삼성전자 · 72,500원 · 20주)이라 스토어의 한국어 사진과 같은 숫자로 선다. */
     page: {
-      headline: "얼마를 더 사야|평단가가 맞춰질까?",
-      lede: "보유와 추가 매수를 넣으면 새 평단가가, 원하는 평단가를 넣으면 필요한 수량과 금액이 바로 나옵니다.",
+      headline: "추가 매수 전,|평단가부터 확인하세요.",
+      lede: "보유 수량과 추가 매수 조건으로 새 평단가를 계산합니다. 목표 평단가에 필요한 수량과 금액도 확인하세요.",
       /* 첫 화면의 사실 셋. «기록은 이 기기에만»은 아래 «믿어도 되는 이유» 띠가 이미 크게 말하므로 걷고,
          그 자리에 사람이 모르고 떠날 강점(언어)을 세운다 */
       facts: ["무료", "11개 언어", "로그인 없음"],
-      hero: screen("stock-calculator", "home", "물타기 계산 화면 — 72,500원에 20주, 58,000원에 15주를 더 사면 새 평단가 66,285.71원"),
+      hero: screen(
+        "stock-calculator",
+        "home",
+        "물타기 계산 화면 — 72,500원에 20주, 58,000원에 15주를 더 사면 새 평단가 66,285.71원",
+      ),
       featuresTitle: "계산부터 리포트까지, 한 앱에서.",
       features: [
         {
-          title: "목표 평단가에서 거꾸로",
+          title: "목표 평단가에 필요한 만큼",
           body: "원하는 평단가를 넣으면 몇 주를 더 사야 하는지, 얼마가 드는지 역산합니다.",
-          screen: screen("stock-calculator", "target", "목표 평단가 화면 — 필요한 추가 수량과 금액"),
+          screen: screen(
+            "stock-calculator",
+            "target",
+            "목표 평단가 화면 — 필요한 추가 수량과 금액",
+          ),
           facts: [
             { label: "목표 평단가", value: "64,525원" },
             { label: "더 살 수량", value: "24.44주" },
@@ -202,16 +224,24 @@ export const APPS: readonly LabApp[] = [
              식은 다른 곳에서 복사해 칸을 길게 눌러 붙여 넣을 때만 들어간다. 사진은 그대로 키패드다 */
           title: "빠른 키와 식 붙여 넣기",
           body: "+1천 · +1만 · +10만 · +100만 빠른 키로 금액을 한 번에 올립니다. 다른 계산기에서 복사한 식은 칸을 길게 눌러 붙여 넣으면 값으로 들어갑니다.",
-          screen: screen("stock-calculator", "keypad", "숫자 키패드와 +1천 · +1만 · +10만 · +100만 빠른 키"),
+          screen: screen(
+            "stock-calculator",
+            "keypad",
+            "숫자 키패드와 +1천 · +1만 · +10만 · +100만 빠른 키",
+          ),
           facts: [
             { label: "빠른 키", value: "+1천 · +1만 · +10만 · +100만" },
             { label: "식 붙여 넣기", value: "칸을 길게 눌러서" },
           ],
         },
         {
-          title: "종목마다 통화와 단위",
+          title: "종목에 맞는 통화와 단위",
           body: "삼성전자는 원으로, 비트코인은 달러와 BTC로, 금은 그램으로. 국내 주식도 해외 주식도 코인도 한 앱에서 셉니다.",
-          screen: screen("stock-calculator", "stocks", "종목 관리 — 종목마다 다른 통화와 수량 단위 배지"),
+          screen: screen(
+            "stock-calculator",
+            "stocks",
+            "종목 관리 — 종목마다 다른 통화와 수량 단위 배지",
+          ),
           facts: [
             { label: "삼성전자", value: "₩ · 주" },
             { label: "비트코인", value: "$ · BTC" },
@@ -219,8 +249,8 @@ export const APPS: readonly LabApp[] = [
           ],
         },
         {
-          title: "굴려 본 계산이 쌓입니다",
-          body: "저장한 계산은 종목별로 모입니다. 아이콘을 골라 종목에 얼굴을 붙이세요.",
+          title: "다시 꺼내 보는 계산 기록",
+          body: "저장한 계산을 종목별로 모아 다시 확인하세요. 종목마다 아이콘을 지정해 쉽게 구분할 수 있습니다.",
           screen: screen("stock-calculator", "history", "계산 이력 — 종목별로 묶인 기록"),
           facts: [
             { label: "묶는 단위", value: "종목" },
@@ -229,9 +259,13 @@ export const APPS: readonly LabApp[] = [
           ],
         },
         {
-          title: "한 장으로 나가는 리포트",
-          body: "본전까지의 거리와 주가가 움직일 때의 손익을 리포트로 보고, QR이 든 그림으로 바로 공유합니다.",
-          screen: screen("stock-calculator", "report", "투자 리포트 — 본전 탈출 허들과 주가 변동 시나리오 손익"),
+          title: "한눈에 살펴보는 리포트",
+          body: "본전 회복에 필요한 변화와 주가별 예상 손익을 리포트로 확인하세요. 결과는 QR 코드가 포함된 이미지로 공유할 수 있습니다.",
+          screen: screen(
+            "stock-calculator",
+            "report",
+            "투자 리포트 — 본전 탈출 허들과 주가 변동 시나리오 손익",
+          ),
           facts: [
             { label: "본전 탈출 허들", value: "▼ 10.71%p" },
             { label: "주가 변동 시나리오", value: "±10% · ±20%" },
@@ -240,9 +274,21 @@ export const APPS: readonly LabApp[] = [
         },
       ],
       trust: [
-        { glyph: "device", title: "이 기기에만 저장", body: "계산 기록과 종목 이름은 기기를 떠나지 않습니다. 백업에도 올라가지 않습니다." },
-        { glyph: "person", title: "로그인 없음", body: "계정도 가입도 없습니다. 열면 바로 계산합니다." },
-        { glyph: "offline", title: "인터넷 없이도", body: "계산은 기기 안에서 합니다. 신호가 없는 곳에서도 됩니다." },
+        {
+          glyph: "device",
+          title: "이 기기에만 저장",
+          body: "계산 기록과 종목 이름은 기기를 떠나지 않습니다. 백업에도 올라가지 않습니다.",
+        },
+        {
+          glyph: "person",
+          title: "로그인 없음",
+          body: "계정도 가입도 없습니다. 열면 바로 계산합니다.",
+        },
+        {
+          glyph: "offline",
+          title: "인터넷 없이도",
+          body: "계산은 기기 안에서 합니다. 신호가 없는 곳에서도 됩니다.",
+        },
       ],
       /* 이 앱의 강점 — 한 줄 소개가 아니라 **다른 계산기에 없는 것**. 2026-09-11 에 사람이 «중요한 설명이 필요하다
          — 다국어, 다중 종목 · 여러 화폐 · 커스텀 단위(BTC)»라고 했다. ↩ 09-06 에는 카드의 요점에서 «통화 아홉 · 언어
@@ -273,8 +319,9 @@ export const APPS: readonly LabApp[] = [
           "물타기 앱",
         ],
       },
-      closing: "다음 매수 전에,|네 칸부터.",
-      disclaimer: "계산 도구입니다. 투자 자문이나 매매 권유가 아니며, 결과에는 실제 체결가·수수료·세금이 반영되지 않습니다.",
+      closing: "다음 매수의 계산을,|조금 더 간단하게.",
+      disclaimer:
+        "계산 도구입니다. 투자 자문이나 매매 권유가 아니며, 결과에는 실제 체결가·수수료·세금이 반영되지 않습니다.",
     },
     /* 앱 한 장이 이용약관과 개인정보 처리방침을 함께 든다 — 문서 하나가 아니라 그 목록을 가리킨다.
        (`/t/…` 를 가리키고 있었는데 Polaris 에 그런 길이 없어 404 였다. 서버가 없으니 고쳐 줄 것도 없다.) */
@@ -283,7 +330,8 @@ export const APPS: readonly LabApp[] = [
   {
     slug: "pocket-pdf",
     name: "Pocket PDF",
-    tagline: "매달 나가는 구독료와 문서 유출 걱정 없이, 기기 안에서 모든 작업이 끝나는 7-in-1 PDF 도구",
+    tagline:
+      "매달 나가는 구독료와 문서 유출 걱정 없이, 기기 안에서 모든 작업이 끝나는 7-in-1 PDF 도구",
     blurb:
       "간단한 서명 하나 넣으려 해도 매달 값비싼 구독료를 요구받거나, 중요한 개인 문서를 알 수 없는 서버에 업로드해야 했던 적 있으신가요? Pocket PDF는 그런 불안과 부담을 모두 걷어냈습니다. 한글 검색이 되는 스마트 스캔부터 문서 병합, 쪽 분할, 전자 서명, 암호 해제까지 꼭 필요한 7가지 도구를 조건 없이 무료로 엽니다. 모든 문서 처리는 100% 기기 안에서만 이루어져 안전하며, 복잡한 정기 구독 없이 단 한 번의 결제로 영원히 광고 없는 쾌적함을 누리실 수 있습니다.",
     points: [
@@ -298,27 +346,40 @@ export const APPS: readonly LabApp[] = [
     store: "https://play.google.com/store/apps/details?id=kr.twinklelabs.pocketpdf",
     icon: "/apps/pocket-pdf.png",
     page: {
-      headline: "기기 안에서 끝나는|PDF 도구",
+      headline: "문서 작업은 간단하게,|파일은 내 기기에.",
       /* 도구는 일곱이다 — 앱 홈의 카드 수(스캔 · 병합 · 분할 · 이미지→PDF · 잠금 해제 · 서명 · 페이지 편집).
          ↩ 첫 판은 «여섯»이라 적고 잠금 해제를 빠뜨렸다(2026-09-19 Founder) */
-      lede: "일곱 가지 도구를 모두 무료로. 문서와 암호는 기기 밖으로 나가지 않습니다.",
+      lede: "스캔부터 병합, 서명까지 일곱 가지 도구를 무료로. 모든 문서 작업은 기기 안에서 처리합니다.",
+      downloadNote: "광고 포함 · 광고 제거는 선택 사항이며, 한 번만 결제합니다.",
       facts: ["무료", "11개 언어", "로그인 없음"],
-      hero: screen("pocket-pdf", "home", "Pocket PDF 홈 화면 — 일곱 가지 기능이 한눈에 보이는 격자"),
+      hero: screen(
+        "pocket-pdf",
+        "home",
+        "Pocket PDF 홈 화면 — 일곱 가지 기능이 한눈에 보이는 격자",
+      ),
       featuresTitle: "스캔부터 서명까지, 한 앱에서.",
       features: [
         {
           title: "한글까지 검색되는 스캔",
-          body: "문서를 촬영하면 윤곽과 원근을 잡아 반듯하게 펴고, 한글과 영어를 읽어 검색하고 복사할 수 있는 PDF로 굽습니다.",
-          screen: screen("pocket-pdf", "scan", "문서 스캔 결과 — 스캔한 업무협약서와 인식된 단락 여섯, 전체 복사 · PDF로 내보내기"),
+          body: "촬영한 문서의 기울기와 원근을 보정하고, 한글과 영어를 인식합니다. 검색과 복사가 가능한 PDF로 저장하세요.",
+          screen: screen(
+            "pocket-pdf",
+            "scan",
+            "문서 스캔 결과 — 스캔한 업무협약서와 인식된 단락 여섯, 전체 복사 · PDF로 내보내기",
+          ),
           facts: [
             { label: "텍스트 인식", value: "한국어 · 영어" },
             { label: "결과물", value: "검색 가능한 PDF" },
           ],
         },
         {
-          title: "끌어서 끼워 넣는 병합",
-          body: "여러 PDF를 고른 뒤 끌어 옮겨 순서를 맞춥니다. 밀어내면 목록에서 바로 빠집니다.",
-          screen: screen("pocket-pdf", "merge", "PDF 병합 화면 — 업무협약서 · 임대차계약서 · 분기보고서 세 문서를 순서대로 담은 목록"),
+          title: "여러 문서를 하나로",
+          body: "여러 PDF를 한 번에 선택하고, 끌어서 순서를 정하세요. 필요 없는 파일은 옆으로 밀어 목록에서 제외할 수 있습니다.",
+          screen: screen(
+            "pocket-pdf",
+            "merge",
+            "PDF 병합 화면 — 업무협약서 · 임대차계약서 · 분기보고서 세 문서를 순서대로 담은 목록",
+          ),
           facts: [
             { label: "문서 추가", value: "여러 파일 한 번에" },
             { label: "순서 변경", value: "길게 눌러 끌기" },
@@ -326,8 +387,12 @@ export const APPS: readonly LabApp[] = [
         },
         {
           title: "도장과 전자 서명",
-          body: "손으로 그린 서명을 남기거나, 명조와 고딕으로 인감을 빚어 문서 위에 얹습니다. 만든 서명과 도장은 기기에 보관됩니다.",
-          screen: screen("pocket-pdf", "sign", "전자 서명 화면 — 명조체 사각 인감 «김민수» 를 빚고, 저장된 도장과 손글씨 서명이 아래에 선 모습"),
+          body: "직접 그린 서명이나 명조·고딕 서체의 도장을 문서에 넣으세요. 만든 서명과 도장은 기기에 저장해 다시 사용할 수 있습니다.",
+          screen: screen(
+            "pocket-pdf",
+            "sign",
+            "전자 서명 화면 — 명조체 사각 인감 «김민수» 를 빚고, 저장된 도장과 손글씨 서명이 아래에 선 모습",
+          ),
           facts: [
             { label: "서명 보관", value: "기기 안에 무제한" },
             { label: "인감 모양", value: "원형 · 사각" },
@@ -335,18 +400,26 @@ export const APPS: readonly LabApp[] = [
           ],
         },
         {
-          title: "쪽 단위 편집과 분할",
-          body: "문서의 불필요한 쪽을 지우거나 돌리고, 원하는 쪽만 골라내어 가벼운 PDF로 나누어 담습니다.",
-          screen: screen("pocket-pdf", "edit", "페이지 편집기 — 다섯 쪽 문서를 격자로 펼쳐 쪽마다 돌리기 · 지우기"),
+          title: "필요한 페이지만 남기세요",
+          body: "불필요한 페이지를 삭제하거나 방향을 바꾸고, 필요한 페이지만 선택해 별도의 PDF로 저장하세요.",
+          screen: screen(
+            "pocket-pdf",
+            "edit",
+            "페이지 편집기 — 다섯 쪽 문서를 격자로 펼쳐 쪽마다 돌리기 · 지우기",
+          ),
           facts: [
             { label: "쪽 추출", value: "범위 지정 · 짝/홀수" },
             { label: "페이지 뷰", value: "한눈에 보는 격자" },
           ],
         },
         {
-          title: "결과물은 바로 서랍으로",
-          body: "작업이 끝난 문서는 즉시 기기의 Documents 폴더에 안전하게 앉습니다. 완성된 파일들을 날짜별로 모아 봅니다.",
-          screen: screen("pocket-pdf", "history", "문서함 — 오늘 만든 서명본 · 분할본 · 이미지 PDF 세 개"),
+          title: "완성한 문서를 한곳에",
+          body: "완성한 문서는 기기의 Documents 폴더에 저장됩니다. 날짜별로 모아 보고, 목록에서 바로 공유하세요.",
+          screen: screen(
+            "pocket-pdf",
+            "history",
+            "문서함 — 오늘 만든 서명본 · 분할본 · 이미지 PDF 세 개",
+          ),
           facts: [
             { label: "분류 기준", value: "날짜" },
             { label: "기록 위치", value: "Documents 폴더" },
@@ -355,9 +428,21 @@ export const APPS: readonly LabApp[] = [
         },
       ],
       trust: [
-        { glyph: "device", title: "문서 전송 없음", body: "모든 연산과 문자 인식이 기기 안에서 끝납니다. 문서는 절대 서버로 나가지 않습니다." },
-        { glyph: "lock", title: "암호 보호", body: "비밀번호가 걸린 문서를 열 때 입력한 암호 역시 기기 밖으로 빠져나가지 않습니다." },
-        { glyph: "noRepeat", title: "구독 없음", body: "매달 결제할 필요 없이 단 한 번의 결제로 모든 광고가 영원히 사라집니다." },
+        {
+          glyph: "device",
+          title: "문서 전송 없음",
+          body: "모든 연산과 문자 인식이 기기 안에서 끝납니다. 문서는 절대 서버로 나가지 않습니다.",
+        },
+        {
+          glyph: "lock",
+          title: "암호 보호",
+          body: "비밀번호가 걸린 문서를 열 때 입력한 암호 역시 기기 밖으로 빠져나가지 않습니다.",
+        },
+        {
+          glyph: "noRepeat",
+          title: "구독 없이, 원하는 만큼",
+          body: "모든 도구를 광고와 함께 무료로 이용할 수 있습니다. 광고 제거를 원하면 한 번만 결제하세요.",
+        },
       ],
       highlights: [
         { value: "온디바이스", label: "문서 전송 없음" },
@@ -392,8 +477,9 @@ export const APPS: readonly LabApp[] = [
           "포켓 PDF",
         ],
       },
-      closing: "기기 밖으로 나가지 않는|안전한 도구.",
-      disclaimer: "문서 내용과 입력된 비밀번호는 서버로 전송되지 않으며 모든 처리는 기기 내부에서 이루어집니다.",
+      closing: "문서 작업이 필요할 때,|Pocket PDF.",
+      disclaimer:
+        "문서 내용과 입력된 비밀번호는 서버로 전송되지 않으며 모든 처리는 기기 내부에서 이루어집니다.",
     },
     terms: `${POLARIS_URL}/ko/pocket-pdf/`,
   },
@@ -411,87 +497,11 @@ export const HERO = {
   secondary: { label: "이야기 읽기", href: "#founder" },
 } as const;
 
-/** 이름이 무엇을 뜻하는지 — Twinkle 과 Polaris. */
-export const NAMES_SECTION = {
-  eyebrow: "브랜드 이야기",
-  title: "별에서 시작한 이름",
-  items: [
-    {
-      word: "Twinkle",
-      reading: "트윙클 · 반짝이다",
-      body:
-        "별은 스스로 빛을 냅니다. Twinkle도 떠올린 생각을 직접 만들고 세상에 내놓겠다는 다짐입니다.",
-      motto:
-        "“스스로 빛나다.” 작은 아이디어가 누군가에게 쓸모 있는 도구가 될 때까지.",
-    },
-    {
-      word: "Polaris",
-      reading: "폴라리스 · 북극성",
-      body:
-        "밤하늘의 이정표인 북극성처럼, 앱을 믿고 쓸 수 있는 기준을 둡니다. 모든 앱의 이용약관과 개인정보 처리방침을 Polaris에서 확인할 수 있습니다.",
-      link: { label: "약관 보관소 열기", href: POLARIS_URL },
-    },
-  ],
-} as const;
-
 export const APPS_SECTION = {
   eyebrow: "만든 것",
   /* «첫 번째 앱»이라고 적혀 있었다 — 앱이 둘이 된 날 제목만 그대로 남았다.
      수를 세는 제목은 앱이 늘 때마다 조용히 거짓이 된다. */
   title: "일상의 작은 도구들",
-  summary: "일상의 작은 불편을 덜어주는 앱을 만듭니다. 만든 앱과 준비 중인 앱을 한곳에서 만나보세요.",
-} as const;
-
-export const FOUNDER = {
-  eyebrow: "만드는 사람",
-  title: "한 사람이 만들고, 직접 돌봅니다",
-  /** 숫자가 먼저 말하고, 이야기가 뒤를 받는다. */
-  stats: [
-    { value: "5", unit: "년+", label: "웹·서버 개발 경력" },
-    { value: "10", unit: "개+", label: "프로젝트 개발·운영 경험" },
-    { value: "1", unit: "+ AI", label: "개발자와 AI의 협업" },
-  ],
-  body: [
-    "5년 넘게 웹과 서버를 개발하고, 10개 이상의 프로젝트를 만들고 운영해 왔습니다. 화면부터 서버까지 쌓아 온 경험으로 쓰기 편하고 오래 유지할 수 있는 제품을 설계합니다.",
-    "Twinkle AI Labs에서는 AI와 함께 아이디어를 구체화하고 앱으로 만듭니다. 기획과 개발부터 출시 후 개선까지 직접 맡아, 일상에서 발견한 불편을 하나씩 줄여 갑니다.",
-  ],
-} as const;
-
-export const HOW = {
-  eyebrow: "만드는 방식",
-  title: "쓰는 사람의 일을 더 간단하게",
-  items: [
-    {
-      title: "아름답게 완성한다",
-      body: "글자 하나, 버튼 하나까지 살핍니다. 잘 동작하는 것은 물론, 매일 쓰기 편한 화면으로 다듬습니다.",
-    },
-    {
-      title: "어느 앱에서나 익숙하게",
-      body: "읽는 방식과 누르는 흐름을 일관되게 만듭니다. 다른 앱을 열어도 다시 배우는 수고를 줄입니다.",
-    },
-    {
-      title: "설명이 필요 없는 직관성",
-      body: "켜자마자 무엇을 해야 할지 알 수 있게 만듭니다. 설명이 길어진다면 먼저 화면을 다시 살핍니다.",
-    },
-    {
-      title: "본질에 집중한 단순함",
-      body: "할 일을 마치는 데 꼭 필요한 기능을 남깁니다. 선택은 줄이고 결과는 분명하게 보여줍니다.",
-    },
-  ],
-} as const;
-
-/** 디자인 시스템은 짧게 소개한다 — 색과 간격의 상세 기준은 제 장에 산다. */
-export const DESIGN_SECTION = {
-  eyebrow: "디자인 시스템",
-  title: "Aurora Ledger",
-  lead: "이 원칙을 화면에 담는 공통 기준입니다. 읽기 편한 글자와 여백, 익숙한 버튼과 움직임을 모든 앱에 이어 갑니다.",
-  more: { label: "디자인 시스템 살펴보기", href: DESIGN_URL },
-} as const;
-
-export const MONEY = {
-  eyebrow: "이어가는 마음",
-  title: "작게 시작해 오래 남는 것을",
-  body: [
-    "부담 없이 시작하고, 필요할 때 다시 찾을 수 있는 도구를 만듭니다. 운영에 필요한 수익은 단순하고 투명하게 마련하고, 오래 쓸 수 있도록 꾸준히 돌보겠습니다.",
-  ],
+  summary:
+    "일상의 작은 불편을 덜어주는 앱을 만듭니다. 만든 앱과 준비 중인 앱을 한곳에서 만나보세요.",
 } as const;

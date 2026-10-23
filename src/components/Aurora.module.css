@@ -25,7 +25,10 @@
   height: 78vh;
   background: radial-gradient(
     closest-side,
-    light-dark(color-mix(in srgb, var(--primary) 35%, transparent), color-mix(in srgb, var(--primary) 16%, transparent)),
+    light-dark(
+      color-mix(in srgb, var(--primary) 35%, transparent),
+      color-mix(in srgb, var(--primary) 16%, transparent)
+    ),
     transparent 70%
   );
   animation: drift1 var(--motion-drift) ease-in-out infinite alternate;
@@ -38,7 +41,10 @@
   height: 70vh;
   background: radial-gradient(
     closest-side,
-    light-dark(color-mix(in srgb, var(--primary-lit) 35%, transparent), color-mix(in srgb, var(--primary-lit) 14%, transparent)),
+    light-dark(
+      color-mix(in srgb, var(--primary-lit) 35%, transparent),
+      color-mix(in srgb, var(--primary-lit) 14%, transparent)
+    ),
     transparent 70%
   );
   animation: drift2 calc(var(--motion-drift) * 1.45) ease-in-out infinite alternate;
@@ -52,23 +58,34 @@
   height: 66vh;
   background: radial-gradient(
     closest-side,
-    light-dark(color-mix(in srgb, var(--accent) 30%, transparent), color-mix(in srgb, var(--accent) 11%, transparent)),
+    light-dark(
+      color-mix(in srgb, var(--accent) 30%, transparent),
+      color-mix(in srgb, var(--accent) 11%, transparent)
+    ),
     transparent 70%
   );
   animation: drift3 calc(var(--motion-drift) * 1.9) ease-in-out infinite alternate;
 }
 
 @keyframes drift1 {
-  to { transform: translate3d(6vw, 5vh, 0) scale(1.12); }
+  to {
+    transform: translate3d(6vw, 5vh, 0) scale(1.12);
+  }
 }
 @keyframes drift2 {
-  to { transform: translate3d(-7vw, 7vh, 0) scale(1.16); }
+  to {
+    transform: translate3d(-7vw, 7vh, 0) scale(1.16);
+  }
 }
 @keyframes drift3 {
-  to { transform: translate3d(5vw, -6vh, 0) scale(1.1); }
+  to {
+    transform: translate3d(5vw, -6vh, 0) scale(1.1);
+  }
 }
 
 /* 전역 규칙은 시간을 0으로 줄일 뿐이라 무한 반복은 깜빡임이 된다 — 여기서 멈춘다. */
 @media (prefers-reduced-motion: reduce) {
-  .veil { animation: none; }
+  .veil {
+    animation: none;
+  }
 }
