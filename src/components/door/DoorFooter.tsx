@@ -16,24 +16,43 @@ export default function DoorFooter({ app }: { app: LabApp }) {
     <footer className={styles.footer}>
       <div className={styles.footerInner}>
         <p className={styles.footerApp}>
-          {app.icon && <Image className={styles.footerIcon} src={app.icon} alt="" width={48} height={48} />}
+          {app.icon && (
+            <Image className={styles.footerIcon} src={app.icon} alt="" width={48} height={48} />
+          )}
           {app.name}
         </p>
         <ul className={styles.footerLinks}>
           {app.terms && (
             <>
               {/* `terms` 는 그 앱의 문서 목록(`…/ko/<slug>/`)이다 — 문서 둘은 그 아래에 선다 */}
-              <li><a className={styles.footerLink} href={`${app.terms}terms/`}>이용약관</a></li>
-              <li><a className={styles.footerLink} href={`${app.terms}privacy/`}>개인정보 처리방침</a></li>
+              <li>
+                <a className={styles.footerLink} href={`${app.terms}terms/`}>
+                  이용약관
+                </a>
+              </li>
+              <li>
+                <a className={styles.footerLink} href={`${app.terms}privacy/`}>
+                  개인정보 처리방침
+                </a>
+              </li>
             </>
           )}
-          <li><a className={styles.footerLink} href={`mailto:${CONTACT_EMAIL}`}>문의</a></li>
+          <li>
+            <a className={styles.footerLink} href={`mailto:${CONTACT_EMAIL}`}>
+              문의
+            </a>
+          </li>
         </ul>
         <div className={styles.footerMaker}>
           <span>
-            <a className={styles.footerMakerLink} href={`${HOME_URL}/`}>{NAME}</a> 가 만든 앱
+            <a className={styles.footerMakerLink} href={`${HOME_URL}/`}>
+              {NAME}
+            </a>{" "}
+            가 만든 앱
           </span>
-          <span>© {year} {NAME}</span>
+          <span>
+            © {year} {NAME}
+          </span>
         </div>
       </div>
     </footer>

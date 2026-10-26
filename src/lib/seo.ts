@@ -64,7 +64,9 @@ export function shareCard({
   description: string;
   path: string;
   /** 카드 그림 — 비우면 이 집의 것. 앱의 문은 제 그림을 든다. */
-  image?: typeof OG_IMAGE | { url: string; width: number; height: number; alt: string; type: string };
+  image?:
+    | typeof OG_IMAGE
+    | { url: string; width: number; height: number; alt: string; type: string };
 }): Pick<Metadata, "openGraph" | "twitter"> {
   return {
     openGraph: {
@@ -112,7 +114,12 @@ export function appDoorMetadata(app: LabApp): Metadata {
       title: seo ? title : `${app.name} · ${NAME}`,
       description,
       path,
-      image: { url: `${path}og.png`, ...OG_SIZE, alt: `${app.name}. ${app.page?.headline.replace("|", " ") ?? app.tagline}`, type: "image/png" },
+      image: {
+        url: `${path}og.png`,
+        ...OG_SIZE,
+        alt: `${app.name}. ${app.page?.headline.replace("|", " ") ?? app.tagline}`,
+        type: "image/png",
+      },
     }),
   };
 }
@@ -150,7 +157,9 @@ export function appJsonLd(app: LabApp): string {
     ...(page
       ? {
           featureList: page.features.map((feature) => `${feature.title} — ${feature.body}`),
-          screenshot: [page.hero, ...page.features.map((feature) => feature.screen)].map((screen) => `${HOME_URL}${screen.light}`),
+          screenshot: [page.hero, ...page.features.map((feature) => feature.screen)].map(
+            (screen) => `${HOME_URL}${screen.light}`,
+          ),
         }
       : {}),
   };

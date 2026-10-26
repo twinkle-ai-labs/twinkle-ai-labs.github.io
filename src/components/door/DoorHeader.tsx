@@ -22,7 +22,9 @@ export default function DoorHeader({ app }: { app: LabApp }) {
     <header className={`${styles.header} ${isScrolled ? styles.headerScrolled : ""}`}>
       <div className={styles.headerInner}>
         <a className={styles.brand} href="#top">
-          {app.icon && <Image className={styles.brandIcon} src={app.icon} alt="" width={64} height={64} />}
+          {app.icon && (
+            <Image className={styles.brandIcon} src={app.icon} alt="" width={64} height={64} />
+          )}
           <span className={styles.brandName}>{app.name}</span>
         </a>
         <div className={styles.headerEnd}>

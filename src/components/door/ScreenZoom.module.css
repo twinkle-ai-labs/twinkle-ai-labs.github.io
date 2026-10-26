@@ -1,0 +1,82 @@
+.wrapper {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+.trigger {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  border-radius: var(--door-device-radius);
+  background: transparent;
+  color: var(--door-ink-sub);
+  cursor: zoom-in;
+}
+.hint {
+  position: absolute;
+  bottom: -1.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 0.75rem;
+}
+.trigger:hover .hint {
+  color: var(--door-ink);
+}
+.dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(480px, calc(100% - 2rem));
+  max-width: none;
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  border: 1px solid var(--door-line);
+  border-radius: 20px;
+  color: var(--door-ink);
+  background: var(--door-bg);
+  box-shadow: 0 24px 90px #0005;
+  overscroll-behavior: contain;
+}
+.dialog::backdrop {
+  background: #0009;
+  backdrop-filter: blur(8px);
+}
+.heading {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0.75rem 0.6rem 1.25rem;
+  border-bottom: 1px solid var(--door-line);
+  background: var(--door-bg);
+  font-size: 0.875rem;
+}
+.heading button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--door-line);
+  border-radius: 50%;
+  background: var(--door-bg);
+  color: var(--door-ink);
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+.heading button:hover {
+  background: var(--door-band);
+}
+.screen img {
+  position: static;
+  width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AppsSection from "@/components/sections/AppsSection";
+import AuroraCatalog from "@/components/sections/AuroraCatalog";
 import { APPS_SECTION } from "@/lib/labs";
 import { shareCard } from "@/lib/seo";
 import { NAME } from "@/lib/site";
@@ -16,5 +16,5 @@ export const metadata: Metadata = {
 };
 
 export default function AppsPage() {
-  return <AppsSection expanded />;
+  return <AuroraCatalog />;
 }

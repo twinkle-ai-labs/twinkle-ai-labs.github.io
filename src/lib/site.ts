@@ -37,9 +37,3 @@ export const THEME_TOGGLE_LABELS = {
   toLight: "밝은 화면으로",
   toDark: "어두운 화면으로",
 } as const;
-
-/** 바닥글의 한 줄 소개 — 머리띠가 이름만 말하므로, 무엇을 하는 곳인지는 여기서 한 번 더. */
-export const FOOTER_BLURB =
-  "한 명의 개발자가 AI와 함께 만들고 직접 운영하는 개인 제품 스튜디오입니다.";
-
-export const FOOTER_HEADINGS = { nav: "바로가기", contact: "연락" } as const;

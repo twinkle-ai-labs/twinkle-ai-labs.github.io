@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import DeviceScreen from "@/components/door/DeviceScreen";
 import DoorFooter from "@/components/door/DoorFooter";
 import DoorHeader from "@/components/door/DoorHeader";
@@ -52,7 +53,9 @@ export default async function AppDoorPage({ params }: Params) {
   const page = app.page;
 
   /* 기기 틀의 비율은 이 앱이 찍은 화면의 것이다(법 12) — 틀의 폭 · 키 · 붙박이 자리가 모두 이 값에서 셈된다 */
-  const screenRatio = page && ({ "--door-screen-ratio": `${page.hero.width} / ${page.hero.height}` } as React.CSSProperties);
+  const screenRatio =
+    page &&
+    ({ "--door-screen-ratio": `${page.hero.width} / ${page.hero.height}` } as React.CSSProperties);
 
   return (
     <div className={styles.door} id="top" style={screenRatio}>
@@ -61,6 +64,13 @@ export default async function AppDoorPage({ params }: Params) {
       <DoorHeader app={app} />
 
       <main>
+        <nav className={styles.breadcrumb} aria-label="현재 위치">
+          <Link href="/app/">
+            <span aria-hidden="true">←</span> 모든 앱
+          </Link>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{app.name}</span>
+        </nav>
         {/* ── 첫 화면 ── */}
         <section className={styles.hero}>
           <div className={styles.heroText}>
@@ -85,6 +95,7 @@ export default async function AppDoorPage({ params }: Params) {
                 </ul>
               )}
             </div>
+            {page?.downloadNote && <p className={styles.downloadNote}>{page.downloadNote}</p>}
           </div>
           {page && (
             <div className={`${styles.stage} ${styles.heroStage}`}>

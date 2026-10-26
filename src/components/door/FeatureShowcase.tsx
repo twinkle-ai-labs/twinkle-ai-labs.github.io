@@ -5,6 +5,7 @@ import type { DoorPage } from "@/lib/labs";
 import DeviceFrame from "./DeviceFrame";
 import DeviceScreen from "./DeviceScreen";
 import ScreenImage from "./ScreenImage";
+import ScreenZoom from "./ScreenZoom";
 import styles from "./door.module.css";
 
 /** 넓은 화면의 문턱 — CSS 의 `@media (min-width: 56em)` 과 같은 값이다. 둘이 갈리면 붙박이와 갤러리가 함께 선다 */
@@ -73,7 +74,17 @@ export default function FeatureShowcase({ features }: { features: DoorPage["feat
           disabled={active === 0}
           onClick={() => goTo(active - 1)}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={styles.arrowGlyph} aria-hidden="true">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={styles.arrowGlyph}
+            aria-hidden="true"
+          >
             <path d="M15 5l-7 7 7 7" />
           </svg>
         </button>
@@ -101,6 +112,7 @@ export default function FeatureShowcase({ features }: { features: DoorPage["feat
                     </div>
                   ))}
                 </dl>
+                <p className={styles.exampleNote}>실제 앱 화면을 기준으로 한 예시입니다.</p>
               </div>
               <div className={styles.stepDevice}>
                 <DeviceScreen screen={feature.screen} />
@@ -115,7 +127,17 @@ export default function FeatureShowcase({ features }: { features: DoorPage["feat
           disabled={active === features.length - 1}
           onClick={() => goTo(active + 1)}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={styles.arrowGlyph} aria-hidden="true">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={styles.arrowGlyph}
+            aria-hidden="true"
+          >
             <path d="M9 5l7 7-7 7" />
           </svg>
         </button>
@@ -136,15 +158,20 @@ export default function FeatureShowcase({ features }: { features: DoorPage["feat
         ))}
       </div>
 
-      <div className={styles.stageColumn} aria-hidden="true">
+      <div className={styles.stageColumn}>
         <div className={styles.stage}>
-          <DeviceFrame size="stage">
-            {features.map((feature, i) => (
-              <div key={feature.title} className={`${styles.layer} ${i === active ? styles.layerActive : ""}`}>
-                <ScreenImage screen={feature.screen} hidden={i !== active} />
-              </div>
-            ))}
-          </DeviceFrame>
+          <ScreenZoom screen={features[active].screen}>
+            <DeviceFrame size="stage">
+              {features.map((feature, i) => (
+                <div
+                  key={feature.title}
+                  className={`${styles.layer} ${i === active ? styles.layerActive : ""}`}
+                >
+                  <ScreenImage screen={feature.screen} hidden={i !== active} />
+                </div>
+              ))}
+            </DeviceFrame>
+          </ScreenZoom>
         </div>
       </div>
     </div>

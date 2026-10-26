@@ -1,16 +1,12 @@
-import AppsSection from "@/components/sections/AppsSection";
-import FounderSection from "@/components/sections/FounderSection";
-import HeroSection from "@/components/sections/HeroSection";
-import HowSection from "@/components/sections/HowSection";
-import NamesSection from "@/components/sections/NamesSection";
+import AuroraHome from "@/components/home/AuroraHome";
 
 import type { Metadata } from "next";
 import { shareCard } from "@/lib/seo";
 import { NAME } from "@/lib/site";
 
-const TITLE = `${NAME} | AI와 함께 만드는 1인 제품 스튜디오`;
+const TITLE = `${NAME} | 필요한 도구를, 좋아하는 모습으로`;
 const DESCRIPTION =
-  "투자 계산부터 PDF 작업까지, 일상의 작은 불편을 덜어주는 앱을 만듭니다. 한 명의 개발자와 AI가 함께 만드는 Twinkle AI Labs입니다.";
+  "일상의 필요에서 출발해 기능과 디자인을 함께 다듬습니다. 만드는 사람이 먼저 쓰는 앱, Twinkle AI Labs의 도구와 이야기를 만나보세요.";
 
 export const metadata: Metadata = {
   // 홈은 제 이름을 통째로 쓴다 — 꼬리표(`· Twinkle AI Labs`)가 붙으면 이름이 두 번이다.
@@ -20,20 +16,6 @@ export const metadata: Metadata = {
   ...shareCard({ title: TITLE, description: DESCRIPTION, path: "/" }),
 };
 
-/**
- * 소개 화면 — **차례만** 든다.
- *
- * 구획 하나가 저마다 제 조각을 가지므로 이 파일은 「무엇이 어떤 순서로 서는가」를 말한다.
- * 한 화면을 한 파일에 몰아 두면 «앱 카드의 배지 색»을 고치러 히어로부터 스크롤하게 된다.
- */
 export default function HomePage() {
-  return (
-    <>
-      <HeroSection />
-      <AppsSection />
-      <FounderSection />
-      <HowSection />
-      <NamesSection />
-    </>
-  );
+  return <AuroraHome />;
 }

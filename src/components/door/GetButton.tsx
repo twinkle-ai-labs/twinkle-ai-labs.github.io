@@ -7,7 +7,12 @@ import styles from "./door.module.css";
  */
 function PlayLogo({ className }: { className?: string }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className} aria-hidden="true">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      className={className}
+      aria-hidden="true"
+    >
       <path fill="#4285F4" d="M4 2.8c-.4.3-.6.8-.6 1.3v15.8c0 .5.2 1 .6 1.3L13.2 12 4 2.8z" />
       <path fill="#34A853" d="M4 2.8 13.2 12l3.2-3.2L5.6 2.7c-.6-.3-1.2-.3-1.6.1z" />
       <path fill="#EA4335" d="M4 21.2c.4.4 1 .4 1.6.1l10.8-6.1-3.2-3.2L4 21.2z" />

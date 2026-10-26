@@ -30,7 +30,13 @@ export const metadata: Metadata = {
     follow: true,
     /* 검색 결과의 미리보기를 우리가 줄이지 않는다 — 글자 수도, 그림 크기도.
        기본값은 짧게 자르는 쪽이라, 적어 두지 않으면 카드가 한 줄로 선다. */
-    googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
   },
   formatDetection: { telephone: false, address: false, email: false },
 };

@@ -9,10 +9,21 @@
   background: var(--glass);
   color: var(--text-sub);
   cursor: pointer;
-  transition: background var(--motion-fast) var(--ease),
-    color var(--motion-fast) var(--ease), transform var(--motion-fast) var(--ease), box-shadow var(--motion-fast) var(--ease);
+  transition:
+    background var(--motion-fast) var(--ease),
+    color var(--motion-fast) var(--ease),
+    transform var(--motion-fast) var(--ease),
+    box-shadow var(--motion-fast) var(--ease);
 }
 
-.toggle:hover { background: var(--primary-soft); color: var(--accent); transform: rotate(8deg); box-shadow: var(--shadow-raised); }
+.toggle:hover {
+  background: var(--primary-soft);
+  color: var(--accent);
+  transform: rotate(8deg);
+  box-shadow: var(--shadow-raised);
+}
 
-.icon { font-size: var(--fs-16); line-height: 1; }
+.icon {
+  font-size: var(--fs-16);
+  line-height: 1;
+}
